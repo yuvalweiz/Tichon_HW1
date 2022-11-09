@@ -1,6 +1,12 @@
 public class Customer {
 
     private String _id;
+    private Address _address;
+    private String _phone;
+    private String _email;
+
+    public Customer() {
+    }
 
     public Customer(String _id, Address _address, String _phone, String _email) {
         this._id = _id;
@@ -41,11 +47,5 @@ public class Customer {
         this._email = _email;
     }
 
-    private Address _address;
-    private String _phone;
-    private String _email;
 
-    public Customer() {
-
-    }
 }

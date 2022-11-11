@@ -2,6 +2,7 @@ public class Supplier
 {
     String _id;
     String _name;
+    Product[] productsArr;
 
     public Supplier(String _id, String _name) {
         this._id = _id;

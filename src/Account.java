@@ -7,14 +7,17 @@ public class Account {
     private Date _open;
     private Date _closed;
     private int _balance;
+    private Customer _customer; // wont be able to create account without customer!
+    private Order[] ordersArr;
 
-    public Account(String _id, String _billing_address, boolean _is_closed, Date _open, Date _closed, int _balance) {
+    public Account(String _id, String _billing_address, boolean _is_closed, Date _open, Date _closed, int _balance, Customer _customer) {
         this._id = _id;
         this._billing_address = _billing_address;
         this._is_closed = _is_closed;
         this._open = _open;
         this._closed = _closed;
         this._balance = _balance;
+        this._customer = _customer;
     }
 
     public String get_id() {

@@ -1,0 +1,256 @@
+Index: src/Customer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public class Customer {\r\n\r\n    private String _id;\r\n    private Address _address;\r\n\r\n    public Customer() {\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Customer.java b/src/Customer.java
+--- a/src/Customer.java	(revision 62bba546737af037ff8ca59bf539ab88805e057c)
++++ b/src/Customer.java	(date 1667997013887)
+@@ -1,7 +1,49 @@
+ public class Customer {
+ 
+     private String _id;
++
++    public Customer(String _id, Address _address, String _phone, String _email) {
++        this._id = _id;
++        this._address = _address;
++        this._phone = _phone;
++        this._email = _email;
++    }
++
++    public String get_id() {
++        return _id;
++    }
++
++    public void set_id(String _id) {
++        this._id = _id;
++    }
++
++    public Address get_address() {
++        return _address;
++    }
++
++    public void set_address(Address _address) {
++        this._address = _address;
++    }
++
++    public String get_phone() {
++        return _phone;
++    }
++
++    public void set_phone(String _phone) {
++        this._phone = _phone;
++    }
++
++    public String get_email() {
++        return _email;
++    }
++
++    public void set_email(String _email) {
++        this._email = _email;
++    }
++
+     private Address _address;
++    private String _phone;
++    private String _email;
+ 
+     public Customer() {
+ 
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"5198120f-0955-4c57-bec4-bc285fab6ab4\" name=\"Changes\" comment=\"test1\">\r\n      <change afterPath=\"$PROJECT_DIR$/src/Address.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/Customer.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2HGzfH0UCszOQZeFNGHalD4475Y\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"5198120f-0955-4c57-bec4-bc285fab6ab4\" name=\"Changes\" comment=\"\" />\r\n      <created>1667926313386</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1667926313386</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"test1\">\r\n      <created>1667926772421</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1667926772421</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"test1\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"test1\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 62bba546737af037ff8ca59bf539ab88805e057c)
++++ b/.idea/workspace.xml	(date 1667997576941)
+@@ -1,10 +1,12 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="test1">
+-      <change afterPath="$PROJECT_DIR$/src/Address.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/Customer.java" afterDir="false" />
++    <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="address class added">
++      <change afterPath="$PROJECT_DIR$/src/Account.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/PremiumAccount.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Customer.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -50,7 +52,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1667926772421</updated>
+     </task>
+-    <option name="localTasksCounter" value="2" />
++    <task id="LOCAL-00002" summary="address class added">
++      <created>1667996651815</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1667996651815</updated>
++    </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -66,6 +75,7 @@
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="test1" />
+-    <option name="LAST_COMMIT_MESSAGE" value="test1" />
++    <MESSAGE value="address class added" />
++    <option name="LAST_COMMIT_MESSAGE" value="address class added" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/PremiumAccount.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/PremiumAccount.java b/src/PremiumAccount.java
+new file mode 100644
+--- /dev/null	(date 1667997576902)
++++ b/src/PremiumAccount.java	(date 1667997576902)
+@@ -0,0 +1,8 @@
++import java.util.Date;
++
++public class PremiumAccount extends Account {
++
++    public PremiumAccount(String _id, String _billing_address, boolean _is_closed, Date _open, Date _closed, int _balance) {
++        super(_id, _billing_address, _is_closed, _open, _closed, _balance);
++    }
++}
+Index: src/Account.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Account.java b/src/Account.java
+new file mode 100644
+--- /dev/null	(date 1667997519635)
++++ b/src/Account.java	(date 1667997519635)
+@@ -0,0 +1,70 @@
++import java.util.Date;
++
++public class Account {
++    private String _id;
++    private String _billing_address;
++    private boolean _is_closed;
++    private Date _open;
++    private Date _closed;
++    private int _balance;
++
++    public Account(String _id, String _billing_address, boolean _is_closed, Date _open, Date _closed, int _balance) {
++        this._id = _id;
++        this._billing_address = _billing_address;
++        this._is_closed = _is_closed;
++        this._open = _open;
++        this._closed = _closed;
++        this._balance = _balance;
++    }
++
++    public String get_id() {
++        return _id;
++    }
++
++    public void set_id(String _id) {
++        this._id = _id;
++    }
++
++    public String get_billing_address() {
++        return _billing_address;
++    }
++
++    public void set_billing_address(String _billing_address) {
++        this._billing_address = _billing_address;
++    }
++
++    public boolean is_is_closed() {
++        return _is_closed;
++    }
++
++    public void set_is_closed(boolean _is_closed) {
++        this._is_closed = _is_closed;
++    }
++
++    public Date get_open() {
++        return _open;
++    }
++
++    public void set_open(Date _open) {
++        this._open = _open;
++    }
++
++    public Date get_closed() {
++        return _closed;
++    }
++
++    public void set_closed(Date _closed) {
++        this._closed = _closed;
++    }
++
++    public int get_balance() {
++        return _balance;
++    }
++
++    public void set_balance(int _balance) {
++        this._balance = _balance;
++    }
++
++
++
++}
+Index: src/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/User.java b/src/User.java
+new file mode 100644
+--- /dev/null	(date 1667997207834)
++++ b/src/User.java	(date 1667997207834)
+@@ -0,0 +1,36 @@
++public class User {
++    private String _login_id;
++    private String _password;
++    //private UserState _state;
++
++    //public UserState get_state(){
++    //  return _state;
++    //}
++
++    //public UserState set_state(UserState _state){
++    //  this._state = _state;
++
++
++
++    public String get_login_id() {
++        return _login_id;
++    }
++
++    public void set_login_id(String _login_id) {
++        this._login_id = _login_id;
++    }
++
++    public String get_password() {
++        return _password;
++    }
++
++    public void set_password(String _password) {
++        this._password = _password;
++    }
++
++    public User(String _login_id, String _password) { //SHOULD ADD USER STATE HERE!
++        this._login_id = _login_id;
++        this._password = _password;
++        //this._state = _state;
++    }
++}

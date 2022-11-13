@@ -1,22 +1,25 @@
 import java.util.Date;
 
 public class Account {
-    private String _id;
+    private  String _id;
     private String _billing_address;
     private boolean _is_closed;
     private Date _open;
     private Date _closed;
     private int _balance;
+
+    public void set_customer(Customer _customer) {
+        this._customer = _customer;
+    }
+
     private Customer _customer; // wont be able to create account without customer!
     private Order[] ordersArr;
 
-    public Account(String _id, String _billing_address, boolean _is_closed, Date _open, Date _closed, int _balance, Customer _customer) {
+    public Account(String _id, Customer _customer) {
         this._id = _id;
-        this._billing_address = _billing_address;
-        this._is_closed = _is_closed;
-        this._open = _open;
-        this._closed = _closed;
-        this._balance = _balance;
+        this._is_closed = false;
+        this._open = new Date();
+        this._balance = 0;
         this._customer = _customer;
     }
 

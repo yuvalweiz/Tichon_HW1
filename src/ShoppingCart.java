@@ -1,13 +1,15 @@
 import java.util.Date;
+import java.util.Vector;
 
 public class ShoppingCart
 {
     private Date _created;
     private User _user;
-    private LineItem[] lineItemsArr;
+    private Vector<LineItem> lineItemsVector;
+    //private LineItem[] lineItemsArr;
 
-    public LineItem[] getLineItemsArr() {
-        return lineItemsArr;
+    public Vector<LineItem>  getLineItemsVector() {
+        return lineItemsVector;
     }
 
     //Add lineItem method!
@@ -25,11 +27,17 @@ public class ShoppingCart
 
     }
 
+    public void AddLineItem(LineItem lineItem)
+    {
+        this.lineItemsVector.add(lineItem);
+    }
+
     public Date getCreated() {
         return _created;
     }
 
     public ShoppingCart(Date created) {
         this._created = created;
+        this.lineItemsVector = new Vector<LineItem>();
     }
 }

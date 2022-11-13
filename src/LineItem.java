@@ -8,6 +8,15 @@ public class LineItem {
     public void setQuantity(int quantity) {
         this._quantity = quantity;
     }
+
+    public void set_product(Product _product) {
+        this._product = _product;
+    }
+
+    public Product get_product() {
+        return _product;
+    }
+
     public LineItem(int quantity, int price) {
         this._quantity = quantity;
         this._price = price;

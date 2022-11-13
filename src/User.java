@@ -3,12 +3,6 @@ public class User {
     private String _password;
     //private UserState _state;
 
-    public User(String _login_id, String _password) { //SHOULD ADD USER STATE HERE!
-        this._login_id = _login_id;
-        this._password = _password;
-        //this._state = _state;
-    }
-
     //public UserState get_state(){
     //  return _state;
     //}
@@ -34,5 +28,9 @@ public class User {
         this._password = _password;
     }
 
-
+    public User(String _login_id, String _password) { //SHOULD ADD USER STATE HERE!
+        this._login_id = _login_id;
+        this._password = _password;
+        //this._state = _state;
+    }
 }

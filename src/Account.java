@@ -27,6 +27,13 @@ public class Account {
         this.OrderDict.put(order.get_number(),order);
     }
 
+    public Order getOrder (String number){
+        if(!OrderDict.containsKey(number)){
+            return null;
+        }
+        return OrderDict.get(number);
+    }
+
     public void set_customer(Customer _customer) {
         this._customer = _customer;
     }

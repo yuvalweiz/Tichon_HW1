@@ -13,7 +13,7 @@ public class Order {
     private LineItem[] lineItemsArr;
 
     public Order(Date _ordered, Address _ship_to, Account _account) {
-        this._number = String.valueOf(Curr_Id) + "#";
+        this._number = "#" + String.valueOf(Curr_Id) ;
         Curr_Id++;
         this._ordered = _ordered;
         this._ship_to = _ship_to;

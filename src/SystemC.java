@@ -20,10 +20,12 @@ public class SystemC {
         if(premium == 1){
             newAccount = new PremiumAccount(_login_id,newCustomer);
             newCustomer.set_account(newAccount);
+            newAccount.set_customer(newCustomer);
         }
         if (premium == 0){
             newAccount = new Account(newCustomer);
             newCustomer.set_account(newAccount);
+            newAccount.set_customer(newCustomer);
         }
         newCustomer.set_user(newUser);
         newUser.set_customer(newCustomer);

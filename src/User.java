@@ -10,6 +10,17 @@ public class User {
         this._customer = _customer;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "_login_id='" + _login_id + '\'' +
+                ", _password='" + _password.length() + '\'' +
+                ", _state=" + _state +
+                ", _shcart=" + _shcart +
+                ", _customer=" + _customer +
+                '}';
+    }
+
     private Customer _customer;
     public static HashMap<String, User> UserDict = new HashMap<String, User>();
 

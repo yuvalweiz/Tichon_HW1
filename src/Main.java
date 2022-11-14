@@ -49,11 +49,11 @@ public class Main {
                     String customer_phone = scanner.nextLine();
                     System.out.println("Enter customer email");
                     String customer_email = scanner.nextLine();
-                    if(!User.AddUser(login_id, pass, p_account, address, customer_phone, customer_email))
-                    {
-                        System.out.println("user is not valid");
+                    //if(!User.AddUser(login_id, pass, p_account, address, customer_phone, customer_email))
+                    //{
+                      //  System.out.println("user is not valid");
 
-                    }
+                    //}
                     break;
                 //default case to display the message invalid choice made by the user
                 default:

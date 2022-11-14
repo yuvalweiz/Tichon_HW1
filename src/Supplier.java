@@ -9,6 +9,15 @@ public class Supplier
     public static HashMap<String, Supplier> SupllierDict = new HashMap<String, Supplier>();
     Vector<Product> productsVec;
 
+    @Override
+    public String toString() {
+        return "Supplier{" +
+                "ID = '" + _id + '\'' +
+                ", Name = '" + _name + '\'' +
+                ", Products = " + productsVec +
+                '}';
+    }
+
     public Supplier(String _name) {
         this._id = String.valueOf(Curr_Id) + ":)";
         Curr_Id++;

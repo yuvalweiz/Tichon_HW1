@@ -78,6 +78,21 @@ public class Account {
         this._open = _open;
     }
 
+    @Override
+    public String toString() {
+        return "Account{" +
+                "ID = '" + _id + '\'' +
+                ", Billing Address = '" + _billing_address + '\'' +
+                ", Is Closed=" + _is_closed +
+                ", Open = " + _open +
+                ", Closed = " + _closed +
+                ", Balance = " + _balance +
+                ", Last Order = '" + _lastOrder + '\'' +
+                ", Orders = " + OrderDict +
+                ", Customer = " + _customer +
+                '}';
+    }
+
     public Date get_closed() {
         return _closed;
     }

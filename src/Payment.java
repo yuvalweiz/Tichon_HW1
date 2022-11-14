@@ -25,6 +25,16 @@ public class Payment {
         return paid;
     }
 
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "ID = '" + id + '\'' +
+                ", Paid = " + paid +
+                ", Total = " + total +
+                ", Details = '" + details + '\'' +
+                '}';
+    }
+
     public void setPaid(Date paid) {
         this.paid = paid;
     }

@@ -75,6 +75,20 @@ public class Order {
         return _total;
     }
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "Number = '" + _number + '\'' +
+                ", Ordered = " + _ordered +
+                ", Shipped = " + _shipped +
+                ", Ship To = " + _ship_to +
+                ", Status = " + _status +
+                ", Total = " + _total +
+                ", Account = " + _account +
+                ", LineItems = " + LineItemsVec +
+                '}';
+    }
+
     public void set_number(String _number) {
         this._number = _number;
     }

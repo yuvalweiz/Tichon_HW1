@@ -32,6 +32,15 @@ public class ShoppingCart
         this.lineItemsVector.add(lineItem);
     }
 
+    @Override
+    public String toString() {
+        return "ShoppingCart{" +
+                "Created = " + _created +
+                ", User = " + _user +
+                ", lineItems = " + lineItemsVector +
+                '}';
+    }
+
     public Date getCreated() {
         return _created;
     }

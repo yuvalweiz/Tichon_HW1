@@ -17,6 +17,17 @@ public class LineItem {
         return _product;
     }
 
+    @Override
+    public String toString() {
+        return "LineItem{" +
+                "Quantity = " + _quantity +
+                ", Price = " + _price +
+                ", Shopping Cart = " + shcart +
+                ", LineItem = " + _lineItem +
+                ", Product = " + _product +
+                '}';
+    }
+
     public LineItem(int quantity, int price) {
         this._quantity = quantity;
         this._price = price;

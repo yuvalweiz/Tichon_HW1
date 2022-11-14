@@ -8,6 +8,14 @@ public class PremiumAccount extends Account {
         super( _customer);
         Products = new Vector<Product>();
     }
+
+    @Override
+    public String toString() {
+        return "PremiumAccount{" +
+                "Products = " + Products +
+                '}';
+    }
+
     public Product GetProduct(String Productname)
     {
         for (int i=0;i<Products.size();i++)

@@ -22,7 +22,19 @@ public class Customer {
         this._user = _user;
     }
 
-    public Customer( Address _address, String _phone, String _email) {
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "ID = '" + _id + '\'' +
+                ", Address = " + _address +
+                ", Phone = '" + _phone + '\'' +
+                ", Email = '" + _email + '\'' +
+                ", User = " + _user +
+                ", Account = " + _account +
+                '}';
+    }
+
+    public Customer(Address _address, String _phone, String _email) {
         this._id = String.valueOf(Curr_Id) + "$";
         Curr_Id++;
         this._address = _address;

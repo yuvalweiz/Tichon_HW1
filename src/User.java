@@ -13,11 +13,10 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "_login_id='" + _login_id + '\'' +
-                ", _password='" + _password.length() + '\'' +
-                ", _state=" + _state +
-                ", _shcart=" + _shcart +
-                ", _customer=" + _customer +
+                "Login ID= " + _login_id + '\'' +
+                ", State = " + _state +
+                ", ShoppingCart = " + _shcart +
+                ", Customer = " + _customer +
                 '}';
     }
 

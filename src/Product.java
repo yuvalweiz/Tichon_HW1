@@ -7,6 +7,17 @@ public class Product {
     private static int Curr_id=0;
     private String _name;
     private Vector<LineItem> lineItemsVec;
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "ID = '" + _id + '\'' +
+                ", Name = '" + _name + '\'' +
+                ", LineItems = " + lineItemsVec +
+                ", Supplier = " + _supplier +
+                '}';
+    }
+
     private Supplier _supplier;
 
 

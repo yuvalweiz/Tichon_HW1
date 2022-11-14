@@ -48,10 +48,10 @@ public class Address {
     @Override
     public String toString() {
         return "Address:" +
-                "country='" + _country + '\'' +
-                ",city='" + _city + '\'' +
-                ",street='" + _street + '\'' +
-                ",number=" + _number
+                "Country = '" + _country + '\'' +
+                ",City = '" + _city + '\'' +
+                ",Street = '" + _street + '\'' +
+                ",Number = " + _number
                 ;
     }
 }

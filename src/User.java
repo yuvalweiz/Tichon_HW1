@@ -45,6 +45,16 @@ public class User {
 
     }
 
+    public static boolean RemoveUser(String Login_id)
+    {
+        if (UserDict.containsKey(Login_id)!= true)
+        {
+            return false;
+        }
+        UserDict.remove(Login_id);
+        return true;
+    }
+
     public void set_shcart(ShoppingCart _shcart) {
         this._shcart = _shcart;
     }
@@ -76,4 +86,6 @@ public class User {
     public void set_state(UserState _state) {
         this._state = _state;
     }
+
+
 }

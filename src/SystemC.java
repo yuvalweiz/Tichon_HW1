@@ -1,5 +1,7 @@
 import Error.*;
 
+import java.util.Date;
+
 public class SystemC {
     private User _connectedUser;
 
@@ -64,7 +66,18 @@ public class SystemC {
         return true;
     }
 
+    public void Create_new_order(Address address) throws Erorr {
 
+        if(_connectedUser==null)
+        {
+            Erorr error = new there_is_no_user_connected_EX();
+            throw error;
+        }
+        Date currDate = new Date();
+        Order order = new Order(currDate,address,_connectedUser.get_customer().get_account());
+        System.out.println("Your Order number is: " + order.get_number());
+
+    }
 
 
 

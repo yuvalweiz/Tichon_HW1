@@ -3,6 +3,11 @@ public class Customer {
     private String _id;
     private Address _address;
     private String _phone;
+
+    public Account get_account() {
+        return _account;
+    }
+
     private String _email;
     private User _user;
     private Account _account;

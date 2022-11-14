@@ -13,6 +13,10 @@ public class User {
     private Customer _customer;
     public static HashMap<String, User> UserDict = new HashMap<String, User>();
 
+    public Customer get_customer() {
+        return _customer;
+    }
+
     public User(String _login_id, String _password) { //SHOULD ADD USER STATE HERE!
         this._login_id = _login_id;
         this._password = _password;

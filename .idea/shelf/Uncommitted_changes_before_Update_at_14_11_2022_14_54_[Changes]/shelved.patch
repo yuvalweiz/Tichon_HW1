@@ -1,0 +1,52 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"5198120f-0955-4c57-bec4-bc285fab6ab4\" name=\"Changes\" comment=\"error class created\">\r\n      <change afterPath=\"$PROJECT_DIR$/src/id_is_wrong_EX.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/pass_is_wrong_EX.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/there_is_no_user_connected_EX.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/there_is_user_connected_EX.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/this_user_is_not_connected_EX.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Erorr.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Erorr.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2HGzfH0UCszOQZeFNGHalD4475Y\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"5198120f-0955-4c57-bec4-bc285fab6ab4\" name=\"Changes\" comment=\"\" />\r\n      <created>1667926313386</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1667926313386</updated>\r\n      <workItem from=\"1668324775726\" duration=\"2848000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"test1\">\r\n      <created>1667926772421</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1667926772421</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Add User func\">\r\n      <created>1668366678281</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668366678281</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Add User func\">\r\n      <created>1668366709485</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668366709485</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"user func update&#10;customer id and account id update\">\r\n      <created>1668425961720</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668425961720</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"user func update&#10;customer id and account id update\">\r\n      <created>1668426006216</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668426006216</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"SystemC class, login method.\">\r\n      <created>1668427248803</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668427248803</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"error class created\">\r\n      <created>1668427786309</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668427786309</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"8\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"test1\" />\r\n    <MESSAGE value=\"Add User func\" />\r\n    <MESSAGE value=\"user func update&#10;customer id and account id update\" />\r\n    <MESSAGE value=\"SystemC class, login method.\" />\r\n    <MESSAGE value=\"error class created\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"error class created\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision be8d28cddebce3a6b48592dfa08057542b6f0fdf)
++++ b/.idea/workspace.xml	(date 1668430263013)
+@@ -1,15 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="error class created">
+-      <change afterPath="$PROJECT_DIR$/src/id_is_wrong_EX.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/pass_is_wrong_EX.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/there_is_no_user_connected_EX.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/there_is_user_connected_EX.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/this_user_is_not_connected_EX.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Erorr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Erorr.java" afterDir="false" />
+-    </list>
++    <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="replaced arrays with vectors, and added the relevant methods." />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -93,7 +85,13 @@
+       <option name="project" value="LOCAL" />
+       <updated>1668427786309</updated>
+     </task>
+-    <option name="localTasksCounter" value="8" />
++    <task id="LOCAL‎00008" summary="replaced arrays with vectors, and added the relevant methods.">
++      <created>1668429908012</created>
++      <option name="number" value="LOCAL‎00008" />
++      <option name="presentableId" value="LOCAL‎00008" />
++      <updated>1668429908012</updated>
++    </task>
++    <option name="localTasksCounter" value="9" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -116,6 +114,7 @@
+     <MESSAGE value="user func update&#10;customer id and account id update" />
+     <MESSAGE value="SystemC class, login method." />
+     <MESSAGE value="error class created" />
+-    <option name="LAST_COMMIT_MESSAGE" value="error class created" />
++    <MESSAGE value="replaced arrays with vectors, and added the relevant methods." />
++    <option name="LAST_COMMIT_MESSAGE" value="replaced arrays with vectors, and added the relevant methods." />
+   </component>
+ </project>
+\ No newline at end of file

@@ -1,0 +1,85 @@
+Index: src/SystemC.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import Error.*;\r\n\r\npublic class SystemC {\r\n    private User _connectedUser;\r\n\r\n    public SystemC(){\r\n        this._connectedUser = null;\r\n    }; //defult constructor\r\n    public boolean AddUser(String _login_id,String _password,int premium,Address address,String phone, String email){\r\n        if(User.UserDict.containsKey(_login_id)){\r\n            return false;\r\n        }\r\n        User newUser= new User(_login_id,_password);\r\n        Customer newCustomer = new Customer(address,phone,email);\r\n        Account newAccount;\r\n        if(premium == 1){\r\n            newAccount = new PremiumAccount(_login_id,newCustomer);\r\n            newCustomer.set_account(newAccount);\r\n        }\r\n        if (premium == 0){\r\n            newAccount = new Account(newCustomer);\r\n            newCustomer.set_account(newAccount);\r\n        }\r\n        newCustomer.set_user(newUser);\r\n        return true;\r\n\r\n    }\r\n    public boolean RemoveUser(String Login_id)\r\n    {\r\n        if (User.UserDict.containsKey(Login_id)!= true)\r\n        {\r\n            return false;\r\n        }\r\n        User.UserDict.remove(Login_id);\r\n        return true;\r\n    }\r\n\r\n    public boolean loginUser(String _loginid, String password) throws Erorr {\r\n        Erorr error;\r\n        if(this._connectedUser != null){\r\n            error = new there_is_user_connected_EX();\r\n            throw error;\r\n        }\r\n\r\n        if(!User.UserDict.containsKey(_loginid)){\r\n            error = new id_is_wrong_EX();\r\n            throw error;\r\n\r\n        }\r\n        if(!User.UserDict.get(_loginid).equals(password)){\r\n            error = new pass_is_wrong_EX();\r\n            throw error;\r\n        }\r\n        this._connectedUser = User.UserDict.get(_loginid);\r\n        return true;\r\n    }\r\n    public boolean logoutUser(String _loginid) throws Erorr {\r\n        Erorr error;\r\n        if(this._connectedUser == null){\r\n            error = new there_is_no_user_connected_EX();\r\n            throw error;\r\n        }\r\n        this._connectedUser = null;\r\n        return true;\r\n    }\r\n\r\n\r\n\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/SystemC.java b/src/SystemC.java
+--- a/src/SystemC.java	(revision a96f02673a66618ff69f3f78abcdc174e88820ca)
++++ b/src/SystemC.java	(date 1668431080978)
+@@ -1,5 +1,7 @@
+ import Error.*;
+ 
++import java.util.Date;
++
+ public class SystemC {
+     private User _connectedUser;
+ 
+@@ -64,7 +66,17 @@
+         return true;
+     }
+ 
++    public boolean Create_new_order(Address address) throws Erorr {
+ 
++        if(_connectedUser==null)
++        {
++            Erorr error = new there_is_no_user_connected_EX();
++            throw error;
++        }
++        Date currDate = new Date();
++        Order order = new Order(currDate,)
++
++    }
+ 
+ 
+ 
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_X\" default=\"true\" project-jdk-name=\"corretto-18\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision a96f02673a66618ff69f3f78abcdc174e88820ca)
++++ b/.idea/misc.xml	(date 1668430456690)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="corretto-18" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_18" default="true" project-jdk-name="corretto-18" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"5198120f-0955-4c57-bec4-bc285fab6ab4\" name=\"Changes\" comment=\"error class created\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2022_13_15__Changes_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2022_13_15__Changes_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2022_13_41__Changes_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2022_13_41__Changes_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2022_14_11__Changes_.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2022_14_11__Changes_.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Erorr.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Error/Erorr.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Main.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Main.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/SystemC.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/SystemC.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/UserTest.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/UserTest.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/id_is_wrong_EX.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Error/id_is_wrong_EX.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/pass_is_wrong_EX.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Error/pass_is_wrong_EX.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/there_is_no_user_connected_EX.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Error/there_is_no_user_connected_EX.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/there_is_user_connected_EX.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Error/there_is_user_connected_EX.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/this_user_is_not_connected_EX.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Error/this_user_is_not_connected_EX.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2HGzfH0UCszOQZeFNGHalD4475Y\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"5198120f-0955-4c57-bec4-bc285fab6ab4\" name=\"Changes\" comment=\"\" />\r\n      <created>1667926313386</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1667926313386</updated>\r\n      <workItem from=\"1668324775726\" duration=\"2848000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"test1\">\r\n      <created>1667926772421</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1667926772421</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Add User func\">\r\n      <created>1668366678281</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668366678281</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Add User func\">\r\n      <created>1668366709485</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668366709485</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"user func update&#10;customer id and account id update\">\r\n      <created>1668425961720</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668425961720</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"user func update&#10;customer id and account id update\">\r\n      <created>1668426006216</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668426006216</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"SystemC class, login method.\">\r\n      <created>1668427248803</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668427248803</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"error class created\">\r\n      <created>1668427786309</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668427786309</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"8\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"test1\" />\r\n    <MESSAGE value=\"Add User func\" />\r\n    <MESSAGE value=\"user func update&#10;customer id and account id update\" />\r\n    <MESSAGE value=\"SystemC class, login method.\" />\r\n    <MESSAGE value=\"error class created\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"error class created\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision a96f02673a66618ff69f3f78abcdc174e88820ca)
++++ b/.idea/workspace.xml	(date 1668430719433)
+@@ -3,19 +3,8 @@
+   <component name="ChangeListManager">
+     <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="error class created">
+       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2022_13_15__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2022_13_15__Changes_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2022_13_41__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2022_13_41__Changes_.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2022_14_11__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2022_14_11__Changes_.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Erorr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Error/Erorr.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/SystemC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SystemC.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/UserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserTest.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/id_is_wrong_EX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Error/id_is_wrong_EX.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/pass_is_wrong_EX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Error/pass_is_wrong_EX.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/there_is_no_user_connected_EX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Error/there_is_no_user_connected_EX.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/there_is_user_connected_EX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Error/there_is_user_connected_EX.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/this_user_is_not_connected_EX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Error/this_user_is_not_connected_EX.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />

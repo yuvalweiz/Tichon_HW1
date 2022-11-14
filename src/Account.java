@@ -1,6 +1,7 @@
 import java.util.Date;
 
 public class Account {
+    private static int Curr_Id=0;
     private  String _id;
     private String _billing_address;
     private boolean _is_closed;
@@ -15,8 +16,9 @@ public class Account {
     private Customer _customer; // wont be able to create account without customer!
     private Order[] ordersArr;
 
-    public Account(String _id, Customer _customer) {
-        this._id = _id;
+    public Account(Customer _customer) {
+        this._id = String.valueOf(Curr_Id);
+        Curr_Id++;
         this._is_closed = false;
         this._open = new Date();
         this._balance = 0;

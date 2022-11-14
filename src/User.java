@@ -25,17 +25,15 @@ public class User {
             return false;
         }
         User newUser= new User(_login_id,_password);
-        Customer newCustomer = new Customer(_login_id,address,phone,email);
+        Customer newCustomer = new Customer(address,phone,email);
         Account newAccount;
         if(premium == 1){
             newAccount = new PremiumAccount(_login_id,newCustomer);
             newCustomer.set_account(newAccount);
-            newAccount.set_customer(newCustomer);
         }
         if (premium == 0){
-            newAccount = new Account(_login_id,newCustomer);
+            newAccount = new Account(newCustomer);
             newCustomer.set_account(newAccount);
-            newAccount.set_customer(newCustomer);
         }
         newCustomer.set_user(newUser);
         return true;

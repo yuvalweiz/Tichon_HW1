@@ -1,0 +1,318 @@
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\nimport java.util.Scanner;\n\n\npublic class Main {\n    public static void main(String[] args)\n    {\n        SystemC system = new SystemC();\n        Scanner scanner = new Scanner(System.in);\n        while(true) {\n\n            System.out.println(\"Press 1 for Add user\");\n            System.out.println(\"Press 2 for Remove user\");\n            System.out.println(\"Press 3 for Login user \");\n            System.out.println(\"Press 4 for Logout user \");\n            System.out.println(\"Press 5 for Create new order\");\n            System.out.println(\"Press 6 for Add product to order\");\n            System.out.println(\"Press 7 for Display order\");\n            System.out.println(\"Press 8 for Link Product \");\n            System.out.println(\"Press 9 for Add Product \");\n            System.out.println(\"Press 10 for Delete Product \");\n            System.out.println(\"Press 11 for ShowAllObjects \");\n            System.out.println(\"Press 12 for ShowObjectId \");\n            System.out.println(\"Press 13 to Quit\\n \\n \");\n\n            System.out.println(\"Make your choice\");\n            int choice = scanner.nextInt();\n            switch (choice) {\n\n                //First case for finding the addition\n                case 1:\n                    System.out.println(\"Enter Login_id \");\n                    String login_id = scanner.nextLine();\n                    System.out.println(\"Enter password\");\n                    String pass = scanner.nextLine();\n                    System.out.println(\"Premium Account - Yes enter 1/Not enter 0\");\n                    int p_account = scanner.nextInt();\n                    System.out.println(\"Enter customer country\");\n                    String customer_country = scanner.nextLine();\n                    System.out.println(\"Enter customer city\");\n                    String customer_city = scanner.nextLine();\n                    System.out.println(\"Enter customer street\");\n                    String customer_street = scanner.nextLine();\n                    System.out.println(\"Enter customer number\");\n                    int customer_addres_num = scanner.nextInt();\n                    Address address = new Address(customer_country, customer_city, customer_street, customer_addres_num);\n                    System.out.println(\"Enter customer phone\");\n                    String customer_phone = scanner.nextLine();\n                    System.out.println(\"Enter customer email\");\n                    String customer_email = scanner.nextLine();\n                    if(!system.AddUser(login_id, pass, p_account, address, customer_phone, customer_email))\n                    {\n                        System.out.println(\"user is not valid\");\n\n                    }\n                    break;\n                //default case to display the message invalid choice made by the user\n                default:\n                    System.out.println(\"Invalid choice!!! Please make a valid choice. \\\\n\\\\n\");\n\n            }\n        }\n\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Main.java b/src/Main.java
+--- a/src/Main.java	(revision 19fc6575b60ed971bd8f9062785d9ed3ae34f06d)
++++ b/src/Main.java	(date 1668441203119)
+@@ -7,6 +7,7 @@
+     {
+         SystemC system = new SystemC();
+         Scanner scanner = new Scanner(System.in);
++        int choice;
+         while(true) {
+ 
+             System.out.println("Press 1 for Add user");
+@@ -23,37 +24,98 @@
+             System.out.println("Press 12 for ShowObjectId ");
+             System.out.println("Press 13 to Quit\n \n ");
+ 
+-            System.out.println("Make your choice");
+-            int choice = scanner.nextInt();
++            choice = scanner.nextInt();
++
+             switch (choice) {
+ 
+                 //First case for finding the addition
+                 case 1:
+-                    System.out.println("Enter Login_id ");
+-                    String login_id = scanner.nextLine();
+-                    System.out.println("Enter password");
+-                    String pass = scanner.nextLine();
+-                    System.out.println("Premium Account - Yes enter 1/Not enter 0");
++                    System.out.println("Enter login_id: ");
++                    String login_id = scanner.next();
++                    System.out.println("Enter password:");
++                    String pass = scanner.next();
++                    System.out.println("Premium account: - Yes enter 1/Not enter 0");
+                     int p_account = scanner.nextInt();
+-                    System.out.println("Enter customer country");
+-                    String customer_country = scanner.nextLine();
+-                    System.out.println("Enter customer city");
+-                    String customer_city = scanner.nextLine();
+-                    System.out.println("Enter customer street");
+-                    String customer_street = scanner.nextLine();
+-                    System.out.println("Enter customer number");
++                    System.out.println("Enter customer country: ");
++                    String customer_country = scanner.next();
++                    System.out.println("Enter customer city: ");
++                    String customer_city = scanner.next();
++                    System.out.println("Enter customer street: ");
++                    String customer_street = scanner.next();
++                    System.out.println("Enter customer number: ");
+                     int customer_addres_num = scanner.nextInt();
+                     Address address = new Address(customer_country, customer_city, customer_street, customer_addres_num);
+-                    System.out.println("Enter customer phone");
+-                    String customer_phone = scanner.nextLine();
+-                    System.out.println("Enter customer email");
+-                    String customer_email = scanner.nextLine();
++                    System.out.println("Enter customer phone: ");
++                    String customer_phone = scanner.next();
++                    System.out.println("Enter customer email: ");
++                    String customer_email = scanner.next();
+                     if(!system.AddUser(login_id, pass, p_account, address, customer_phone, customer_email))
+                     {
+-                        System.out.println("user is not valid");
++                        System.out.println("User is not valid");
++
++                    }
++                    break;
+ 
++                case 2:
++                    System.out.println("Enter login_id: ");
++                    login_id = scanner.nextLine();
++                    if(!system.RemoveUser(login_id))
++                    {
++                        System.out.println("User does not exist");
++                    }
++                    break;
++
++                case 3:
++                    try
++                    {
++                        System.out.println("Enter login_id: ");
++                        login_id = scanner.nextLine();
++                        System.out.println("Enter password: ");
++                        pass = scanner.nextLine();
++                        if(!system.loginUser(login_id,pass))
++                        {
++                            System.out.println("Login problem");
++                        }
++                    }
++                    catch(Exception Error) {
++                        System.out.println(Error.getMessage());
++                    }
++                    break;
++                case 4:
++                    try
++                    {
++                        System.out.println("Enter login_id: ");
++                        login_id = scanner.nextLine();
++                        if(!system.logoutUser(login_id))
++                        {
++                            System.out.println("logout problem");
++                        }
++                    }
++                    catch(Exception Error) {
++                        System.out.println(Error.getMessage());
++                    }
++                    break;
++                case 5:
++                    try
++                    {
++                        System.out.println("Enter login_id: ");
++                        login_id = scanner.nextLine();
++                        System.out.println("Enter customer country: ");
++                        customer_country = scanner.next();
++                        System.out.println("Enter customer city: ");
++                        customer_city = scanner.next();
++                        System.out.println("Enter customer street: ");
++                        customer_street = scanner.next();
++                        System.out.println("Enter customer number: ");
++                        customer_addres_num = scanner.nextInt();
++                        address = new Address(customer_country, customer_city, customer_street, customer_addres_num);
++                        system.Create_new_order(address);
++                    }
++                    catch(Exception Error) {
++                        System.out.println(Error.getMessage());
+                     }
+                     break;
++
+                 //default case to display the message invalid choice made by the user
+                 default:
+                     System.out.println("Invalid choice!!! Please make a valid choice. \\n\\n");
+@@ -62,4 +124,5 @@
+         }
+ 
+     }
++
+ }
+\ No newline at end of file
+Index: src/Test.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Test.java b/src/Test.java
+new file mode 100644
+--- /dev/null	(date 1668441662521)
++++ b/src/Test.java	(date 1668441662521)
+@@ -0,0 +1,49 @@
++import static org.junit.jupiter.api.Assertions.*;
++
++public class Test {
++
++    @org.junit.jupiter.api.Test
++     void test()
++    {
++        SystemC system = new SystemC();
++        String login_id1 ="itayraz";
++        String pass1 = "1234";
++        User new_user1 =  new User(login_id1,pass1);
++        String login_id2 ="yuvalva";
++        String pass2 = "12345";
++        User new_user2 =  new User(login_id2,pass2);
++
++        Address add =  new Address("israel","beer sheve","harzit",5);
++        system.AddUser("itayraz","1234",0,add,"0506824544","itay@gamil.com");
++        System.out.println("Add user successed");
++        system.RemoveUser(login_id1);
++        System.out.println("remove user successed");
++        system.AddUser("yuvalva","12345",1,add,"0506824545","yuval@gamil.com");
++        System.out.println("Add user2 successed");
++        try
++        {
++            system.loginUser(login_id2,pass2);
++            System.out.println("loginuser user2 successed");
++            system.logoutUser(login_id2);
++            System.out.println("logoutuser user2 successed");
++
++        }
++        catch(Exception Error)
++        {
++            System.out.println(Error.getMessage());
++        }
++        try
++        {
++            system.Create_new_order(add);
++            System.out.println("Create_new_order successed");
++
++        }
++        catch(Exception Error)
++        {
++            System.out.println(Error.getMessage());
++        }
++
++
++     }
++
++}
+Index: Tichon_HW1.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<module type=\"JAVA_MODULE\" version=\"4\">\n  <component name=\"NewModuleRootManager\" inherit-compiler-output=\"true\">\n    <exclude-output />\n    <content url=\"file://$MODULE_DIR$\">\n      <sourceFolder url=\"file://$MODULE_DIR$/src\" isTestSource=\"false\" />\n    </content>\n    <orderEntry type=\"inheritedJdk\" />\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\n    <orderEntry type=\"module-library\">\n      <library name=\"JUnit4\">\n        <CLASSES>\n          <root url=\"jar://$MAVEN_REPOSITORY$/junit/junit/4.13.1/junit-4.13.1.jar!/\" />\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar!/\" />\n        </CLASSES>\n        <JAVADOC />\n        <SOURCES />\n      </library>\n    </orderEntry>\n    <orderEntry type=\"module-library\">\n      <library name=\"JUnit5.8.1\">\n        <CLASSES>\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.8.1/junit-jupiter-5.8.1.jar!/\" />\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.8.1/junit-jupiter-api-5.8.1.jar!/\" />\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar!/\" />\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.8.1/junit-platform-commons-1.8.1.jar!/\" />\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar!/\" />\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-params/5.8.1/junit-jupiter-params-5.8.1.jar!/\" />\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-engine/5.8.1/junit-jupiter-engine-5.8.1.jar!/\" />\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.8.1/junit-platform-engine-1.8.1.jar!/\" />\n        </CLASSES>\n        <JAVADOC />\n        <SOURCES />\n      </library>\n    </orderEntry>\n  </component>\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Tichon_HW1.iml b/Tichon_HW1.iml
+--- a/Tichon_HW1.iml	(revision 19fc6575b60ed971bd8f9062785d9ed3ae34f06d)
++++ b/Tichon_HW1.iml	(date 1668438392723)
+@@ -33,5 +33,21 @@
+         <SOURCES />
+       </library>
+     </orderEntry>
++    <orderEntry type="module-library">
++      <library name="JUnit5.7.0">
++        <CLASSES>
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.7.0/junit-jupiter-5.7.0.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.7.0/junit-jupiter-api-5.7.0.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.7.0/junit-platform-commons-1.7.0.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-params/5.7.0/junit-jupiter-params-5.7.0.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-engine/5.7.0/junit-jupiter-engine-5.7.0.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.7.0/junit-platform-engine-1.7.0.jar!/" />
++        </CLASSES>
++        <JAVADOC />
++        <SOURCES />
++      </library>
++    </orderEntry>
+   </component>
+ </module>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"5198120f-0955-4c57-bec4-bc285fab6ab4\" name=\"Changes\" comment=\"blabla\">\n      <change afterPath=\"$PROJECT_DIR$/src/Error/order_is_not_exist.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/Error/product_is_not_exist.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2HGzfH0UCszOQZeFNGHalD4475Y\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"5198120f-0955-4c57-bec4-bc285fab6ab4\" name=\"Changes\" comment=\"\" />\n      <created>1667926313386</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1667926313386</updated>\n      <workItem from=\"1668324775726\" duration=\"2848000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"test1\">\n      <created>1667926772421</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1667926772421</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"Add User func\">\n      <created>1668366678281</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1668366678281</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"Add User func\">\n      <created>1668366709485</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1668366709485</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"user func update&#10;customer id and account id update\">\n      <created>1668425961720</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1668425961720</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"user func update&#10;customer id and account id update\">\n      <created>1668426006216</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1668426006216</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"SystemC class, login method.\">\n      <created>1668427248803</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1668427248803</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"error class created\">\n      <created>1668427786309</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1668427786309</updated>\n    </task>\n    <task id=\"LOCAL-00008\" summary=\"exceptions\">\n      <created>1668430381827</created>\n      <option name=\"number\" value=\"00008\" />\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1668430381827</updated>\n    </task>\n    <task id=\"LOCAL-00009\" summary=\"blabla\">\n      <created>1668433819230</created>\n      <option name=\"number\" value=\"00009\" />\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1668433819230</updated>\n    </task>\n    <task id=\"LOCAL-00010\" summary=\"blabla\">\n      <created>1668433837748</created>\n      <option name=\"number\" value=\"00010\" />\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1668433837748</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"11\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"test1\" />\n    <MESSAGE value=\"Add User func\" />\n    <MESSAGE value=\"user func update&#10;customer id and account id update\" />\n    <MESSAGE value=\"SystemC class, login method.\" />\n    <MESSAGE value=\"error class created\" />\n    <MESSAGE value=\"exceptions\" />\n    <MESSAGE value=\"blabla\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"blabla\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 19fc6575b60ed971bd8f9062785d9ed3ae34f06d)
++++ b/.idea/workspace.xml	(date 1668441347061)
+@@ -1,10 +1,11 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="blabla">
+-      <change afterPath="$PROJECT_DIR$/src/Error/order_is_not_exist.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/Error/product_is_not_exist.java" afterDir="false" />
++    <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="test class">
++      <change afterPath="$PROJECT_DIR$/src/Test.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Tichon_HW1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Tichon_HW1.iml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -30,6 +31,23 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
++  <component name="RunManager">
++    <configuration name="Test.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="Tichon_HW1" />
++      <option name="PACKAGE_NAME" value="" />
++      <option name="MAIN_CLASS_NAME" value="Test" />
++      <option name="METHOD_NAME" value="test" />
++      <option name="TEST_OBJECT" value="method" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <recent_temporary>
++      <list>
++        <item itemvalue="JUnit.Test.test" />
++      </list>
++    </recent_temporary>
++  </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+@@ -110,7 +128,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1668433837748</updated>
+     </task>
+-    <option name="localTasksCounter" value="11" />
++    <task id="LOCAL-00011" summary="test class">
++      <created>1668438422907</created>
++      <option name="number" value="00011" />
++      <option name="presentableId" value="LOCAL-00011" />
++      <option name="project" value="LOCAL" />
++      <updated>1668438422907</updated>
++    </task>
++    <option name="localTasksCounter" value="12" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -126,6 +151,7 @@
+         </entry>
+       </map>
+     </option>
++    <option name="oldMeFiltersMigrated" value="true" />
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="test1" />
+@@ -135,6 +161,7 @@
+     <MESSAGE value="error class created" />
+     <MESSAGE value="exceptions" />
+     <MESSAGE value="blabla" />
+-    <option name="LAST_COMMIT_MESSAGE" value="blabla" />
++    <MESSAGE value="test class" />
++    <option name="LAST_COMMIT_MESSAGE" value="test class" />
+   </component>
+ </project>
+\ No newline at end of file

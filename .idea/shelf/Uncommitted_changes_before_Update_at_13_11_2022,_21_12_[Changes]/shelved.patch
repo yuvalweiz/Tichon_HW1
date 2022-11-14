@@ -1,0 +1,203 @@
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public class Main {\n    public static void main(String[] args)\n\n    {\n        System.out.println(\"Hello world!\");\n        System.out.println(\"Change 1\");\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Main.java b/src/Main.java
+--- a/src/Main.java	(revision 99a8ed70e890f2496db79d81bf12d48c59e16345)
++++ b/src/Main.java	(date 1668366364306)
+@@ -1,8 +1,94 @@
++import java.util.Scanner;
++
++
+ public class Main {
+     public static void main(String[] args)
+ 
+     {
+-        System.out.println("Hello world!");
+-        System.out.println("Change 1");
+-    }
++        //System.out.println("Hello world!");
++        //System.out.println("Change 1");
++        Scanner scanner = new Scanner(System.in);
++        while(true) {
++
++            System.out.println("Press 1 for Add user");
++            System.out.println("Press 2 for Remove user");
++            System.out.println("Press 3 for Login user ");
++            System.out.println("Press 4 for Logout user ");
++            System.out.println("Press 5 for Create new order");
++            System.out.println("Press 6 for Add product to order");
++            System.out.println("Press 7 for Display order");
++            System.out.println("Press 8 for Link Product ");
++            System.out.println("Press 9 for Add Product ");
++            System.out.println("Press 10 for Delete Product ");
++            System.out.println("Press 11 for ShowAllObjects ");
++            System.out.println("Press 12 for ShowObjectId ");
++            System.out.println("Press 13 to Quit\n \n ");
++
++            System.out.println("Make your choice");
++            int choice = scanner.nextInt();
++            switch (choice) {
++
++                //First case for finding the addition
++                case 1:
++                    System.out.println("Enter Login_id ");
++                    String login_id = scanner.nextLine();
++                    System.out.println("Enter password");
++                    int pass = scanner.nextInt();
++                    System.out.println("Premium Account - Yes enter 1/Not enter 0");
++                    int p_account = scanner.nextInt();
++                    System.out.println("Enter customer country");
++                    String customer_country = scanner.nextLine();
++                    System.out.println("Enter customer city");
++                    String customer_city = scanner.nextLine();
++                    System.out.println("Enter customer street");
++                    String customer_street = scanner.nextLine();
++                    System.out.println("Enter customer number");
++                    int customer_addres_num = scanner.nextInt();
++                    Address address= new Address(customer_country, customer_city, customer_street,customer_addres_num);
++                    System.out.println("Enter customer phone");
++                    String customer_phone = scanner.nextLine();
++                    System.out.println("Enter customer email");
++                    String customer_email = scanner.nextLine();
++                    User.AddUser(login_id,pass,p_account,address,customer_phone,customer_email);
++                    break;
++                case 2:
++                    System.out.println("Enter user to remove");
++                    a = scanner.nextInt();
++                    System.out.println("Enter the second number");
++                    b = scanner.nextInt();
++                    c = a - b;
++                    System.out.println("The difference of the numbers is = " + c +"\n");
++                    break;
++
++                //Third case for finding the product
++                case 3:
++                    System.out.println("Enter the first number");
++                    a = scanner.nextInt();
++                    System.out.println("Enter the second number");
++                    b = scanner.nextInt();
++                    c = a * b;
++                    System.out.println("The product of the numbers is = " + c + "\n");
++                    break;
++
++                //Fourth case for finding the quotient
++                case 4:
++                    System.out.println("Enter the first number");
++                    a = scanner.nextInt();
++                    System.out.println("Enter the second number");
++                    b = scanner.nextInt();
++                    c = a / b;
++                    System.out.println("The quotient is = " + c +"\n");
++                    break;
++
++                //Fifth case to quit the program
++                case 5:
++                    System.exit(0);
++
++                    //default case to display the message invalid choice made by the user
++                default:
++                    System.out.println("Invalid choice!!! Please make a valid choice. \\n\\n");
++
++
++
++            }
+ }
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"5198120f-0955-4c57-bec4-bc285fab6ab4\" name=\"Changes\" comment=\"test1\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/LineItem.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/LineItem.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/PremiumAccount.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/PremiumAccount.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/Product.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Product.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ShoppingCart.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ShoppingCart.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/Supplier.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Supplier.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2HGzfH0UCszOQZeFNGHalD4475Y\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"WebServerToolWindowFactoryState\": \"false\"\n  }\n}]]></component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"5198120f-0955-4c57-bec4-bc285fab6ab4\" name=\"Changes\" comment=\"\" />\n      <created>1667926313386</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1667926313386</updated>\n      <workItem from=\"1668324775726\" duration=\"2848000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"test1\">\n      <created>1667926772421</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1667926772421</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"2\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"test1\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"test1\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 99a8ed70e890f2496db79d81bf12d48c59e16345)
++++ b/.idea/workspace.xml	(date 1668361614277)
+@@ -1,14 +1,9 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="test1">
+-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++    <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="Classes added: Customer, Account,Premium account and User &#10;to note: UserState is a filed in USER and is missing.">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/LineItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LineItem.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/PremiumAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PremiumAccount.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Product.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ShoppingCart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ShoppingCart.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Supplier.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -18,6 +13,7 @@
+   <component name="FileTemplateManagerImpl">
+     <option name="RECENT_TEMPLATES">
+       <list>
++        <option value="Enum" />
+         <option value="Class" />
+       </list>
+     </option>
+@@ -34,11 +30,10 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "WebServerToolWindowFactoryState": "false"
+-  }
+-}]]></component>
++  <component name="PropertiesComponent">
++    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
++    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
++  </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+@@ -47,7 +42,6 @@
+       <option name="number" value="Default" />
+       <option name="presentableId" value="Default" />
+       <updated>1667926313386</updated>
+-      <workItem from="1668324775726" duration="2848000" />
+     </task>
+     <task id="LOCAL-00001" summary="test1">
+       <created>1667926772421</created>
+@@ -56,12 +50,16 @@
+       <option name="project" value="LOCAL" />
+       <updated>1667926772421</updated>
+     </task>
+-    <option name="localTasksCounter" value="2" />
++    <task id="LOCAL-00002" summary="Classes added: Customer, Account,Premium account and User &#10;to note: UserState is a filed in USER and is missing.">
++      <created>1667997689218</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1667997689218</updated>
++    </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+-  <component name="TypeScriptGeneratedFilesManager">
+-    <option name="version" value="3" />
+-  </component>
+   <component name="Vcs.Log.Tabs.Properties">
+     <option name="TAB_STATES">
+       <map>
+@@ -72,9 +70,11 @@
+         </entry>
+       </map>
+     </option>
++    <option name="oldMeFiltersMigrated" value="true" />
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="test1" />
+-    <option name="LAST_COMMIT_MESSAGE" value="test1" />
++    <MESSAGE value="Classes added: Customer, Account,Premium account and User &#10;to note: UserState is a filed in USER and is missing." />
++    <option name="LAST_COMMIT_MESSAGE" value="Classes added: Customer, Account,Premium account and User &#10;to note: UserState is a filed in USER and is missing." />
+   </component>
+ </project>
+\ No newline at end of file

@@ -1,0 +1,148 @@
+Index: src/Test.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import static org.junit.jupiter.api.Assertions.*;\n\npublic class Test {\n\n    @org.junit.jupiter.api.Test\n     void test()\n    {\n        SystemC system = new SystemC();\n        String login_id1 =\"itayraz\";\n        String pass1 = \"1234\";\n        User new_user1 =  new User(login_id1,pass1);\n        String login_id2 =\"yuvalva\";\n        String pass2 = \"12345\";\n        User new_user2 =  new User(login_id2,pass2);\n\n        Address add =  new Address(\"israel\",\"beer sheve\",\"harzit\",5);\n        system.AddUser(\"itayraz\",\"1234\",0,add,\"0506824544\",\"itay@gamil.com\");\n        System.out.println(\"Add user successed\");\n        system.AddUser(\"yuvalva\",\"12345\",1,add,\"0506824545\",\"yuval@gamil.com\");\n        System.out.println(\"Add user2 successed\");\n        try\n        {\n//            system.loginUser(login_id2,pass2);\n//            System.out.println(\"loginuser user2 successed\");\n            system.RemoveUser(login_id1);\n            System.out.println(\"remove user successed\");\n            system.loginUser(login_id2,pass2);\n            System.out.println(\"loginuser user2 successed\");\n            system.logoutUser(login_id2);\n            System.out.println(\"logoutuser user2 successed\");\n\n        }\n        catch(Exception Error)\n        {\n            System.out.println(Error.getMessage());\n        }\n        try\n        {\n            system.Create_new_order(add);\n            System.out.println(\"Create_new_order successed\");\n\n        }\n        catch(Exception Error)\n        {\n            System.out.println(Error.getMessage());\n        }\n\n\n     }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Test.java b/src/Test.java
+--- a/src/Test.java	(revision e3fa4293398a95ee5e4e246febde39c9fb2e7424)
++++ b/src/Test.java	(date 1668443700230)
+@@ -8,31 +8,34 @@
+         SystemC system = new SystemC();
+         String login_id1 ="itayraz";
+         String pass1 = "1234";
+-        User new_user1 =  new User(login_id1,pass1);
++        //User new_user1 =  new User(login_id1,pass1);
+         String login_id2 ="yuvalva";
+         String pass2 = "12345";
+-        User new_user2 =  new User(login_id2,pass2);
++        //User new_user2 =  new User(login_id2,pass2);
+ 
+         Address add =  new Address("israel","beer sheve","harzit",5);
+         system.AddUser("itayraz","1234",0,add,"0506824544","itay@gamil.com");
+         System.out.println("Add user successed");
++
+         system.AddUser("yuvalva","12345",1,add,"0506824545","yuval@gamil.com");
+         System.out.println("Add user2 successed");
++
+         try
+         {
+ //            system.loginUser(login_id2,pass2);
+-//            System.out.println("loginuser user2 successed");
+-            system.RemoveUser(login_id1);
+-            System.out.println("remove user successed");
+-            system.loginUser(login_id2,pass2);
+-            System.out.println("loginuser user2 successed");
++//            System.out.println("login user user2 successed");
++//            system.RemoveUser(login_id1);
++//            System.out.println("remove user successed");
++            System.out.println("bugbug");
++            boolean bool = system.loginUser(login_id2,pass2);
++            System.out.println(bool + " " +  "loginuser user2 successed");
+             system.logoutUser(login_id2);
+             System.out.println("logoutuser user2 successed");
+ 
+         }
+         catch(Exception Error)
+         {
+-            System.out.println(Error.getMessage());
++            System.out.println(Error.getMessage() );
+         }
+         try
+         {
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"5198120f-0955-4c57-bec4-bc285fab6ab4\" name=\"Changes\" comment=\"blabla\">\n      <change afterPath=\"$PROJECT_DIR$/src/Test.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/Tichon_HW1.iml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/Tichon_HW1.iml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/Main.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Main.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2HGzfH0UCszOQZeFNGHalD4475Y\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"5198120f-0955-4c57-bec4-bc285fab6ab4\" name=\"Changes\" comment=\"\" />\n      <created>1667926313386</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1667926313386</updated>\n      <workItem from=\"1668324775726\" duration=\"2848000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"test1\">\n      <created>1667926772421</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1667926772421</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"Add User func\">\n      <created>1668366678281</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1668366678281</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"Add User func\">\n      <created>1668366709485</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1668366709485</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"user func update&#10;customer id and account id update\">\n      <created>1668425961720</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1668425961720</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"user func update&#10;customer id and account id update\">\n      <created>1668426006216</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1668426006216</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"SystemC class, login method.\">\n      <created>1668427248803</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1668427248803</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"error class created\">\n      <created>1668427786309</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1668427786309</updated>\n    </task>\n    <task id=\"LOCAL-00008\" summary=\"exceptions\">\n      <created>1668430381827</created>\n      <option name=\"number\" value=\"00008\" />\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1668430381827</updated>\n    </task>\n    <task id=\"LOCAL-00009\" summary=\"blabla\">\n      <created>1668433819230</created>\n      <option name=\"number\" value=\"00009\" />\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1668433819230</updated>\n    </task>\n    <task id=\"LOCAL-00010\" summary=\"blabla\">\n      <created>1668433837748</created>\n      <option name=\"number\" value=\"00010\" />\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1668433837748</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"11\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"test1\" />\n    <MESSAGE value=\"Add User func\" />\n    <MESSAGE value=\"user func update&#10;customer id and account id update\" />\n    <MESSAGE value=\"SystemC class, login method.\" />\n    <MESSAGE value=\"error class created\" />\n    <MESSAGE value=\"exceptions\" />\n    <MESSAGE value=\"blabla\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"blabla\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision e3fa4293398a95ee5e4e246febde39c9fb2e7424)
++++ b/.idea/workspace.xml	(date 1668443042930)
+@@ -1,11 +1,9 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="blabla">
+-      <change afterPath="$PROJECT_DIR$/src/Test.java" afterDir="false" />
++    <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="update 2">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/Tichon_HW1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Tichon_HW1.iml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -30,6 +28,33 @@
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
++  </component>
++  <component name="RunManager" selected="JUnit.Test">
++    <configuration name="Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="Tichon_HW1" />
++      <option name="PACKAGE_NAME" value="" />
++      <option name="MAIN_CLASS_NAME" value="Test" />
++      <option name="TEST_OBJECT" value="class" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="Test.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="Tichon_HW1" />
++      <option name="PACKAGE_NAME" value="" />
++      <option name="MAIN_CLASS_NAME" value="Test" />
++      <option name="METHOD_NAME" value="test" />
++      <option name="TEST_OBJECT" value="method" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <recent_temporary>
++      <list>
++        <item itemvalue="JUnit.Test" />
++        <item itemvalue="JUnit.Test.test" />
++      </list>
++    </recent_temporary>
+   </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+@@ -111,7 +136,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1668433837748</updated>
+     </task>
+-    <option name="localTasksCounter" value="11" />
++    <task id="LOCAL-00011" summary="update 2">
++      <created>1668441937491</created>
++      <option name="number" value="00011" />
++      <option name="presentableId" value="LOCAL-00011" />
++      <option name="project" value="LOCAL" />
++      <updated>1668441937491</updated>
++    </task>
++    <option name="localTasksCounter" value="12" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -137,6 +169,18 @@
+     <MESSAGE value="error class created" />
+     <MESSAGE value="exceptions" />
+     <MESSAGE value="blabla" />
+-    <option name="LAST_COMMIT_MESSAGE" value="blabla" />
++    <MESSAGE value="update 2" />
++    <option name="LAST_COMMIT_MESSAGE" value="update 2" />
++  </component>
++  <component name="XDebuggerManager">
++    <breakpoint-manager>
++      <breakpoints>
++        <line-breakpoint enabled="true" type="java-line">
++          <url>file://$PROJECT_DIR$/src/Test.java</url>
++          <line>28</line>
++          <option name="timeStamp" value="3" />
++        </line-breakpoint>
++      </breakpoints>
++    </breakpoint-manager>
+   </component>
+ </project>
+\ No newline at end of file

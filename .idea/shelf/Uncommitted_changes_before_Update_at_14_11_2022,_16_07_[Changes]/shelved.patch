@@ -1,0 +1,167 @@
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.Scanner;\n\n\npublic class Main {\n    public static void main(String[] args)\n    {\n        SystemC system = new SystemC();\n        Scanner scanner = new Scanner(System.in);\n        while(true) {\n\n            System.out.println(\"Press 1 for Add user\");\n            System.out.println(\"Press 2 for Remove user\");\n            System.out.println(\"Press 3 for Login user \");\n            System.out.println(\"Press 4 for Logout user \");\n            System.out.println(\"Press 5 for Create new order\");\n            System.out.println(\"Press 6 for Add product to order\");\n            System.out.println(\"Press 7 for Display order\");\n            System.out.println(\"Press 8 for Link Product \");\n            System.out.println(\"Press 9 for Add Product \");\n            System.out.println(\"Press 10 for Delete Product \");\n            System.out.println(\"Press 11 for ShowAllObjects \");\n            System.out.println(\"Press 12 for ShowObjectId \");\n            System.out.println(\"Press 13 to Quit\\n \\n \");\n\n            System.out.println(\"Make your choice\");\n            int choice = scanner.nextInt();\n            switch (choice) {\n\n                //First case for finding the addition\n                case 1:\n                    System.out.println(\"Enter Login_id \");\n                    String login_id = scanner.nextLine();\n                    System.out.println(\"Enter password\");\n                    String pass = scanner.nextLine();\n                    System.out.println(\"Premium Account - Yes enter 1/Not enter 0\");\n                    int p_account = scanner.nextInt();\n                    System.out.println(\"Enter customer country\");\n                    String customer_country = scanner.nextLine();\n                    System.out.println(\"Enter customer city\");\n                    String customer_city = scanner.nextLine();\n                    System.out.println(\"Enter customer street\");\n                    String customer_street = scanner.nextLine();\n                    System.out.println(\"Enter customer number\");\n                    int customer_addres_num = scanner.nextInt();\n                    Address address = new Address(customer_country, customer_city, customer_street, customer_addres_num);\n                    System.out.println(\"Enter customer phone\");\n                    String customer_phone = scanner.nextLine();\n                    System.out.println(\"Enter customer email\");\n                    String customer_email = scanner.nextLine();\n                    if(!system.AddUser(login_id, pass, p_account, address, customer_phone, customer_email))\n                    {\n                        System.out.println(\"user is not valid\");\n\n                    }\n                    break;\n                //default case to display the message invalid choice made by the user\n                default:\n                    System.out.println(\"Invalid choice!!! Please make a valid choice. \\\\n\\\\n\");\n\n            }\n        }\n\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Main.java b/src/Main.java
+--- a/src/Main.java	(revision 82a248038b78fadee47b2ca49a23f1cd2711b711)
++++ b/src/Main.java	(date 1668434606719)
+@@ -22,17 +22,17 @@
+             System.out.println("Press 12 for ShowObjectId ");
+             System.out.println("Press 13 to Quit\n \n ");
+ 
+-            System.out.println("Make your choice");
++            //System.out.println("Make your choice");
+             int choice = scanner.nextInt();
+             switch (choice) {
+ 
+                 //First case for finding the addition
+                 case 1:
+-                    System.out.println("Enter Login_id ");
++                    System.out.println("Enter login_id ");
+                     String login_id = scanner.nextLine();
+                     System.out.println("Enter password");
+                     String pass = scanner.nextLine();
+-                    System.out.println("Premium Account - Yes enter 1/Not enter 0");
++                    System.out.println("Premium account - Yes enter 1/Not enter 0");
+                     int p_account = scanner.nextInt();
+                     System.out.println("Enter customer country");
+                     String customer_country = scanner.nextLine();
+@@ -49,10 +49,37 @@
+                     String customer_email = scanner.nextLine();
+                     if(!system.AddUser(login_id, pass, p_account, address, customer_phone, customer_email))
+                     {
+-                        System.out.println("user is not valid");
++                        System.out.println("User is not valid");
+ 
+                     }
+                     break;
++
++                case 2:
++                    System.out.println("Enter login_id ");
++                    login_id = scanner.nextLine();
++                    if(!system.RemoveUser(login_id))
++                    {
++                        System.out.println("User does not exist");
++                    }
++                    break;
++                case 3:
++                    try
++                    {
++                        System.out.println("Enter login_id");
++                        login_id = scanner.nextLine();
++                        System.out.println("Enter password");
++                        pass = scanner.nextLine();
++                        if(!system.loginUser(login_id,pass))
++                        {
++                            System.out.println("Login problem");
++                        }
++                    }
++                    catch(Exception Error) {
++                        System.out.println(Error.getMessage());
++                    }
++                    break;
++
++
+                 //default case to display the message invalid choice made by the user
+                 default:
+                     System.out.println("Invalid choice!!! Please make a valid choice. \\n\\n");
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"5198120f-0955-4c57-bec4-bc285fab6ab4\" name=\"Changes\" comment=\"error class created\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/Customer.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Customer.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/SystemC.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/SystemC.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/User.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/User.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2HGzfH0UCszOQZeFNGHalD4475Y\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"5198120f-0955-4c57-bec4-bc285fab6ab4\" name=\"Changes\" comment=\"\" />\n      <created>1667926313386</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1667926313386</updated>\n      <workItem from=\"1668324775726\" duration=\"2848000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"test1\">\n      <created>1667926772421</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1667926772421</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"Add User func\">\n      <created>1668366678281</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1668366678281</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"Add User func\">\n      <created>1668366709485</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1668366709485</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"user func update&#10;customer id and account id update\">\n      <created>1668425961720</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1668425961720</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"user func update&#10;customer id and account id update\">\n      <created>1668426006216</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1668426006216</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"SystemC class, login method.\">\n      <created>1668427248803</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1668427248803</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"error class created\">\n      <created>1668427786309</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1668427786309</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"8\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"test1\" />\n    <MESSAGE value=\"Add User func\" />\n    <MESSAGE value=\"user func update&#10;customer id and account id update\" />\n    <MESSAGE value=\"SystemC class, login method.\" />\n    <MESSAGE value=\"error class created\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"error class created\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 82a248038b78fadee47b2ca49a23f1cd2711b711)
++++ b/.idea/workspace.xml	(date 1668433883845)
+@@ -1,12 +1,9 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="error class created">
+-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++    <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="Add User func">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Customer.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/SystemC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SystemC.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -49,49 +46,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1667926772421</updated>
+     </task>
+-    <task id="LOCAL-00002" summary="Add User func">
+-      <created>1668366678281</created>
++    <task id="LOCAL-00002" summary="update main">
++      <created>1668428557782</created>
+       <option name="number" value="00002" />
+       <option name="presentableId" value="LOCAL-00002" />
+       <option name="project" value="LOCAL" />
+-      <updated>1668366678281</updated>
+-    </task>
+-    <task id="LOCAL-00003" summary="Add User func">
+-      <created>1668366709485</created>
+-      <option name="number" value="00003" />
+-      <option name="presentableId" value="LOCAL-00003" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1668366709485</updated>
+-    </task>
+-    <task id="LOCAL-00004" summary="user func update&#10;customer id and account id update">
+-      <created>1668425961720</created>
+-      <option name="number" value="00004" />
+-      <option name="presentableId" value="LOCAL-00004" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1668425961720</updated>
+-    </task>
+-    <task id="LOCAL-00005" summary="user func update&#10;customer id and account id update">
+-      <created>1668426006216</created>
+-      <option name="number" value="00005" />
+-      <option name="presentableId" value="LOCAL-00005" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1668426006216</updated>
++      <updated>1668428557782</updated>
+     </task>
+-    <task id="LOCAL-00006" summary="SystemC class, login method.">
+-      <created>1668427248803</created>
+-      <option name="number" value="00006" />
+-      <option name="presentableId" value="LOCAL-00006" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1668427248803</updated>
+-    </task>
+-    <task id="LOCAL-00007" summary="error class created">
+-      <created>1668427786309</created>
+-      <option name="number" value="00007" />
+-      <option name="presentableId" value="LOCAL-00007" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1668427786309</updated>
+-    </task>
+-    <option name="localTasksCounter" value="8" />
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -107,13 +69,11 @@
+         </entry>
+       </map>
+     </option>
++    <option name="oldMeFiltersMigrated" value="true" />
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="test1" />
+-    <MESSAGE value="Add User func" />
+-    <MESSAGE value="user func update&#10;customer id and account id update" />
+-    <MESSAGE value="SystemC class, login method." />
+-    <MESSAGE value="error class created" />
+-    <option name="LAST_COMMIT_MESSAGE" value="error class created" />
++    <MESSAGE value="update main" />
++    <option name="LAST_COMMIT_MESSAGE" value="update main" />
+   </component>
+ </project>
+\ No newline at end of file

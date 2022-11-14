@@ -1,4 +1,5 @@
 import java.util.Date;
+import java.util.HashMap;
 
 public class Account {
     private static int Curr_Id=0;
@@ -8,13 +9,10 @@ public class Account {
     private Date _open;
     private Date _closed;
     private int _balance;
-
-    public void set_customer(Customer _customer) {
-        this._customer = _customer;
-    }
-
+    private HashMap<String, Order> OrderDict = new HashMap<String, Order>();
     private Customer _customer; // wont be able to create account without customer!
-    private Order[] ordersArr;
+
+
 
     public Account(Customer _customer) {
         this._id = String.valueOf(Curr_Id);
@@ -25,6 +23,13 @@ public class Account {
         this._customer = _customer;
     }
 
+    public void AddOrder (Order order){
+        this.OrderDict.put(order.get_number(),order);
+    }
+
+    public void set_customer(Customer _customer) {
+        this._customer = _customer;
+    }
     public String get_id() {
         return _id;
     }

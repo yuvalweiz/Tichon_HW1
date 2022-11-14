@@ -2,7 +2,7 @@ import java.io.ObjectInputFilter;
 import java.util.Date;
 
 public class Order {
-
+    private static int Curr_Id=0;
     private String _number;
     private Date _ordered;
     private Date _shipped;
@@ -12,13 +12,13 @@ public class Order {
     private Account _account;
     private LineItem[] lineItemsArr;
 
-    public Order(String _number, Date _ordered, Date _shipped, Address _ship_to, OrderStatus _status, float _total, Account _account) {
-        this._number = _number;
+    public Order(Date _ordered, Address _ship_to, Account _account) {
+        this._number = String.valueOf(Curr_Id) + "#";
+        Curr_Id++;
         this._ordered = _ordered;
-        this._shipped = _shipped;
         this._ship_to = _ship_to;
-        this._status = _status;
-        this._total = _total;
+        this._status = OrderStatus.New;
+        this._total = 0;
         this._account = _account;
     }
 

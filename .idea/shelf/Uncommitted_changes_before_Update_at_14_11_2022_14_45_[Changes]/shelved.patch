@@ -1,0 +1,253 @@
+Index: src/SystemC.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public class SystemC {\r\n    private User _connectedUser;\r\n\r\n    public SystemC(){\r\n        this._connectedUser = null;\r\n    }; //defult constructor\r\n    public boolean AddUser(String _login_id,String _password,int premium,Address address,String phone, String email){\r\n        if(User.UserDict.containsKey(_login_id)){\r\n            return false;\r\n        }\r\n        User newUser= new User(_login_id,_password);\r\n        Customer newCustomer = new Customer(address,phone,email);\r\n        Account newAccount;\r\n        if(premium == 1){\r\n            newAccount = new PremiumAccount(_login_id,newCustomer);\r\n            newCustomer.set_account(newAccount);\r\n        }\r\n        if (premium == 0){\r\n            newAccount = new Account(newCustomer);\r\n            newCustomer.set_account(newAccount);\r\n        }\r\n        newCustomer.set_user(newUser);\r\n        return true;\r\n\r\n    }\r\n    public boolean RemoveUser(String Login_id)\r\n    {\r\n        if (User.UserDict.containsKey(Login_id)!= true)\r\n        {\r\n            return false;\r\n        }\r\n        User.UserDict.remove(Login_id);\r\n        return true;\r\n    }\r\n\r\n    public InputCheck loginUser(String _loginid, String password){\r\n        if(this._connectedUser != null){\r\n            return InputCheck.there_is_user_connected;\r\n        }\r\n\r\n        if(!User.UserDict.containsKey(_loginid)){\r\n            return InputCheck.id_is_wrong;\r\n        }\r\n        if(!User.UserDict.get(_loginid).equals(password)){\r\n            return InputCheck.pass_is_wrong;\r\n        }\r\n        this._connectedUser = User.UserDict.get(_loginid);\r\n        return InputCheck.succses;\r\n    }\r\n    public InputCheck logoutUser(String _loginid){\r\n        if(this._connectedUser == null){\r\n            return InputCheck.there_is_no_user_connected;\r\n        }\r\n        return InputCheck.succses;\r\n    }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/SystemC.java b/src/SystemC.java
+--- a/src/SystemC.java	(revision 795fd02ed78ded3b5f3f79070a63a05bf2743821)
++++ b/src/SystemC.java	(date 1668429790209)
+@@ -34,8 +34,9 @@
+     }
+ 
+     public InputCheck loginUser(String _loginid, String password){
++        Erorr error;
+         if(this._connectedUser != null){
+-            return InputCheck.there_is_user_connected;
++            //return InputCheck.there_is_user_connected;
+         }
+ 
+         if(!User.UserDict.containsKey(_loginid)){
+@@ -51,8 +52,12 @@
+         if(this._connectedUser == null){
+             return InputCheck.there_is_no_user_connected;
+         }
++        this._connectedUser = null;
+         return InputCheck.succses;
+     }
+ 
+ 
++
++
++
+ }
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.Scanner;\r\n\r\n\r\npublic class Main {\r\n    public static void main(String[] args)\r\n\r\n    {\r\n        //System.out.println(\"Hello world!\");\r\n        //System.out.println(\"Change 1\");\r\n        Scanner scanner = new Scanner(System.in);\r\n        while(true) {\r\n\r\n            System.out.println(\"Press 1 for Add user\");\r\n            System.out.println(\"Press 2 for Remove user\");\r\n            System.out.println(\"Press 3 for Login user \");\r\n            System.out.println(\"Press 4 for Logout user \");\r\n            System.out.println(\"Press 5 for Create new order\");\r\n            System.out.println(\"Press 6 for Add product to order\");\r\n            System.out.println(\"Press 7 for Display order\");\r\n            System.out.println(\"Press 8 for Link Product \");\r\n            System.out.println(\"Press 9 for Add Product \");\r\n            System.out.println(\"Press 10 for Delete Product \");\r\n            System.out.println(\"Press 11 for ShowAllObjects \");\r\n            System.out.println(\"Press 12 for ShowObjectId \");\r\n            System.out.println(\"Press 13 to Quit\\n \\n \");\r\n\r\n            System.out.println(\"Make your choice\");\r\n            int choice = scanner.nextInt();\r\n            switch (choice) {\r\n\r\n                //First case for finding the addition\r\n                case 1:\r\n                    System.out.println(\"Enter Login_id \");\r\n                    String login_id = scanner.nextLine();\r\n                    System.out.println(\"Enter password\");\r\n                    String pass = scanner.nextLine();\r\n                    System.out.println(\"Premium Account - Yes enter 1/Not enter 0\");\r\n                    int p_account = scanner.nextInt();\r\n                    System.out.println(\"Enter customer country\");\r\n                    String customer_country = scanner.nextLine();\r\n                    System.out.println(\"Enter customer city\");\r\n                    String customer_city = scanner.nextLine();\r\n                    System.out.println(\"Enter customer street\");\r\n                    String customer_street = scanner.nextLine();\r\n                    System.out.println(\"Enter customer number\");\r\n                    int customer_addres_num = scanner.nextInt();\r\n                    Address address = new Address(customer_country, customer_city, customer_street, customer_addres_num);\r\n                    System.out.println(\"Enter customer phone\");\r\n                    String customer_phone = scanner.nextLine();\r\n                    System.out.println(\"Enter customer email\");\r\n                    String customer_email = scanner.nextLine();\r\n                    if(!User.AddUser(login_id, pass, p_account, address, customer_phone, customer_email))\r\n                    {\r\n                        System.out.println(\"user is not valid\");\r\n\r\n                    }\r\n                    break;\r\n                //default case to display the message invalid choice made by the user\r\n                default:\r\n                    System.out.println(\"Invalid choice!!! Please make a valid choice. \\\\n\\\\n\");\r\n\r\n            }\r\n        }\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Main.java b/src/Main.java
+--- a/src/Main.java	(revision 795fd02ed78ded3b5f3f79070a63a05bf2743821)
++++ b/src/Main.java	(date 1668429367442)
+@@ -3,10 +3,8 @@
+ 
+ public class Main {
+     public static void main(String[] args)
+-
+     {
+-        //System.out.println("Hello world!");
+-        //System.out.println("Change 1");
++        SystemC system = new SystemC();
+         Scanner scanner = new Scanner(System.in);
+         while(true) {
+ 
+@@ -49,7 +47,7 @@
+                     String customer_phone = scanner.nextLine();
+                     System.out.println("Enter customer email");
+                     String customer_email = scanner.nextLine();
+-                    if(!User.AddUser(login_id, pass, p_account, address, customer_phone, customer_email))
++                    if(!system.AddUser(login_id, pass, p_account, address, customer_phone, customer_email))
+                     {
+                         System.out.println("user is not valid");
+ 
+Index: src/Erorr.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public abstract class Erorr extends Exception{\r\n\r\n    public Erorr(String s) {\r\n    }\r\n\r\n    public class id_is_wrong_EX extends Erorr\r\n    {\r\n        public id_is_wrong_EX() {\r\n            super(\"The ID you entered is wrong.\");\r\n        }\r\n    }\r\n    public class pass_is_wrong_EX extends Erorr\r\n    {\r\n\r\n        public pass_is_wrong_EX() {\r\n            super(\"The Password you entered is wrong.\");\r\n        }\r\n    }\r\n    public class there_is_user_connected_EX extends Erorr\r\n    {\r\n        public there_is_user_connected_EX() {\r\n            super(\"The ID you entered is wrong.\");\r\n        }\r\n    }\r\n    public class there_is_no_user_connected_EX extends Erorr\r\n    {\r\n        public there_is_no_user_connected_EX() {\r\n            super(\"The ID you entered is wrong.\");\r\n        }\r\n    }\r\n    public class this_user_is_not_connected_EX extends Erorr\r\n    {\r\n        public this_user_is_not_connected_EX() {\r\n            super(\"The ID you entered is wrong.\");\r\n        }\r\n    }\r\n\r\n\r\n    }\r\n\r\n\r\n\r\n\r\n// id_is_wrong, pass_is_wrong,there_is_user_connected,succses,there_is_no_user_connected,this_user_is_not_connected;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Erorr.java b/src/Erorr.java
+--- a/src/Erorr.java	(revision 795fd02ed78ded3b5f3f79070a63a05bf2743821)
++++ b/src/Erorr.java	(date 1668429790215)
+@@ -1,15 +1,10 @@
+-public abstract class Erorr extends Exception{
++public abstract class Erorr extends Exception {
+ 
+     public Erorr(String s) {
+     }
+-
+-    public class id_is_wrong_EX extends Erorr
+-    {
+-        public id_is_wrong_EX() {
+-            super("The ID you entered is wrong.");
+-        }
+-    }
+-    public class pass_is_wrong_EX extends Erorr
++}
++
++public class pass_is_wrong_EX extends Erorr
+     {
+ 
+         public pass_is_wrong_EX() {
+@@ -36,7 +31,7 @@
+     }
+ 
+ 
+-    }
++
+ 
+ 
+ 
+Index: src/UserTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import static org.junit.jupiter.api.Assertions.*;\r\n\r\nclass UserTest {\r\n\r\n    @org.junit.jupiter.api.Test\r\n    void addUser() {\r\n        SystemC system = new SystemC();\r\n        Address adress = new Address(\"ISRAEL\",\"B7\",\"mekor haim\",12);\r\n        system.AddUser(\"itay\",\"123\",0,adress,\"052\",\"walla.com\");\r\n        if(User.UserDict.containsKey(\"itay\"))\r\n            System.out.println(\"itay is in\");\r\n        if(!system.AddUser(\"itay\",\"123\",0,adress,\"052\",\"walla.com\"))\r\n            System.out.println(\"false\");\r\n        system.RemoveUser(\"itay\");\r\n        if(!User.UserDict.containsKey(\"itay\"))\r\n            System.out.println(\"itay is out\");\r\n\r\n\r\n    }\r\n\r\n    @org.junit.jupiter.api.Test\r\n    void removeUser() {\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/UserTest.java b/src/UserTest.java
+--- a/src/UserTest.java	(revision 795fd02ed78ded3b5f3f79070a63a05bf2743821)
++++ b/src/UserTest.java	(date 1668429367454)
+@@ -21,4 +21,6 @@
+     @org.junit.jupiter.api.Test
+     void removeUser() {
+     }
++
++
+ }
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"5198120f-0955-4c57-bec4-bc285fab6ab4\" name=\"Changes\" comment=\"error class created\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2HGzfH0UCszOQZeFNGHalD4475Y\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"5198120f-0955-4c57-bec4-bc285fab6ab4\" name=\"Changes\" comment=\"\" />\r\n      <created>1667926313386</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1667926313386</updated>\r\n      <workItem from=\"1668324775726\" duration=\"2848000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"test1\">\r\n      <created>1667926772421</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1667926772421</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Add User func\">\r\n      <created>1668366678281</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668366678281</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Add User func\">\r\n      <created>1668366709485</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668366709485</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"user func update&#10;customer id and account id update\">\r\n      <created>1668425961720</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668425961720</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"user func update&#10;customer id and account id update\">\r\n      <created>1668426006216</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668426006216</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"SystemC class, login method.\">\r\n      <created>1668427248803</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668427248803</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"error class created\">\r\n      <created>1668427786309</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668427786309</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"8\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"test1\" />\r\n    <MESSAGE value=\"Add User func\" />\r\n    <MESSAGE value=\"user func update&#10;customer id and account id update\" />\r\n    <MESSAGE value=\"SystemC class, login method.\" />\r\n    <MESSAGE value=\"error class created\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"error class created\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 795fd02ed78ded3b5f3f79070a63a05bf2743821)
++++ b/.idea/workspace.xml	(date 1668429790284)
+@@ -1,8 +1,17 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="error class created">
++    <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="Add User func">
++      <change afterPath="$PROJECT_DIR$/src/id_is_wrong_EX.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2022_13_15__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2022_13_15__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2022_13_41__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2022_13_41__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2022_14_11__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_11_2022_14_11__Changes_.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Erorr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Erorr.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/SystemC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SystemC.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/UserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserTest.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -45,49 +54,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1667926772421</updated>
+     </task>
+-    <task id="LOCAL-00002" summary="Add User func">
+-      <created>1668366678281</created>
++    <task id="LOCAL-00002" summary="update main">
++      <created>1668428557782</created>
+       <option name="number" value="00002" />
+       <option name="presentableId" value="LOCAL-00002" />
+       <option name="project" value="LOCAL" />
+-      <updated>1668366678281</updated>
+-    </task>
+-    <task id="LOCAL-00003" summary="Add User func">
+-      <created>1668366709485</created>
+-      <option name="number" value="00003" />
+-      <option name="presentableId" value="LOCAL-00003" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1668366709485</updated>
+-    </task>
+-    <task id="LOCAL-00004" summary="user func update&#10;customer id and account id update">
+-      <created>1668425961720</created>
+-      <option name="number" value="00004" />
+-      <option name="presentableId" value="LOCAL-00004" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1668425961720</updated>
+-    </task>
+-    <task id="LOCAL-00005" summary="user func update&#10;customer id and account id update">
+-      <created>1668426006216</created>
+-      <option name="number" value="00005" />
+-      <option name="presentableId" value="LOCAL-00005" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1668426006216</updated>
++      <updated>1668428557782</updated>
+     </task>
+-    <task id="LOCAL-00006" summary="SystemC class, login method.">
+-      <created>1668427248803</created>
+-      <option name="number" value="00006" />
+-      <option name="presentableId" value="LOCAL-00006" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1668427248803</updated>
+-    </task>
+-    <task id="LOCAL-00007" summary="error class created">
+-      <created>1668427786309</created>
+-      <option name="number" value="00007" />
+-      <option name="presentableId" value="LOCAL-00007" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1668427786309</updated>
+-    </task>
+-    <option name="localTasksCounter" value="8" />
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -106,10 +80,7 @@
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="test1" />
+-    <MESSAGE value="Add User func" />
+-    <MESSAGE value="user func update&#10;customer id and account id update" />
+-    <MESSAGE value="SystemC class, login method." />
+-    <MESSAGE value="error class created" />
+-    <option name="LAST_COMMIT_MESSAGE" value="error class created" />
++    <MESSAGE value="update main" />
++    <option name="LAST_COMMIT_MESSAGE" value="update main" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/id_is_wrong_EX.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/id_is_wrong_EX.java b/src/id_is_wrong_EX.java
+new file mode 100644
+--- /dev/null	(date 1668429790202)
++++ b/src/id_is_wrong_EX.java	(date 1668429790202)
+@@ -0,0 +1,5 @@
++public class id_is_wrong_EX extends Erorr {
++    public id_is_wrong_EX() {
++        super("The ID you entered is wrong.");
++    }
++}
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_18\" default=\"true\" project-jdk-name=\"corretto-18\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 795fd02ed78ded3b5f3f79070a63a05bf2743821)
++++ b/.idea/misc.xml	(date 1668429478447)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_18" default="true" project-jdk-name="corretto-18" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="corretto-18" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file

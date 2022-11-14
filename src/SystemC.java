@@ -27,11 +27,13 @@ public class SystemC {
         return true;
 
     }
-    public boolean RemoveUser(String Login_id)
-    {
+    public boolean RemoveUser(String Login_id) throws Erorr {
         if (User.UserDict.containsKey(Login_id)!= true)
         {
             return false;
+        }
+        if(_connectedUser.get_login_id().equals(Login_id)){
+            logoutUser(_connectedUser.get_login_id());
         }
         User.UserDict.remove(Login_id);
         return true;

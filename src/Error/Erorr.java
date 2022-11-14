@@ -1,3 +1,5 @@
+package Error;
+
 public abstract class Erorr extends Exception {
 
     public Erorr(String s) {

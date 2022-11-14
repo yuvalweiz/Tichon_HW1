@@ -1,3 +1,5 @@
+import Error.*;
+
 public class SystemC {
     private User _connectedUser;
 
@@ -33,26 +35,37 @@ public class SystemC {
         return true;
     }
 
-    public InputCheck loginUser(String _loginid, String password){
+    public boolean loginUser(String _loginid, String password) throws Erorr {
+        Erorr error;
         if(this._connectedUser != null){
-            return InputCheck.there_is_user_connected;
+            error = new there_is_user_connected_EX();
+            throw error;
         }
 
         if(!User.UserDict.containsKey(_loginid)){
-            return InputCheck.id_is_wrong;
+            error = new id_is_wrong_EX();
+            throw error;
+
         }
         if(!User.UserDict.get(_loginid).equals(password)){
-            return InputCheck.pass_is_wrong;
+            error = new pass_is_wrong_EX();
+            throw error;
         }
         this._connectedUser = User.UserDict.get(_loginid);
-        return InputCheck.succses;
+        return true;
     }
-    public InputCheck logoutUser(String _loginid){
+    public boolean logoutUser(String _loginid) throws Erorr {
+        Erorr error;
         if(this._connectedUser == null){
-            return InputCheck.there_is_no_user_connected;
+            error = new there_is_no_user_connected_EX();
+            throw error;
         }
-        return InputCheck.succses;
+        this._connectedUser = null;
+        return true;
     }
+
+
+
 
 
 }

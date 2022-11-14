@@ -32,6 +32,15 @@ public class Order {
         return null;
     }
 
+    public void AddProduct(Product product){
+        for(int i=0;i<LineItemsVec.size();i++){
+            if(LineItemsVec.get(i).get_product().get_name().equals(product.get_name())){
+                LineItemsVec.get(i).setQuantity(LineItemsVec.get(i).getQuantity()+1);
+            }
+        }
+
+    }
+
     public String get_number() {
         return _number;
     }

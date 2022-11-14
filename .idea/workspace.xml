@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="expetions">
+    <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="Line Item vector">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Error/not_premium_user.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Error/not_premium_user.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Order.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -124,7 +123,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668434996270</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Line Item vector">
+      <created>1668435801824</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1668435801824</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -151,6 +157,7 @@
     <MESSAGE value="blabla" />
     <MESSAGE value="more expestions to error" />
     <MESSAGE value="expetions" />
-    <option name="LAST_COMMIT_MESSAGE" value="expetions" />
+    <MESSAGE value="Line Item vector" />
+    <option name="LAST_COMMIT_MESSAGE" value="Line Item vector" />
   </component>
 </project>

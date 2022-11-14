@@ -1,5 +1,6 @@
 import java.io.ObjectInputFilter;
 import java.util.Date;
+import java.util.Vector;
 
 public class Order {
     private static int Curr_Id=0;
@@ -10,7 +11,7 @@ public class Order {
     private OrderStatus _status;
     private float _total;
     private Account _account;
-    private LineItem[] lineItemsArr;
+    private Vector<LineItem> LineItemsVec;
 
     public Order(Date _ordered, Address _ship_to, Account _account) {
         this._number = "#" + String.valueOf(Curr_Id) ;
@@ -20,6 +21,15 @@ public class Order {
         this._status = OrderStatus.New;
         this._total = 0;
         this._account = _account;
+    }
+
+    public Product getProductFromLineItem(String product_name){
+        for(int i=0;i<LineItemsVec.size();i++){
+            if(LineItemsVec.get(i).get_product().get_name().equals(product_name)){
+                return LineItemsVec.get(i).get_product();
+            }
+        }
+        return null;
     }
 
     public String get_number() {

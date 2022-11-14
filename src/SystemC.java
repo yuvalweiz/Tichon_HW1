@@ -47,6 +47,12 @@ public class SystemC {
         this._connectedUser = User.UserDict.get(_loginid);
         return InputCheck.succses;
     }
+    public InputCheck logoutUser(String _loginid){
+        if(this._connectedUser == null){
+            return InputCheck.there_is_no_user_connected;
+        }
+        return InputCheck.succses;
+    }
 
 
 }

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="user func update&#10;customer id and account id update">
-      <change afterPath="$PROJECT_DIR$/src/SystemC.java" afterDir="false" />
+    <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="error class created">
+      <change afterPath="$PROJECT_DIR$/src/Erorr.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/InputCheck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/InputCheck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PremiumAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PremiumAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SystemC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SystemC.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +76,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668426006216</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="SystemC class, login method.">
+      <created>1668427248803</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1668427248803</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -99,6 +104,8 @@
     <MESSAGE value="test1" />
     <MESSAGE value="Add User func" />
     <MESSAGE value="user func update&#10;customer id and account id update" />
-    <option name="LAST_COMMIT_MESSAGE" value="user func update&#10;customer id and account id update" />
+    <MESSAGE value="SystemC class, login method." />
+    <MESSAGE value="error class created" />
+    <option name="LAST_COMMIT_MESSAGE" value="error class created" />
   </component>
 </project>

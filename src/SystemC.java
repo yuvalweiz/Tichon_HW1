@@ -32,7 +32,7 @@ public class SystemC {
         {
             return false;
         }
-        if(_connectedUser.get_login_id().equals(Login_id)){
+        if(_connectedUser!=null && _connectedUser.get_login_id().equals(Login_id)){
             logoutUser(_connectedUser.get_login_id());
         }
         User.UserDict.remove(Login_id);

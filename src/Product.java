@@ -9,9 +9,7 @@ public class Product {
     private Vector<LineItem> lineItemsVec;
     private Supplier _supplier;
 
-    public Vector<LineItem> getLineItemsVec() {
-        return lineItemsVec;
-    }
+
 
     public Product(String _name, Supplier _supplier) {
 
@@ -30,6 +28,10 @@ public class Product {
 
     public void set_name(String _name) {
         this._name = _name;
+    }
+
+    public Vector<LineItem> getLineItemsVec() {
+        return lineItemsVec;
     }
 
     public String get_id() {

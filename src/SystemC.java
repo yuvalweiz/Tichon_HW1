@@ -1,13 +1,15 @@
 import Error.*;
 
 import java.util.Date;
+import java.util.HashMap;
 
 public class SystemC {
     private User _connectedUser;
+    private HashMap<String, Product> PrductDict = new HashMap<String, Product>();
 
     public SystemC(){
         this._connectedUser = null;
-    }; //defult constructor
+    } //defult constructor
     public boolean AddUser(String _login_id,String _password,int premium,Address address,String phone, String email){
         if(User.UserDict.containsKey(_login_id)){
             return false;
@@ -78,6 +80,7 @@ public class SystemC {
         Date currDate = new Date();
         Order order = new Order(currDate,address,_connectedUser.get_customer().get_account());
         _connectedUser.get_customer().get_account().AddOrder(order);
+        _connectedUser.get_customer().get_account().set_lastOrder(order.get_number());
         System.out.println("Your Order number is: " + order.get_number());
 
     }
@@ -131,5 +134,61 @@ public class SystemC {
 
 
     }
+    public void DisplayOrder() throws Erorr {
+        Erorr erorr;
+        if(_connectedUser == null){
+            erorr = new there_is_no_user_connected_EX();
+            throw erorr;
+        }
+        Order myOrder = _connectedUser.get_customer().get_account().getOrder(_connectedUser.get_customer().get_account().get_lastOrder());
+        if(myOrder == null){
+            erorr = new order_is_not_exist();
+            throw erorr;
+        }
+        int price;
+        int quan;
+        float sum = 0;
+        for(int i=0;i<myOrder.getLineItemsVec().size();i++){
+            quan = myOrder.getLineItemsVec().get(i).getQuantity();
+            price = myOrder.getLineItemsVec().get(i).getPrice();
+            sum = sum + (quan * price);
+        }
+        myOrder.set_total(sum);
+
+        System.out.println("Order Number: " + myOrder.get_number());
+        System.out.println("Order Date: " + myOrder.get_ordered());
+        System.out.println("Shipment Date: " + myOrder.get_shipped());
+        System.out.println("Shipment Address: " + myOrder.get_ship_to());
+        System.out.println("Order status: " + myOrder.get_status());
+        System.out.println("Total payment: " + myOrder.get_total());
+
+    }
+
+    public void LinkProduct (String name,int price,int Quan) throws Erorr {
+        Erorr error;
+        if (_connectedUser == null)
+        {
+            error = new there_is_no_user_connected_EX();
+            throw error;
+        }
+        Account account = _connectedUser.get_customer().get_account();
+        if(!(account instanceof PremiumAccount))
+        {
+            error = new not_premium_user();
+            throw error;
+        }
+        Product product = PrductDict.get(name);
+        if(product == null){
+            error = new product_is_not_exist();
+        }
+
+
+    }
+
+
+    public void AddProduct(String name,String supllierName){
+
+    }
+
 
 }

@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7747a4a0-0031-4f9a-af3e-f1c3089799e9" name="Changes" comment="blabla">
+    <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="hara ba leben">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Address.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Error/id_is_wrong_EX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Error/id_is_wrong_EX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Error/not_premium_user.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Error/not_premium_user.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Error/order_is_not_exist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Error/order_is_not_exist.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Error/pass_is_wrong_EX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Error/pass_is_wrong_EX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Error/product_is_not_exist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Error/product_is_not_exist.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Error/there_is_no_user_connected_EX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Error/there_is_no_user_connected_EX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Error/there_is_user_connected_EX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Error/there_is_user_connected_EX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Error/this_user_is_not_connected_EX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Error/this_user_is_not_connected_EX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SystemC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SystemC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,22 +30,6 @@
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
-  </component>
-  <component name="RunManager">
-    <configuration name="Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Tichon_HW1" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="Test" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="JUnit.Test" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -134,7 +111,28 @@
       <option name="project" value="LOCAL" />
       <updated>1668433837748</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="more expestions to error">
+      <created>1668434364610</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1668434364610</updated>
+    </task>
+    <task id="LOCAL-00012" summary="expetions">
+      <created>1668434996270</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1668434996270</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Line Item vector">
+      <created>1668435801824</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1668435801824</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -159,17 +157,9 @@
     <MESSAGE value="error class created" />
     <MESSAGE value="exceptions" />
     <MESSAGE value="blabla" />
-    <option name="LAST_COMMIT_MESSAGE" value="blabla" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Test.java</url>
-          <line>26</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="more expestions to error" />
+    <MESSAGE value="expetions" />
+    <MESSAGE value="Line Item vector" />
+    <option name="LAST_COMMIT_MESSAGE" value="Line Item vector" />
   </component>
 </project>

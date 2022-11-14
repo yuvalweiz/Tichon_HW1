@@ -13,7 +13,7 @@ public abstract class Erorr extends Exception{
     {
 
         public pass_is_wrong_EX() {
-            super("The ID you entered is wrong.");
+            super("The Password you entered is wrong.");
         }
     }
     public class there_is_user_connected_EX extends Erorr

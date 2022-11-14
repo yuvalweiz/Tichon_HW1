@@ -181,6 +181,9 @@ public class SystemC {
         if(product == null){
             error = new product_is_not_exist();
         }
+        LineItem lineItem = new LineItem(Quan,price);
+        product.getLineItemsVec().add(lineItem);
+        ((PremiumAccount) account).AddProduct(product);
 
 
     }

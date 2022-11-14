@@ -19,4 +19,8 @@ public class PremiumAccount extends Account {
         }
         return null;
     }
+
+    public void AddProduct(Product prod){
+        Products.add(prod);
+    }
 }

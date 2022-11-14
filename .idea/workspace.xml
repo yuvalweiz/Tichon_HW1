@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="hara ba leben">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PremiumAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PremiumAccount.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SystemC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SystemC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +131,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668435801824</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="hara ba leben">
+      <created>1668444256689</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1668444256689</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,6 +166,7 @@
     <MESSAGE value="more expestions to error" />
     <MESSAGE value="expetions" />
     <MESSAGE value="Line Item vector" />
-    <option name="LAST_COMMIT_MESSAGE" value="Line Item vector" />
+    <MESSAGE value="hara ba leben" />
+    <option name="LAST_COMMIT_MESSAGE" value="hara ba leben" />
   </component>
 </project>

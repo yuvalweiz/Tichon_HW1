@@ -22,7 +22,7 @@ public class Test {
         {
 //            system.loginUser(login_id2,pass2);
 //            System.out.println("loginuser user2 successed");
-            system.RemoveUser(login_id1);
+
             System.out.println("remove user successed");
             system.loginUser(login_id2,pass2);
             System.out.println("loginuser user2 successed");

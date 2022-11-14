@@ -51,7 +51,7 @@ public class SystemC {
             throw error;
 
         }
-        if(!User.UserDict.get(_loginid).equals(password)){
+        if(!User.UserDict.get(_loginid).get_password().equals(password)){
             error = new pass_is_wrong_EX();
             throw error;
         }

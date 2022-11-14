@@ -45,4 +45,13 @@ public class Address {
 
     private int _number;
 
+    @Override
+    public String toString() {
+        return "Address:" +
+                "country='" + _country + '\'' +
+                ",city='" + _city + '\'' +
+                ",street='" + _street + '\'' +
+                ",number=" + _number
+                ;
+    }
 }

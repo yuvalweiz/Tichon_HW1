@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="blabla">
-      <change afterPath="$PROJECT_DIR$/src/Test.java" afterDir="false" />
+    <list default="true" id="7747a4a0-0031-4f9a-af3e-f1c3089799e9" name="Changes" comment="blabla">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tichon_HW1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Tichon_HW1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Address.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Error/id_is_wrong_EX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Error/id_is_wrong_EX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Error/not_premium_user.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Error/not_premium_user.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Error/order_is_not_exist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Error/order_is_not_exist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Error/pass_is_wrong_EX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Error/pass_is_wrong_EX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Error/product_is_not_exist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Error/product_is_not_exist.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Error/there_is_no_user_connected_EX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Error/there_is_no_user_connected_EX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Error/there_is_user_connected_EX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Error/there_is_user_connected_EX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Error/this_user_is_not_connected_EX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Error/this_user_is_not_connected_EX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +37,22 @@
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Tichon_HW1" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Test" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.Test" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -127,7 +150,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="test1" />
@@ -138,5 +160,16 @@
     <MESSAGE value="exceptions" />
     <MESSAGE value="blabla" />
     <option name="LAST_COMMIT_MESSAGE" value="blabla" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Test.java</url>
+          <line>26</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -192,7 +192,10 @@ public class SystemC {
 
 
     public void AddProduct(String name,String supllierName){
-
+        Supplier supnik = new Supplier(supllierName);
+        Product prod = new Product(name,supnik);
+        supnik.Add_Product(prod);
+        PrductDict.put(prod.get_id(),prod);
     }
 
 

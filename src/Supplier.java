@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.Vector;
 
 public class Supplier
@@ -5,7 +6,7 @@ public class Supplier
     private static int Curr_Id=0;
     String _id;
     String _name;
-
+    public static HashMap<String, Supplier> SupllierDict = new HashMap<String, Supplier>();
     Vector<Product> productsVec;
 
     public Supplier(String _name) {
@@ -13,6 +14,9 @@ public class Supplier
         Curr_Id++;
         this._name = _name;
         this.productsVec = new Vector<>();
+        SupllierDict.put(this._id,this);
+
+
     }
 
     public void set_id(String _id) {

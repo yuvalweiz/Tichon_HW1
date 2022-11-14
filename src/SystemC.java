@@ -153,11 +153,12 @@ public class SystemC {
         int price;
         int quan;
         float sum = 0;
+        if(myOrder.getLineItemsVec() != null){
         for(int i=0;i<myOrder.getLineItemsVec().size();i++){
             quan = myOrder.getLineItemsVec().get(i).getQuantity();
             price = myOrder.getLineItemsVec().get(i).getPrice();
             sum = sum + (quan * price);
-        }
+        }}
         myOrder.set_total(sum);
 
         System.out.println("Order Number: " + myOrder.get_number());

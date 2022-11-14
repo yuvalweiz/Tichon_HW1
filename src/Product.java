@@ -9,7 +9,6 @@ public class Product {
     private Vector<LineItem> lineItemsVec;
     private Supplier _supplier;
 
-    private Dictionary<String,LineItem> lineItemsDic;
 
     public Product( String _name, Supplier _supplier) {
 
@@ -20,6 +19,8 @@ public class Product {
         this._supplier = _supplier;
         this.lineItemsVec = new Vector<LineItem>();
     }
+
+
     public void set_id(String _id) {
         this._id = _id;
     }

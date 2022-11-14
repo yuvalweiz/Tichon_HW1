@@ -4,6 +4,6 @@ public class PremiumAccount extends Account {
 
 
     public PremiumAccount(String _id, Customer _customer) {
-        super(_id, _customer);
+        super(_customer);
     }
 }

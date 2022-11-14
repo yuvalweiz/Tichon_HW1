@@ -4,13 +4,14 @@ class UserTest {
 
     @org.junit.jupiter.api.Test
     void addUser() {
+        SystemC system = new SystemC();
         Address adress = new Address("ISRAEL","B7","mekor haim",12);
-        User.AddUser("itay","123",0,adress,"052","walla.com");
+        system.AddUser("itay","123",0,adress,"052","walla.com");
         if(User.UserDict.containsKey("itay"))
             System.out.println("itay is in");
-        if(!User.AddUser("itay","123",0,adress,"052","walla.com"))
+        if(!system.AddUser("itay","123",0,adress,"052","walla.com"))
             System.out.println("false");
-        User.RemoveUser("itay");
+        system.RemoveUser("itay");
         if(!User.UserDict.containsKey("itay"))
             System.out.println("itay is out");
 

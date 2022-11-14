@@ -9,8 +9,11 @@ public class Product {
     private Vector<LineItem> lineItemsVec;
     private Supplier _supplier;
 
+    public Vector<LineItem> getLineItemsVec() {
+        return lineItemsVec;
+    }
 
-    public Product( String _name, Supplier _supplier) {
+    public Product(String _name, Supplier _supplier) {
 
 
         this._id=String.valueOf(Curr_id);

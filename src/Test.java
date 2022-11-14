@@ -1,3 +1,5 @@
+import java.util.Date;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class Test {
@@ -44,9 +46,22 @@ public class Test {
 //            system.loginUser(login_id1,pass1);
             boolean bool = system.loginUser(login_id2,pass2);
             System.out.println(bool + " " +  "loginuser user2 successed");
+            System.out.println("Create_new_order successed");
+
+            Customer customer = User.UserDict.get(login_id2).get_customer();
+            Account account = customer.get_account();
             system.Create_new_order(add);
-            System.out.println("Create_new_order successed");
-            System.out.println("Create_new_order successed");
+            //system.AddProduct("shuko","moshe");
+
+            //account.AddOrder(order);
+            //String ordernum = order.get_number();
+            //System.out.println(ordernum);
+            //Customer customer = new Customer(add,"05066666","cus@gamil.com");
+            //PremiumAccount prime_account = new PremiumAccount("account1",customer);
+            //system.Add_product_to_order(account.get_lastOrder(),login_id2,"shuko");
+            //System.out.println("dd_product_to_order successed");
+            system.DisplayOrder();
+            System.out.println("DisplayOrder successed");
 
         }
         catch(Exception Error)

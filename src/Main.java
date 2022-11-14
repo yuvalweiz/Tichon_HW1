@@ -168,6 +168,14 @@ public class Main {
                         System.out.println(Error.getMessage());
                     }
                     break;
+                case 9:
+                    System.out.println("Enter name: ");
+                    String name = scanner.next();
+                    System.out.println("Enter price: ");
+                    String supllierName = scanner.next();
+                    system.AddProduct(name,supllierName);
+                    break;
+
                 //default case to display the message invalid choice made by the user
                 default:
                     System.out.println("Invalid choice!!! Please make a valid choice. \\n\\n");

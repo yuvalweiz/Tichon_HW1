@@ -75,10 +75,59 @@ public class SystemC {
         }
         Date currDate = new Date();
         Order order = new Order(currDate,address,_connectedUser.get_customer().get_account());
+        _connectedUser.get_customer().get_account().AddOrder(order);
         System.out.println("Your Order number is: " + order.get_number());
 
     }
 
+    public void Add_product_to_order(String Order_ID,String Login_ID,String Product_Name) throws Erorr {
+        Erorr error ;
 
+        if (_connectedUser == null)
+        {
+            error = new there_is_no_user_connected_EX();
+            throw error;
+        }
+        User sellerUser = User.UserDict.get(Login_ID);
+        if (sellerUser == null)
+        {
+
+            error=new id_is_wrong_EX();
+            throw error;
+        }
+        Account Seller_account = sellerUser.get_customer().get_account();
+        if(!(Seller_account instanceof PremiumAccount))
+        {
+            error = new not_premium_user();
+            throw error;
+        }
+
+        Order Buyerorder = _connectedUser.get_customer().get_account().getOrder(Order_ID);
+        if (Buyerorder == null)
+        {
+            error = new order_is_not_exist();
+            throw error;
+        }
+        Product SellerProduct = ((PremiumAccount) Seller_account).GetProduct(Product_Name);
+        if (SellerProduct==null)
+        {
+            error = new product_is_not_exist();
+            throw error;
+        }
+        for (int i=0;i<SellerProduct.getLineItemsVec().size();i++)
+        {
+            if (SellerProduct.getLineItemsVec().get(i).getQuantity()==0)
+            {
+                SellerProduct.getLineItemsVec().remove(i);
+            }
+
+        }
+        SellerProduct.getLineItemsVec().get(0).setQuantity(SellerProduct.getLineItemsVec().get(0).getQuantity()-1);
+        int price=SellerProduct.getLineItemsVec().get(0).getPrice();
+        Buyerorder.AddProduct(SellerProduct,price);
+
+
+
+    }
 
 }

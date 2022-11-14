@@ -40,12 +40,13 @@ public class Test {
         }
         try
         {
+//            system.AddUser("itayraz","1234",0,add,"0506824544","itay@gamil.com");
+//            system.loginUser(login_id1,pass1);
             boolean bool = system.loginUser(login_id2,pass2);
             System.out.println(bool + " " +  "loginuser user2 successed");
             system.Create_new_order(add);
             System.out.println("Create_new_order successed");
             System.out.println("Create_new_order successed");
-
 
         }
         catch(Exception Error)

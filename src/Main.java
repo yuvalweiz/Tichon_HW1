@@ -60,7 +60,7 @@ public class Main {
                     try
                     {
                         System.out.println("Enter login_id: ");
-                        login_id = scanner.nextLine();
+                        login_id = scanner.next();
                         if(!system.RemoveUser(login_id))
                         {
                             System.out.println("User does not exist");
@@ -77,9 +77,9 @@ public class Main {
                     try
                     {
                         System.out.println("Enter login_id: ");
-                        login_id = scanner.nextLine();
+                        login_id = scanner.next();
                         System.out.println("Enter password: ");
-                        pass = scanner.nextLine();
+                        pass = scanner.next();
                         if(!system.loginUser(login_id,pass))
                         {
                             System.out.println("Login problem");
@@ -93,7 +93,7 @@ public class Main {
                     try
                     {
                         System.out.println("Enter login_id: ");
-                        login_id = scanner.nextLine();
+                        login_id = scanner.next();
                         if(!system.logoutUser(login_id))
                         {
                             System.out.println("logout problem");
@@ -107,7 +107,7 @@ public class Main {
                     try
                     {
                         System.out.println("Enter login_id: ");
-                        login_id = scanner.nextLine();
+                        login_id = scanner.next();
                         System.out.println("Enter customer country: ");
                         customer_country = scanner.next();
                         System.out.println("Enter customer city: ");
@@ -123,7 +123,51 @@ public class Main {
                         System.out.println(Error.getMessage());
                     }
                     break;
+                case 6:
+                    try
+                    {
+                        System.out.println("Enter Order_id: ");
+                        String order_id = scanner.next();
+                        System.out.println("Enter Login_id: ");
+                        login_id = scanner.next();
+                        System.out.println("Enter Product_name: ");
+                        String product_name = scanner.next();
+                        system.Add_product_to_order(order_id,login_id,product_name);
+                    }
+                    catch(Exception Error)
+                    {
 
+                        System.out.println(Error.getMessage());
+                    }
+                    break;
+                case 7:
+                    try
+                    {
+                        system.DisplayOrder();
+                    }
+                    catch(Exception Error)
+                    {
+
+                        System.out.println(Error.getMessage());
+                    }
+                    break;
+                case 8:
+                    try
+                    {
+                        System.out.println("Enter name: ");
+                        String name = scanner.next();
+                        System.out.println("Enter price: ");
+                        int price = scanner.nextInt();
+                        System.out.println("Enter Product_name: ");
+                        int Quan = scanner.nextInt();
+                        system.LinkProduct(name,price,Quan);
+                    }
+                    catch(Exception Error)
+                    {
+
+                        System.out.println(Error.getMessage());
+                    }
+                    break;
                 //default case to display the message invalid choice made by the user
                 default:
                     System.out.println("Invalid choice!!! Please make a valid choice. \\n\\n");

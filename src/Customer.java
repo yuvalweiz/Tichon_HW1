@@ -1,5 +1,5 @@
 public class Customer {
-
+    private static int Curr_Id=0;
     private String _id;
     private Address _address;
     private String _phone;
@@ -17,8 +17,9 @@ public class Customer {
         this._user = _user;
     }
 
-    public Customer(String _id, Address _address, String _phone, String _email) {
-        this._id = _id;
+    public Customer( Address _address, String _phone, String _email) {
+        this._id = String.valueOf(Curr_Id) + "$";
+        Curr_Id++;
         this._address = _address;
         this._phone = _phone;
         this._email = _email;

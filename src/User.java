@@ -20,30 +20,7 @@ public class User {
         this._state = UserState.New;
     }
 
-    public static boolean AddUser(String _login_id,String _password,int premium,Address address,String phone, String email){
-        if(User.UserDict.containsKey(_login_id)){
-            return false;
-        }
-        User newUser= new User(_login_id,_password);
-        Customer newCustomer = new Customer(_login_id,address,phone,email);
-        Account newAccount;
-        if(premium == 1){
-            newAccount = new PremiumAccount(_login_id,newCustomer);
-            newCustomer.set_account(newAccount);
-            newAccount.set_customer(newCustomer);
-        }
-        if (premium == 0){
-            newAccount = new Account(_login_id,newCustomer);
-            newCustomer.set_account(newAccount);
-            newAccount.set_customer(newCustomer);
-        }
-        newCustomer.set_user(newUser);
-        return true;
 
-
-
-
-    }
 
     public void set_shcart(ShoppingCart _shcart) {
         this._shcart = _shcart;
@@ -76,4 +53,6 @@ public class User {
     public void set_state(UserState _state) {
         this._state = _state;
     }
+
+
 }

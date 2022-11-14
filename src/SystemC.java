@@ -26,6 +26,9 @@ public class SystemC {
             newCustomer.set_account(newAccount);
         }
         newCustomer.set_user(newUser);
+        newUser.set_customer(newCustomer);
+        Date date = new Date();
+        ShoppingCart cart = new ShoppingCart(date);
         return true;
 
     }
@@ -184,7 +187,6 @@ public class SystemC {
         LineItem lineItem = new LineItem(Quan,price);
         product.getLineItemsVec().add(lineItem);
         ((PremiumAccount) account).AddProduct(product);
-
 
     }
 

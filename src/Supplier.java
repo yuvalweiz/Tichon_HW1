@@ -9,7 +9,7 @@ public class Supplier
     Vector<Product> productsVec;
 
     public Supplier(String _name) {
-        this._id = String.valueOf(Curr_Id);
+        this._id = String.valueOf(Curr_Id) + ":)";
         Curr_Id++;
         this._name = _name;
         this.productsVec = new Vector<>();

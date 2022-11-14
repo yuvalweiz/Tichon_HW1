@@ -9,6 +9,7 @@ public class Account {
     private Date _open;
     private Date _closed;
     private int _balance;
+    private String _lastOrder;
     private HashMap<String, Order> OrderDict = new HashMap<String, Order>();
     private Customer _customer; // wont be able to create account without customer!
 
@@ -25,6 +26,14 @@ public class Account {
 
     public void AddOrder (Order order){
         this.OrderDict.put(order.get_number(),order);
+    }
+
+    public void set_lastOrder(String _lastOrder) {
+        this._lastOrder = _lastOrder;
+    }
+
+    public String get_lastOrder() {
+        return _lastOrder;
     }
 
     public Order getOrder (String number){

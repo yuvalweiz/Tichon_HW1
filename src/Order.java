@@ -23,6 +23,10 @@ public class Order {
         this._account = _account;
     }
 
+    public Vector<LineItem> getLineItemsVec() {
+        return LineItemsVec;
+    }
+
     public Product getProductFromLineItem(String product_name){
         for(int i=0;i<LineItemsVec.size();i++){
             if(LineItemsVec.get(i).get_product().get_name().equals(product_name)){

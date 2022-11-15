@@ -10,6 +10,14 @@ public class PremiumAccount extends Account {
 
     }
 
+    public Vector<Product> getProducts() {
+        return Products;
+    }
+
+    public void setProducts(Vector<Product> products) {
+        Products = products;
+    }
+
     @Override
     public String toString() {
         return "PremiumAccount{" +

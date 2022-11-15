@@ -218,6 +218,22 @@ public class SystemC {
             e=new product_is_not_exist();
             throw e;
         }
+        for(var entry : User.UserDict.entrySet()){
+            if(entry.getValue().get_customer().get_account() instanceof PremiumAccount){
+                PremiumAccount Paccount = (PremiumAccount) entry.getValue().get_customer().get_account();
+                for(int i =0;i<Paccount.getProducts().size();i++){
+                    if(Paccount.getProducts().get(i).get_id().equals(Product_name)){
+                        Paccount.getProducts().remove(i);
+                    }
+                }
+            }
+
+
+        }
+
+
+
+
         PrductDict.remove(Product_name);
     }
 

@@ -1,4 +1,7 @@
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
@@ -6,8 +9,7 @@ import java.util.Scanner;
 
 public class Main
 {
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws IOException {
         /* System initialization  */
         SystemC system = new SystemC();
         //Supplier osem = new Supplier("Osem");
@@ -23,7 +25,7 @@ public class Main
         /* End of System initialization  */
 
 
-
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Scanner scanner = new Scanner(System.in);
         int choice;
         while(true)
@@ -50,27 +52,28 @@ public class Main
                 //First case for finding the addition
                 case 1:
                     System.out.println("Enter login id: ");
-                    String login_id = scanner.next();
+                    String login_id = reader.readLine();
                     System.out.println("Enter password: ");
-                    String pass = scanner.next();
+                    String pass = reader.readLine();
                     System.out.println("Premium account: - Yes enter 1/Not enter 0");
                     int p_account = scanner.nextInt();
                     System.out.println("Enter customer country: ");
-                    String customer_country = scanner.next();
+                    String customer_country = reader.readLine();
                     System.out.println("Enter customer city: ");
-                    String customer_city = scanner.next();
+                    String customer_city = reader.readLine();
                     System.out.println("Enter customer street: ");
-                    String customer_street = scanner.next();
+                    String customer_street = reader.readLine();
                     System.out.println("Enter customer number: ");
                     int customer_addres_num = scanner.nextInt();
                     Address address = new Address(customer_country, customer_city, customer_street, customer_addres_num);
                     System.out.println("Enter customer phone: ");
-                    String customer_phone = scanner.next();
+                    String customer_phone = reader.readLine();
                     System.out.println("Enter customer email: ");
-                    String customer_email = scanner.next();
+                    String customer_email = reader.readLine();
                     if (!system.AddUser(login_id, pass, p_account, address, customer_phone, customer_email))
                     {
                         System.out.println("User is not valid");
+                        break;
 
                     }
                     System.out.println("The user was successfully added");
@@ -80,63 +83,69 @@ public class Main
                     try
                     {
                         System.out.println("Enter login id: ");
-                        login_id = scanner.next();
+                        login_id = reader.readLine();
                         if (!system.RemoveUser(login_id))
                         {
                             System.out.println("User does not exist");
+                            break;
                         }
                     }
                     catch (Exception Error)
                     {
                         System.out.println(Error.getMessage());
+                        break;
                     }
-                    System.out.println("The user was successfully remove");
+                    System.out.println("The user was successfully removed");
                     break;
                 case 3:
                     try
                     {
                         System.out.println("Enter login id: ");
-                        login_id = scanner.next();
+                        login_id = reader.readLine();
                         System.out.println("Enter password: ");
-                        pass = scanner.next();
+                        pass = reader.readLine();
                         if (!system.loginUser(login_id, pass))
                         {
                             System.out.println("Login problem");
+                            break;
                         }
                     }
                     catch (Exception Error)
                     {
                         System.out.println(Error.getMessage());
+                        break;
                     }
-                    System.out.println("The user was successfully login");
+                    System.out.println("The user was successfully logged in");
                     break;
                 case 4:
                     try
                     {
                         System.out.println("Enter login id: ");
-                        login_id = scanner.next();
+                        login_id = reader.readLine();
                         if (!system.logoutUser(login_id))
                         {
                             System.out.println("logout problem");
+                            break;
                         }
                     }
                     catch (Exception Error)
                     {
                         System.out.println(Error.getMessage());
+                        break;
                     }
-                    System.out.println("The user was successfully logout");
+                    System.out.println("The user was successfully Logged out");
                     break;
                 case 5:
                     try
                     {
                         System.out.println("Enter login id: ");
-                        login_id = scanner.next();
+                        login_id = reader.readLine();
                         System.out.println("Enter customer country: ");
-                        customer_country = scanner.next();
+                        customer_country = reader.readLine();
                         System.out.println("Enter customer city: ");
-                        customer_city = scanner.next();
+                        customer_city = reader.readLine();
                         System.out.println("Enter customer street: ");
-                        customer_street = scanner.next();
+                        customer_street = reader.readLine();
                         System.out.println("Enter customer number: ");
                         customer_addres_num = scanner.nextInt();
                         address = new Address(customer_country, customer_city, customer_street, customer_addres_num);
@@ -145,6 +154,7 @@ public class Main
                     catch (Exception Error)
                     {
                         System.out.println(Error.getMessage());
+                        break;
                     }
                     System.out.println("A new order has been successfully created");
                     break;
@@ -152,18 +162,20 @@ public class Main
                     try
                     {
                         System.out.println("Enter order id: ");
-                        String order_id = scanner.next();
+                        String order_id = reader.readLine();
                         System.out.println("Enter seller login id: ");
-                        login_id = scanner.next();
+                        login_id = reader.readLine();
                         System.out.println("Enter product name: ");
-                        String product_name = scanner.next();
+                        String product_name = reader.readLine();
                         try
                         {
                             system.Add_product_to_order(order_id, login_id, product_name);
+
                         }
                         catch (Exception Error)
                         {
                             System.out.println(Error.getMessage());
+                            break;
 
                         }
                         System.out.println("Do you want to add payment method? Yes enter 1/Not enter 0");
@@ -181,19 +193,19 @@ public class Main
                             if (payment_type == 1)
                             {
                                 System.out.println("Enter details");
-                                String details = scanner.next();
+                                String details = reader.readLine();
                                 System.out.println("Enter payment date in the following format: ");
                                 System.out.println("DD/MM/YYYY");
-                                String payment_date = scanner.next();
+                                String payment_date = reader.readLine();
                                 Date date = new SimpleDateFormat("dd/MM/yyyy").parse(payment_date);
                                 DelayedPayment delayed_payment = system.AddDelayedPayment(order_id, details, date);
                                 System.out.println(delayed_payment.toString());
 
                             }
-                            if (want_payment == 0)
+                            if (payment_type == 0)
                             {
                                 System.out.println("Enter details");
-                                String details = scanner.next();
+                                String details = reader.readLine();
                                 System.out.println("Payment with phoneconfirmation? Yes enter 1/Not enter 0");
                                 int pc = scanner.nextInt();
                                 if (pc == 0)
@@ -217,6 +229,7 @@ public class Main
                     {
 
                         System.out.println(Error.getMessage());
+                        break;
                     }
                     System.out.println("Adding a product to the order was done successfully");
                     break;
@@ -228,32 +241,34 @@ public class Main
                     {
 
                         System.out.println(Error.getMessage());
+                        break;
                     }
                     System.out.println("Display order done");
                     break;
                 case 8:
                     try
                     {
-                        System.out.println("Enter name: ");
-                        String name = scanner.next();
+                        System.out.println("Enter product name: ");
+                        String name = reader.readLine();
                         System.out.println("Enter price: ");
                         int price = scanner.nextInt();
-                        System.out.println("Enter product name: ");
+                        System.out.println("Enter product quantity: ");
                         int Quan = scanner.nextInt();
                         system.LinkProduct(name, price, Quan);
                     }
                     catch (Exception Error)
                     {
                         System.out.println(Error.getMessage());
+                        break;
                     }
                     System.out.println("Link product done");
 
                     break;
                 case 9:
                     System.out.println("Enter name: ");
-                    String name = scanner.next();
-                    System.out.println("Enter price: ");
-                    String supllierName = scanner.next();
+                    String name = reader.readLine();
+                    System.out.println("Enter supplier: ");
+                    String supllierName = reader.readLine();
                     system.AddProduct(name, supllierName);
 
                     System.out.println("Product has been added");
@@ -262,13 +277,14 @@ public class Main
                     try
                     {
                         System.out.println("Enter product name: ");
-                        name = scanner.next();
+                        name = reader.readLine();
                         system.Delete_Product(name);
                     }
                     catch (Exception Error)
                     {
 
                         System.out.println(Error.getMessage());
+                        break;
                     }
                     System.out.println("Product has been deleted");
                     break;
@@ -294,12 +310,13 @@ public class Main
                                 try
                                 {
                                     System.out.println("Enter id: ");
-                                    String id = scanner.next();
+                                    String id = reader.readLine();
                                     system.ShowObjectUSER(id);
                                 }
                                 catch (Exception Error)
                                 {
                                     System.out.println(Error.getMessage());
+                                    break;
                                 }
                                 System.out.println("Show user id was done");
                                 break;
@@ -308,12 +325,13 @@ public class Main
                                 try
                                 {
                                     System.out.println("Enter id: ");
-                                    String id = scanner.next();
+                                    String id = reader.readLine();
                                     system.ShowObjectProduct(id);
                                 }
                                 catch (Exception Error)
                                 {
                                     System.out.println(Error.getMessage());
+                                    break;
                                 }
                                 System.out.println("Show product id was done");
 
@@ -323,12 +341,13 @@ public class Main
                                 try
                                 {
                                     System.out.println("Enter id:");
-                                    String id = scanner.next();
+                                    String id = reader.readLine();
                                     system.ShowObjectSupplier(id);
                                 }
                                 catch (Exception Error)
                                 {
                                     System.out.println(Error.getMessage());
+                                    break;
                                 }
                                 System.out.println("Show supplier id was done");
                                 break;
@@ -337,12 +356,13 @@ public class Main
                                 try
                                 {
                                     System.out.println("Enter id: ");
-                                    String id = scanner.next();
+                                    String id = reader.readLine();
                                     system.ShowObjectID(id);
                                 }
                                 catch (Exception Error)
                                 {
                                     System.out.println(Error.getMessage());
+                                    break;
                                 }
                                 System.out.println("Show object id was done");
                                 break;
@@ -353,10 +373,9 @@ public class Main
                             default:
                                 System.out.println("Invalid choice!Please make a valid choice. \\n\\n");
                         }
-                        break;
                     }
-                case13:
-                    break;
+                case 13:
+                    return;
                 //default case to display the message invalid choice made by the user
                 default:
                     System.out.println("Invalid choice!Please make a valid choice. \\n\\n");

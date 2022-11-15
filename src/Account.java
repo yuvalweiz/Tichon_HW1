@@ -17,7 +17,7 @@ public class Account {
     }
 
     private String _lastOrder;
-    private HashMap<String, Order> OrderDict = new HashMap<String, Order>();
+    public static HashMap<String, Order> OrderDict = new HashMap<String, Order>();
     private Customer _customer; // wont be able to create account without customer!
     private Vector<Payment> Payments;
 

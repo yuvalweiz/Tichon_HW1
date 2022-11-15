@@ -355,4 +355,33 @@ public class SystemC {
         return true;
 
     }
+    public DelayedPayment Add_DelayedPayment(String Order_id, String Detail,Date paymentdate) throws Erorr {
+        Erorr error;
+        Order order = Account.OrderDict.get(Order_id);
+        if (order == null)
+        {
+            error = new order_is_not_exist();
+            throw error;
+        }
+        float sum = order.get_total();
+        Date d = new Date();
+        return new DelayedPayment(d,sum,Detail,paymentdate);
+
+
+    }
+
+    public ImmediatePayment Add_DelayedPayment(String Order_id, String Detail,boolean phoneconfirmed) throws Erorr {
+        Erorr error;
+        Order order = Account.OrderDict.get(Order_id);
+        if (order == null)
+        {
+            error = new order_is_not_exist();
+            throw error;
+        }
+        float sum = order.get_total();
+        Date d = new Date();
+        return new ImmediatePayment(d,sum,Detail,phoneconfirmed);
+
+
+    }
 }

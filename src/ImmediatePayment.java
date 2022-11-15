@@ -4,7 +4,7 @@ public class ImmediatePayment extends Payment {
     private Boolean phoneConfirmation;
 
     public ImmediatePayment(String ID, Date PAID, Float TOTAL, String DETAILS, Boolean PHONECONFIRMATION) {
-        super(ID, PAID, TOTAL, DETAILS);
+        super( PAID, TOTAL, DETAILS);
         this.phoneConfirmation = PHONECONFIRMATION;
     }
 

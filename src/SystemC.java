@@ -201,7 +201,27 @@ public class SystemC {
         PrductDict.put(prod.get_id(),prod);
     }
 
-    public void ShowObjectID(String ID){
+    public void ShowObjectID(String ID){ //T- payment|P- product|S-Supplier|O-order|C-Customer|A-Account
+        Character firstChar = ID.charAt(0);
+        if(firstChar.equals("T")){
+
+        }
+        if(firstChar.equals("P")){
+
+        }
+        if(firstChar.equals("S")){
+
+        }
+        if(firstChar.equals("O")){
+
+        }
+        if(firstChar.equals("C")){
+
+        }
+        if(firstChar.equals("A")){
+
+        }
+
 
     }
 

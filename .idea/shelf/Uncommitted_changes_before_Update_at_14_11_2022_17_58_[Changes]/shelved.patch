@@ -1,0 +1,110 @@
+Index: src/SystemC.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import Error.*;\r\n\r\nimport java.util.Date;\r\n\r\npublic class SystemC {\r\n    private User _connectedUser;\r\n\r\n    public SystemC(){\r\n        this._connectedUser = null;\r\n    }; //defult constructor\r\n    public boolean AddUser(String _login_id,String _password,int premium,Address address,String phone, String email){\r\n        if(User.UserDict.containsKey(_login_id)){\r\n            return false;\r\n        }\r\n        User newUser= new User(_login_id,_password);\r\n        Customer newCustomer = new Customer(address,phone,email);\r\n        Account newAccount;\r\n        if(premium == 1){\r\n            newAccount = new PremiumAccount(_login_id,newCustomer);\r\n            newCustomer.set_account(newAccount);\r\n        }\r\n        if (premium == 0){\r\n            newAccount = new Account(newCustomer);\r\n            newCustomer.set_account(newAccount);\r\n        }\r\n        newCustomer.set_user(newUser);\r\n        return true;\r\n\r\n    }\r\n    public boolean RemoveUser(String Login_id)\r\n    {\r\n        if (User.UserDict.containsKey(Login_id)!= true)\r\n        {\r\n            return false;\r\n        }\r\n        User.UserDict.remove(Login_id);\r\n        return true;\r\n    }\r\n\r\n    public boolean loginUser(String _loginid, String password) throws Erorr {\r\n        Erorr error;\r\n        if(this._connectedUser != null){\r\n            error = new there_is_user_connected_EX();\r\n            throw error;\r\n        }\r\n\r\n        if(!User.UserDict.containsKey(_loginid)){\r\n            error = new id_is_wrong_EX();\r\n            throw error;\r\n\r\n        }\r\n        if(!User.UserDict.get(_loginid).equals(password)){\r\n            error = new pass_is_wrong_EX();\r\n            throw error;\r\n        }\r\n        this._connectedUser = User.UserDict.get(_loginid);\r\n        return true;\r\n    }\r\n    public boolean logoutUser(String _loginid) throws Erorr {\r\n        Erorr error;\r\n        if(this._connectedUser == null){\r\n            error = new there_is_no_user_connected_EX();\r\n            throw error;\r\n        }\r\n        this._connectedUser = null;\r\n        return true;\r\n    }\r\n\r\n    public void Create_new_order(Address address) throws Erorr {\r\n\r\n        if(_connectedUser==null)\r\n        {\r\n            Erorr error = new there_is_no_user_connected_EX();\r\n            throw error;\r\n        }\r\n        Date currDate = new Date();\r\n        Order order = new Order(currDate,address,_connectedUser.get_customer().get_account());\r\n        System.out.println(\"Your Order number is: \" + order.get_number());\r\n\r\n    }\r\n\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/SystemC.java b/src/SystemC.java
+--- a/src/SystemC.java	(revision 474c316f630645b226c536a73f05d68597e29da9)
++++ b/src/SystemC.java	(date 1668441473195)
+@@ -27,12 +27,14 @@
+         return true;
+ 
+     }
+-    public boolean RemoveUser(String Login_id)
+-    {
++    public boolean RemoveUser(String Login_id) throws Erorr {
+         if (User.UserDict.containsKey(Login_id)!= true)
+         {
+             return false;
+         }
++        if(_connectedUser.get_login_id().equals(Login_id)){
++            logoutUser(_connectedUser.get_login_id());
++        }
+         User.UserDict.remove(Login_id);
+         return true;
+     }
+Index: src/UserTest.java
+===================================================================
+diff --git a/src/UserTest.java b/src/UserTest.java
+deleted file mode 100644
+--- a/src/UserTest.java	(revision 474c316f630645b226c536a73f05d68597e29da9)
++++ /dev/null	(revision 474c316f630645b226c536a73f05d68597e29da9)
+@@ -1,26 +0,0 @@
+-import static org.junit.jupiter.api.Assertions.*;
+-
+-class UserTest {
+-
+-    @org.junit.jupiter.api.Test
+-    void addUser() {
+-        SystemC system = new SystemC();
+-        Address adress = new Address("ISRAEL","B7","mekor haim",12);
+-        system.AddUser("itay","123",0,adress,"052","walla.com");
+-        if(User.UserDict.containsKey("itay"))
+-            System.out.println("itay is in");
+-        if(!system.AddUser("itay","123",0,adress,"052","walla.com"))
+-            System.out.println("false");
+-        system.RemoveUser("itay");
+-        if(!User.UserDict.containsKey("itay"))
+-            System.out.println("itay is out");
+-
+-
+-    }
+-
+-    @org.junit.jupiter.api.Test
+-    void removeUser() {
+-    }
+-
+-
+-}
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"5198120f-0955-4c57-bec4-bc285fab6ab4\" name=\"Changes\" comment=\"Line Item vector\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Order.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Order.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2HGzfH0UCszOQZeFNGHalD4475Y\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"5198120f-0955-4c57-bec4-bc285fab6ab4\" name=\"Changes\" comment=\"\" />\r\n      <created>1667926313386</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1667926313386</updated>\r\n      <workItem from=\"1668324775726\" duration=\"2848000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"test1\">\r\n      <created>1667926772421</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1667926772421</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Add User func\">\r\n      <created>1668366678281</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668366678281</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Add User func\">\r\n      <created>1668366709485</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668366709485</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"user func update&#10;customer id and account id update\">\r\n      <created>1668425961720</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668425961720</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"user func update&#10;customer id and account id update\">\r\n      <created>1668426006216</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668426006216</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"SystemC class, login method.\">\r\n      <created>1668427248803</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668427248803</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"error class created\">\r\n      <created>1668427786309</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668427786309</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"exceptions\">\r\n      <created>1668430381827</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668430381827</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"blabla\">\r\n      <created>1668433819230</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668433819230</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"blabla\">\r\n      <created>1668433837748</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668433837748</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"more expestions to error\">\r\n      <created>1668434364610</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668434364610</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"expetions\">\r\n      <created>1668434996270</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668434996270</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"Line Item vector\">\r\n      <created>1668435801824</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668435801824</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"14\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"test1\" />\r\n    <MESSAGE value=\"Add User func\" />\r\n    <MESSAGE value=\"user func update&#10;customer id and account id update\" />\r\n    <MESSAGE value=\"SystemC class, login method.\" />\r\n    <MESSAGE value=\"error class created\" />\r\n    <MESSAGE value=\"exceptions\" />\r\n    <MESSAGE value=\"blabla\" />\r\n    <MESSAGE value=\"more expestions to error\" />\r\n    <MESSAGE value=\"expetions\" />\r\n    <MESSAGE value=\"Line Item vector\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Line Item vector\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 474c316f630645b226c536a73f05d68597e29da9)
++++ b/.idea/workspace.xml	(date 1668441473221)
+@@ -1,9 +1,10 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="Line Item vector">
++    <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="hara ba leben">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Order.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/SystemC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SystemC.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/UserTest.java" beforeDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -130,7 +131,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1668435801824</updated>
+     </task>
+-    <option name="localTasksCounter" value="14" />
++    <task id="LOCAL-00014" summary="hara ba leben">
++      <created>1668441124698</created>
++      <option name="number" value="00014" />
++      <option name="presentableId" value="LOCAL-00014" />
++      <option name="project" value="LOCAL" />
++      <updated>1668441124698</updated>
++    </task>
++    <option name="localTasksCounter" value="15" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -158,6 +166,7 @@
+     <MESSAGE value="more expestions to error" />
+     <MESSAGE value="expetions" />
+     <MESSAGE value="Line Item vector" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Line Item vector" />
++    <MESSAGE value="hara ba leben" />
++    <option name="LAST_COMMIT_MESSAGE" value="hara ba leben" />
+   </component>
+ </project>
+\ No newline at end of file

@@ -1,0 +1,109 @@
+Index: src/PremiumAccount.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.Date;\r\n\r\npublic class PremiumAccount extends Account {\r\n\r\n\r\n    public PremiumAccount(String _id, Customer _customer) {\r\n        super( _customer);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/PremiumAccount.java b/src/PremiumAccount.java
+--- a/src/PremiumAccount.java	(revision c373a35f0d02b08babffa0d66e5997211bde1ca8)
++++ b/src/PremiumAccount.java	(date 1668437821235)
+@@ -6,4 +6,6 @@
+     public PremiumAccount(String _id, Customer _customer) {
+         super( _customer);
+     }
++
++
+ }
+Index: src/Order.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.io.ObjectInputFilter;\r\nimport java.util.Date;\r\nimport java.util.Vector;\r\n\r\npublic class Order {\r\n    private static int Curr_Id=0;\r\n    private String _number;\r\n    private Date _ordered;\r\n    private Date _shipped;\r\n    private Address _ship_to;\r\n    private OrderStatus _status;\r\n    private float _total;\r\n    private Account _account;\r\n    private Vector<LineItem> LineItemsVec;\r\n\r\n    public Order(Date _ordered, Address _ship_to, Account _account) {\r\n        this._number = \"#\" + String.valueOf(Curr_Id) ;\r\n        Curr_Id++;\r\n        this._ordered = _ordered;\r\n        this._ship_to = _ship_to;\r\n        this._status = OrderStatus.New;\r\n        this._total = 0;\r\n        this._account = _account;\r\n    }\r\n\r\n    public Product getProductFromLineItem(String product_name){\r\n        for(int i=0;i<LineItemsVec.size();i++){\r\n            if(LineItemsVec.get(i).get_product().get_name().equals(product_name)){\r\n                return LineItemsVec.get(i).get_product();\r\n            }\r\n        }\r\n        return null;\r\n    }\r\n\r\n    public void AddProduct(Product product){\r\n        for(int i=0;i<LineItemsVec.size();i++){\r\n            if(LineItemsVec.get(i).get_product().get_name().equals(product.get_name())){\r\n                LineItemsVec.get(i).setQuantity(LineItemsVec.get(i).getQuantity()+1);\r\n            }\r\n        }\r\n\r\n    }\r\n\r\n    public String get_number() {\r\n        return _number;\r\n    }\r\n\r\n    public Date get_ordered() {\r\n        return _ordered;\r\n    }\r\n\r\n    public Date get_shipped() {\r\n        return _shipped;\r\n    }\r\n\r\n    public Address get_ship_to() {\r\n        return _ship_to;\r\n    }\r\n\r\n    public OrderStatus get_status() {\r\n        return _status;\r\n    }\r\n\r\n    public float get_total() {\r\n        return _total;\r\n    }\r\n\r\n    public void set_number(String _number) {\r\n        this._number = _number;\r\n    }\r\n\r\n    public void set_ordered(Date _ordered) {\r\n        this._ordered = _ordered;\r\n    }\r\n\r\n    public void set_shipped(Date _shipped) {\r\n        this._shipped = _shipped;\r\n    }\r\n\r\n    public void set_ship_to(Address _ship_to) {\r\n        this._ship_to = _ship_to;\r\n    }\r\n\r\n    public void set_status(OrderStatus _status) {\r\n        this._status = _status;\r\n    }\r\n\r\n    public void set_total(float _total) {\r\n        this._total = _total;\r\n    }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Order.java b/src/Order.java
+--- a/src/Order.java	(revision c373a35f0d02b08babffa0d66e5997211bde1ca8)
++++ b/src/Order.java	(date 1668441084614)
+@@ -32,13 +32,18 @@
+         return null;
+     }
+ 
+-    public void AddProduct(Product product){
++    public void AddProductQuantity(Product product){
+         for(int i=0;i<LineItemsVec.size();i++){
+             if(LineItemsVec.get(i).get_product().get_name().equals(product.get_name())){
+                 LineItemsVec.get(i).setQuantity(LineItemsVec.get(i).getQuantity()+1);
+             }
+         }
++    }
+ 
++    public void AddProduct(Product product,int price){
++        LineItem newLineItem = new LineItem(1,price);
++        newLineItem.set_product(product);
++        this.LineItemsVec.add(newLineItem);
+     }
+ 
+     public String get_number() {
+Index: src/Product.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import javax.sound.sampled.Line;\r\nimport java.util.Dictionary;\r\nimport java.util.Vector;\r\n\r\npublic class Product {\r\n    private String _id;\r\n    private static int Curr_id=0;\r\n    private String _name;\r\n    private Vector<LineItem> lineItemsVec;\r\n    private Supplier _supplier;\r\n\r\n    private Dictionary<String,LineItem> lineItemsDic;\r\n\r\n    public Product( String _name, Supplier _supplier) {\r\n\r\n\r\n        this._id=String.valueOf(Curr_id);\r\n        Curr_id++;\r\n        this._name = _name;\r\n        this._supplier = _supplier;\r\n        this.lineItemsVec = new Vector<LineItem>();\r\n    }\r\n    public void set_id(String _id) {\r\n        this._id = _id;\r\n    }\r\n\r\n    public void set_name(String _name) {\r\n        this._name = _name;\r\n    }\r\n\r\n    public String get_id() {\r\n        return _id;\r\n    }\r\n\r\n    public String get_name() {\r\n        return _name;\r\n    }\r\n\r\n    public void Add_Line_Item (LineItem lineitem)\r\n    {\r\n        this.lineItemsVec.add(lineitem);\r\n    }\r\n\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Product.java b/src/Product.java
+--- a/src/Product.java	(revision c373a35f0d02b08babffa0d66e5997211bde1ca8)
++++ b/src/Product.java	(date 1668437821230)
+@@ -9,7 +9,6 @@
+     private Vector<LineItem> lineItemsVec;
+     private Supplier _supplier;
+ 
+-    private Dictionary<String,LineItem> lineItemsDic;
+ 
+     public Product( String _name, Supplier _supplier) {
+ 
+@@ -20,6 +19,8 @@
+         this._supplier = _supplier;
+         this.lineItemsVec = new Vector<LineItem>();
+     }
++
++
+     public void set_id(String _id) {
+         this._id = _id;
+     }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"5198120f-0955-4c57-bec4-bc285fab6ab4\" name=\"Changes\" comment=\"Line Item vector\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Order.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Order.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2HGzfH0UCszOQZeFNGHalD4475Y\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"5198120f-0955-4c57-bec4-bc285fab6ab4\" name=\"Changes\" comment=\"\" />\r\n      <created>1667926313386</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1667926313386</updated>\r\n      <workItem from=\"1668324775726\" duration=\"2848000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"test1\">\r\n      <created>1667926772421</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1667926772421</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Add User func\">\r\n      <created>1668366678281</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668366678281</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Add User func\">\r\n      <created>1668366709485</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668366709485</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"user func update&#10;customer id and account id update\">\r\n      <created>1668425961720</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668425961720</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"user func update&#10;customer id and account id update\">\r\n      <created>1668426006216</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668426006216</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"SystemC class, login method.\">\r\n      <created>1668427248803</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668427248803</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"error class created\">\r\n      <created>1668427786309</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668427786309</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"exceptions\">\r\n      <created>1668430381827</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668430381827</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"blabla\">\r\n      <created>1668433819230</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668433819230</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"blabla\">\r\n      <created>1668433837748</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668433837748</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"more expestions to error\">\r\n      <created>1668434364610</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668434364610</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"expetions\">\r\n      <created>1668434996270</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668434996270</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"Line Item vector\">\r\n      <created>1668435801824</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668435801824</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"14\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"test1\" />\r\n    <MESSAGE value=\"Add User func\" />\r\n    <MESSAGE value=\"user func update&#10;customer id and account id update\" />\r\n    <MESSAGE value=\"SystemC class, login method.\" />\r\n    <MESSAGE value=\"error class created\" />\r\n    <MESSAGE value=\"exceptions\" />\r\n    <MESSAGE value=\"blabla\" />\r\n    <MESSAGE value=\"more expestions to error\" />\r\n    <MESSAGE value=\"expetions\" />\r\n    <MESSAGE value=\"Line Item vector\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Line Item vector\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision c373a35f0d02b08babffa0d66e5997211bde1ca8)
++++ b/.idea/workspace.xml	(date 1668438810345)
+@@ -4,6 +4,8 @@
+     <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="Line Item vector">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Order.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/PremiumAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PremiumAccount.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Product.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -130,7 +132,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1668435801824</updated>
+     </task>
+-    <option name="localTasksCounter" value="14" />
++    <task id="LOCAL-00014" summary="Line Item vector">
++      <created>1668437292718</created>
++      <option name="number" value="00014" />
++      <option name="presentableId" value="LOCAL-00014" />
++      <option name="project" value="LOCAL" />
++      <updated>1668437292718</updated>
++    </task>
++    <option name="localTasksCounter" value="15" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">

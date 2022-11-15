@@ -16,7 +16,7 @@ public class Account {
 
 
     public Account(Customer _customer) {
-        this._id = String.valueOf(Curr_Id);
+        this._id ="A-"+ String.valueOf(Curr_Id);
         Curr_Id++;
         this._is_closed = false;
         this._open = new Date();

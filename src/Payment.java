@@ -1,13 +1,15 @@
 import java.util.Date;
 
 public class Payment {
+    private static int Curr_id=0;
     private String id;
     private Date paid;
     private Float total;
     private String details;
 
-    public Payment(String ID, Date PAID, Float TOTAL, String DETAILS){
-        this.id = ID;
+    public Payment(Date PAID, Float TOTAL, String DETAILS){
+        this.id = "T-"+String.valueOf(Curr_id);//T- yani TASHLUM
+        Curr_id++;
         this.paid = PAID;
         this.total = TOTAL;
         this.details = DETAILS;

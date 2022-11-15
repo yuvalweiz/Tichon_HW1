@@ -124,7 +124,7 @@ public class SystemC {
             error = new product_is_not_exist();
             throw error;
         }
-        for (int i=0;i<SellerProduct.getLineItemsVec().size();i++)
+        for (int i=0;i<SellerProduct.getLineItemsVec().size();i++) // I dont think we need this
         {
             if (SellerProduct.getLineItemsVec().get(i).getQuantity()==0)
             {
@@ -132,7 +132,7 @@ public class SystemC {
             }
 
         }
-        SellerProduct.getLineItemsVec().get(0).setQuantity(SellerProduct.getLineItemsVec().get(0).getQuantity()-1);
+        SellerProduct.getLineItemsVec().get(0).setQuantity(SellerProduct.getLineItemsVec().get(0).getQuantity()-1);//
         int price=SellerProduct.getLineItemsVec().get(0).getPrice();
         Buyerorder.AddProduct(SellerProduct,price);
 
@@ -199,6 +199,10 @@ public class SystemC {
         Product prod = new Product(name,supnik);
         supnik.Add_Product(prod);
         PrductDict.put(prod.get_id(),prod);
+    }
+
+    public void ShowObjectID(String ID){
+
     }
 
 

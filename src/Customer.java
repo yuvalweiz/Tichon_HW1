@@ -35,7 +35,7 @@ public class Customer {
     }
 
     public Customer(Address _address, String _phone, String _email) {
-        this._id = String.valueOf(Curr_Id) + "$";
+        this._id ="C-"+ String.valueOf(Curr_Id) ;
         Curr_Id++;
         this._address = _address;
         this._phone = _phone;

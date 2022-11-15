@@ -7,7 +7,7 @@ import java.util.Vector;
 
 public class SystemC {
     private User _connectedUser;
-    private HashMap<String, Product> PrductDict = new HashMap<String, Product>();
+    public static HashMap<String, Product> PrductDict = new HashMap<String, Product>();
 
     public SystemC(){
         this._connectedUser = null;
@@ -156,11 +156,11 @@ public class SystemC {
         int quan;
         float sum = 0;
         if(myOrder.getLineItemsVec() != null){
-        for(int i=0;i<myOrder.getLineItemsVec().size();i++){
-            quan = myOrder.getLineItemsVec().get(i).getQuantity();
-            price = myOrder.getLineItemsVec().get(i).getPrice();
-            sum = sum + (quan * price);
-        }}
+            for(int i=0;i<myOrder.getLineItemsVec().size();i++){
+                quan = myOrder.getLineItemsVec().get(i).getQuantity();
+                price = myOrder.getLineItemsVec().get(i).getPrice();
+                sum = sum + (quan * price);
+            }}
         myOrder.set_total(sum);
 
         System.out.println("Order Number: " + myOrder.get_number());
@@ -221,50 +221,50 @@ public class SystemC {
         Order order;
         ShoppingCart shoppingCart;
         Payment payment;
-       for(var entry : User.UserDict.entrySet())
-       {
-           user = entry.getValue();
-           if (user!=null)
-           {
-               System.out.println(user.toString());
-               System.out.println(user.toString());
-           }
+        for(var entry : User.UserDict.entrySet())
+        {
+            user = entry.getValue();
+            if (user!=null)
+            {
+                System.out.println(user.toString());
+                System.out.println(user.toString());
+            }
 
-           account = entry.getValue().get_customer().get_account();
-           System.out.println( account.toString());
-           if (account.getPayments().size()!=0) {
+            account = entry.getValue().get_customer().get_account();
+            System.out.println( account.toString());
+            if (account.getPayments().size()!=0) {
 
-               for (int i = 0; i < account.getPayments().size(); i++)
-               {
+                for (int i = 0; i < account.getPayments().size(); i++)
+                {
 
-                   System.out.println(account.getPayments().get(i));
-               }
-           }
+                    System.out.println(account.getPayments().get(i));
+                }
+            }
 
-           HashMap<String,Order> Orders=entry.getValue().get_customer().get_account().getOrderDict();
-           for(var orderentry : Orders.entrySet()) {
-               System.out.println(orderentry.getValue().toString());
-               if(orderentry.getValue().getPayments().size()!=0) {
-                   for (int j = 0; j < orderentry.getValue().getPayments().size(); j++) {
-                       payment = orderentry.getValue().getPayments().get(j);
-                       System.out.println(payment.toString());
-                   }
-               }
+            HashMap<String,Order> Orders=entry.getValue().get_customer().get_account().getOrderDict();
+            for(var orderentry : Orders.entrySet()) {
+                System.out.println(orderentry.getValue().toString());
+                if(orderentry.getValue().getPayments().size()!=0) {
+                    for (int j = 0; j < orderentry.getValue().getPayments().size(); j++) {
+                        payment = orderentry.getValue().getPayments().get(j);
+                        System.out.println(payment.toString());
+                    }
+                }
 
-           }
+            }
 
-   // public void ShowObjectID(String ID){
+            // public void ShowObjectID(String ID){
 
- //  }
+            //  }
             shoppingCart = entry.getValue().get_shcart();
-           if (shoppingCart!=null)
-           {
-               System.out.println(shoppingCart.toString());
-           }
+            if (shoppingCart!=null)
+            {
+                System.out.println(shoppingCart.toString());
+            }
 
 
 
-       }
+        }
         for(var entry : Supplier.SupllierDict.entrySet())
         {
             System.out.println(entry.getValue().toString());
@@ -272,7 +272,7 @@ public class SystemC {
         for(var entry : PrductDict.entrySet())
         {
             System.out.println(entry.getValue().toString());
-             lineitemss= entry.getValue().getLineItemsVec();
+            lineitemss= entry.getValue().getLineItemsVec();
             for (int i=0;i<lineitemss.size();i++)
             {
                 System.out.println(lineitemss.get(i).toString());

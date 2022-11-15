@@ -14,7 +14,7 @@ public class Product {
                 "ID = '" + _id + '\'' +
                 ", Name = '" + _name + '\'' +
                 ", LineItems = " + lineItemsVec +
-                ", Supplier = " + _supplier +
+                ", Supplier = " + _supplier._id +
                 '}';
     }
 

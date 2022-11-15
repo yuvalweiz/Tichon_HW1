@@ -104,7 +104,7 @@ public class Account {
                 ", Balance = " + _balance +
                 ", Last Order = '" + _lastOrder + '\'' +
                 ", Orders = " + OrderDict +
-                ", Customer = " + _customer +
+                ", Customer = " + _customer.get_id() +
                 '}';
     }
 

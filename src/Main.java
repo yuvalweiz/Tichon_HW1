@@ -9,14 +9,18 @@ public class Main {
     {
         /* System initialization  */
         SystemC system = new SystemC();
-        Supplier osem = new Supplier("Osem");
-        Supplier EastWest = new Supplier("EastWest");
-        Product bamba = new Product("Bamba",osem);
-        Product ramen = new Product("Ramen",EastWest);
+        //Supplier osem = new Supplier("Osem");
+        //Supplier EastWest = new Supplier("EastWest");
+        //Product bamba = new Product("Bamba",osem);
+        system.AddProduct("Bamba","Osem");
+        system.AddProduct("Ramen","EastWest");
+        //Product ramen = new Product("Ramen",EastWest);
         system.AddUser("Dani","Dani123",0,null,null,null);
         system.AddUser("Dana","Dana123",1,null,null,null);
         PremiumAccount danaIsPremium = (PremiumAccount) User.UserDict.get("Dana").get_customer().get_account();
-        danaIsPremium.AddProduct(bamba);
+        danaIsPremium.AddProductByName("Bamba");
+        /* End of System initialization  */
+
 
 
         Scanner scanner = new Scanner(System.in);

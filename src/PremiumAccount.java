@@ -32,4 +32,9 @@ public class PremiumAccount extends Account {
     public void AddProduct(Product prod){
         Products.add(prod);
     }
+
+    public void AddProductByName(String name){
+        AddProduct(SystemC.PrductDict.get(name));
+
+    }
 }

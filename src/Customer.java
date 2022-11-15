@@ -30,7 +30,7 @@ public class Customer {
                 ", Phone = '" + _phone + '\'' +
                 ", Email = '" + _email + '\'' +
                 ", User = " + _user +
-                ", Account = " + _account +
+                ", Account = " + _account.get_id() +
                 '}';
     }
 

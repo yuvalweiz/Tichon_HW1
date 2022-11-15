@@ -8,6 +8,20 @@ public class ImmediatePayment extends Payment {
         this.phoneConfirmation = PHONECONFIRMATION;
     }
 
+    @Override
+    public String toString() {
+        String yesorno = null;
+        if (phoneConfirmation == true){
+            yesorno = "Yes";
+        }
+        if(phoneConfirmation == false){
+            yesorno = "No";
+        }
+        return "ImmediatePayment: " +
+                "phoneConfirmation=" + yesorno
+                ;
+    }
+
     public Boolean getPhoneConfirmation() {
         return phoneConfirmation;
     }

@@ -264,8 +264,6 @@ public class SystemC {
 
 
 
-
-
        }
         for(var entry : Supplier.SupllierDict.entrySet())
         {
@@ -281,5 +279,80 @@ public class SystemC {
             }
 
         }
+    }
+    public boolean ShowObjectID(String ID) throws Erorr { //T-Payment|P-Product|A-Account|C-Customer|O-Order|S-Supllier
+        Erorr error;
+        Character firstChar = ID.charAt(0);
+        if(firstChar.equals("T")){
+            for(var entry : User.UserDict.entrySet()){
+                Vector<Payment> payments =entry.getValue().get_customer().get_account().getPayments();
+                for(int i =0;i<payments.size();i++){
+                    if(payments.get(i).getId().equals(ID)){
+                        System.out.println(payments.get(i).toString());
+                        return true;
+                    }
+                }
+            }
+            error = new id_is_wrong_EX();
+            throw error;
+
+        }
+        if(firstChar.equals("P")){
+            if(!PrductDict.containsKey(ID)){
+                error = new product_is_not_exist();
+                throw error;
+            }
+            System.out.println(PrductDict.get(ID));
+            return true;
+        }
+        if(firstChar.equals("A")){
+            for(var entry : User.UserDict.entrySet()){
+                if(entry.getValue().get_customer().get_account().get_id().equals(ID)){
+                    System.out.println(entry.getValue().get_customer().get_account());
+                    return true;
+                }
+            }
+            error = new id_is_wrong_EX();
+            throw error;
+        }
+        if(firstChar.equals("C")){
+            for(var entry : User.UserDict.entrySet()){
+                if(entry.getValue().get_customer().get_id().equals(ID)){
+                    System.out.println(entry.getValue().get_customer());
+                    return true;
+                }
+            }
+            error = new id_is_wrong_EX();
+            throw error;
+        }
+        if(firstChar.equals("O")){
+            for(var entry : User.UserDict.entrySet()){
+                for(var entry2 : entry.getValue().get_customer().get_account().getOrderDict().entrySet()){
+                    if(entry2.getValue().get_number().equals(ID)){
+                        System.out.println(entry2.getValue());
+                        return true;
+                    }
+                }
+            }
+            error = new order_is_not_exist();
+            throw error;
+
+        }
+        if(firstChar.equals("S")){
+            if(!Supplier.SupllierDict.containsKey(ID)){
+                error = new id_is_wrong_EX();
+                throw error;
+            }
+            System.out.println(Supplier.SupllierDict.get(ID));
+            return true;
+
+        }
+        if(!User.UserDict.containsKey(ID)){
+            error = new id_is_wrong_EX();
+            throw error;
+        }
+        System.out.println(User.UserDict.get(ID));
+        return true;
+
     }
 }

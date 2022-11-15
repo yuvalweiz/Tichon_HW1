@@ -361,6 +361,27 @@ public class SystemC {
         System.out.println(User.UserDict.get(ID));
         return true;
     }
+
+    public boolean ShowObjectSupplier(String ID) throws Erorr {
+        Erorr error;
+        if(!Supplier.SupllierDict.containsKey(ID)){
+            error = new id_is_wrong_EX();
+            throw error;
+        }
+        System.out.println(Supplier.SupllierDict.get(ID));
+        return true;
+    }
+
+    public boolean ShowObjectProduct(String ID) throws Erorr {
+        Erorr error;
+        if(!PrductDict.containsKey(ID)){
+            error = new product_is_not_exist();
+            throw error;
+        }
+        System.out.println(PrductDict.get(ID));
+        return true;
+    }
+
     public ImmediatePayment AddImmediatePayment(String orderid,String details,Boolean Phoneconfirmation) throws Erorr {
         float sum =0;
         Erorr e;

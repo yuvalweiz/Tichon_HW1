@@ -57,6 +57,7 @@ public class Order {
     public void AddProduct(Product product,int price){
         LineItem newLineItem = new LineItem(1,price);
         newLineItem.set_product(product);
+        product.Add_Line_Item(newLineItem);
         this.LineItemsVec.add(newLineItem);
     }
 

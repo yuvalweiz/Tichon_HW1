@@ -126,17 +126,19 @@ public class SystemC {
             error = new product_is_not_exist();
             throw error;
         }
-        for (int i=0;i<SellerProduct.getLineItemsVec().size();i++) // I dont think we need this
-        {
-            if (SellerProduct.getLineItemsVec().get(i).getQuantity()==0)
-            {
-                SellerProduct.getLineItemsVec().remove(i);
-            }
+        //SellerProduct.Add_Line_Item(new LineItem(77,77));
+        //for (int i=0;i<SellerProduct.getLineItemsVec().size();i++) // I dont think we need this
 
-        }
-        SellerProduct.getLineItemsVec().get(0).setQuantity(SellerProduct.getLineItemsVec().get(0).getQuantity()-1);//
-        int price=SellerProduct.getLineItemsVec().get(0).getPrice();
-        Buyerorder.AddProduct(SellerProduct,price);
+          //  if (SellerProduct.getLineItemsVec().get(i).getQuantity()==0)
+            //{
+              //  SellerProduct.getLineItemsVec().remove(i);
+            //}
+
+        //}
+        //SellerProduct.getLineItemsVec().get(0).setQuantity(SellerProduct.getLineItemsVec().get(0).getQuantity()-1);//
+
+       // int price=SellerProduct.getLineItemsVec().get(0).getPrice();
+        Buyerorder.AddProduct(SellerProduct,50);
 
 
 

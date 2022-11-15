@@ -15,4 +15,11 @@ public class DelayedPayment extends Payment{
     public void setPaymentDate(Date paymentDate) {
         this.paymentDate = paymentDate;
     }
+
+    @Override
+    public String toString() {
+        return "DelayedPayment" +
+                "paymentDate=" + paymentDate +
+                '}';
+    }
 }

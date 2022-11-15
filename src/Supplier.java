@@ -19,8 +19,9 @@ public class Supplier
     }
 
     public Supplier(String _name) {
-        this._id ="S-"+ String.valueOf(Curr_Id);
-        Curr_Id++;
+        //this._id ="S-"+ String.valueOf(Curr_Id);
+        //Curr_Id++;
+        this._id = _name;
         this._name = _name;
         this.productsVec = new Vector<>();
         SupllierDict.put(this._id,this);

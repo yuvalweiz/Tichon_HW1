@@ -297,14 +297,16 @@ public class SystemC {
             throw error;
 
         }
-        if(firstChar.equals("P")){
+        /* if(firstChar.equals("P")){
             if(!PrductDict.containsKey(ID)){
                 error = new product_is_not_exist();
                 throw error;
             }
             System.out.println(PrductDict.get(ID));
             return true;
-        }
+        }*/
+
+
         if(firstChar.equals("A")){
             for(var entry : User.UserDict.entrySet()){
                 if(entry.getValue().get_customer().get_account().get_id().equals(ID)){
@@ -338,6 +340,7 @@ public class SystemC {
             throw error;
 
         }
+        /*
         if(firstChar.equals("S")){
             if(!Supplier.SupllierDict.containsKey(ID)){
                 error = new id_is_wrong_EX();
@@ -347,10 +350,12 @@ public class SystemC {
             return true;
 
         }
+
+*/
         error = new id_is_wrong_EX();
         throw error;
-
     }
+
 
     public boolean ShowObjectUSER (String ID) throws Erorr {
         Erorr error;
@@ -359,6 +364,26 @@ public class SystemC {
             throw error;
         }
         System.out.println(User.UserDict.get(ID));
+        return true;
+    }
+
+    public boolean ShowObjectSupplier(String ID) throws Erorr{
+        Erorr error;
+        if(!Supplier.SupllierDict.containsKey(ID)){
+            error = new id_is_wrong_EX();
+            throw error;
+        }
+        System.out.println(Supplier.SupllierDict.get(ID));
+        return true;
+    }
+
+    public boolean ShowObjectProduct(String ID) throws Erorr {
+        Erorr error;
+        if(!PrductDict.containsKey(ID)){
+            error = new product_is_not_exist();
+            throw error;
+        }
+        System.out.println(PrductDict.get(ID));
         return true;
     }
 }

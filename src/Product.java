@@ -25,8 +25,9 @@ public class Product {
     public Product(String _name, Supplier _supplier) {
 
 
-        this._id="P-"+String.valueOf(Curr_id);
-        Curr_id++;
+        //this._id="P-"+String.valueOf(Curr_id);
+        //Curr_id++;
+        this._id = _name;
         this._name = _name;
         this._supplier = _supplier;
         this.lineItemsVec = new Vector<LineItem>();

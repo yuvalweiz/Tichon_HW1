@@ -5,10 +5,18 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args)
     {
-
-
-
+        /* System initialization  */
         SystemC system = new SystemC();
+        Supplier osem = new Supplier("Osem");
+        Supplier EastWest = new Supplier("EastWest");
+        Product bamba = new Product("Bamba",osem);
+        Product ramen = new Product("Ramen",EastWest);
+        system.AddUser("Dani","Dani123",0,null,null,null);
+        system.AddUser("Dana","Dana123",1,null,null,null);
+        PremiumAccount danaIsPremium = (PremiumAccount) User.UserDict.get("Dana").get_customer().get_account();
+        danaIsPremium.AddProduct(bamba);
+
+
         Scanner scanner = new Scanner(System.in);
         int choice;
         while(true) {

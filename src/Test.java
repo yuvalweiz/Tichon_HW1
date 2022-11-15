@@ -69,7 +69,7 @@ public class Test {
             System.out.println(Error.getMessage());
         }
 
-
+        system.ShowAllObjects();
      }
 
 }

@@ -16,7 +16,7 @@ public class User {
                 "Login ID= " + _login_id + '\'' +
                 ", State = " + _state +
                 ", ShoppingCart = " + _shcart +
-                ", Customer = " + _customer +
+                ", Customer = " + _customer.get_id() +
                 '}';
     }
 

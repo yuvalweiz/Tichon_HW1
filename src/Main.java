@@ -5,6 +5,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args)
     {
+
+
+
         SystemC system = new SystemC();
         Scanner scanner = new Scanner(System.in);
         int choice;

@@ -347,13 +347,19 @@ public class SystemC {
             return true;
 
         }
+        error = new id_is_wrong_EX();
+        throw error;
+
+    }
+
+    public boolean ShowObjectUSER (String ID) throws Erorr {
+        Erorr error;
         if(!User.UserDict.containsKey(ID)){
             error = new id_is_wrong_EX();
             throw error;
         }
         System.out.println(User.UserDict.get(ID));
         return true;
-
     }
     public DelayedPayment Add_DelayedPayment(String Order_id, String Detail,Date paymentdate) throws Erorr {
         Erorr error;

@@ -81,6 +81,7 @@ public class Order {
     }
 
     public float get_total() {
+
         return _total;
     }
 

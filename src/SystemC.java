@@ -361,4 +361,53 @@ public class SystemC {
         System.out.println(User.UserDict.get(ID));
         return true;
     }
+    public ImmediatePayment AddImmediatePayment(String orderid,String details,Boolean Phoneconfirmation) throws Erorr {
+        float sum =0;
+        Erorr e;
+        Order order = Account.OrderDict.get(orderid);
+        if(order==null)
+        {
+            e= new order_is_not_exist();
+            throw e;
+        }
+        if (order.getLineItemsVec().size()==0)
+        {
+            sum =0;
+        }
+        else
+        {
+            for (int i=0;i<order.getLineItemsVec().size();i++)
+            {
+                sum +=order.getLineItemsVec().get(i).getQuantity()*order.getLineItemsVec().get(i).getPrice();
+            }
+        }
+
+        Date date = new Date();
+
+        return new ImmediatePayment(date,sum,details,Phoneconfirmation);
+    }
+
+    public DelayedPayment AddDelayedPayment(String orderid,String details,Date PaymentDate) throws Erorr {
+        float sum =0;
+        Erorr e;
+        Order order = Account.OrderDict.get(orderid);
+        if(order==null)
+        {
+            e= new order_is_not_exist();
+            throw e;
+        }
+        if (order.getLineItemsVec().size()==0)
+        {
+            sum =0;
+        }
+        else
+        {
+            for (int i=0;i<order.getLineItemsVec().size();i++)
+            {
+                sum +=order.getLineItemsVec().get(i).getQuantity()*order.getLineItemsVec().get(i).getPrice();
+            }
+        }
+        Date date = new Date();
+        return new DelayedPayment(date,sum,details,PaymentDate);
+    }
 }

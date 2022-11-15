@@ -1,5 +1,6 @@
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Vector;
 
 public class Account {
     private static int Curr_Id=0;
@@ -9,11 +10,21 @@ public class Account {
     private Date _open;
     private Date _closed;
     private int _balance;
+
+
+    public HashMap<String, Order> getOrderDict() {
+        return OrderDict;
+    }
+
     private String _lastOrder;
     private HashMap<String, Order> OrderDict = new HashMap<String, Order>();
     private Customer _customer; // wont be able to create account without customer!
+    private Vector<Payment> Payments;
 
 
+    public Vector<Payment> getPayments() {
+        return Payments;
+    }
 
     public Account(Customer _customer) {
         this._id ="A-"+ String.valueOf(Curr_Id);
@@ -22,6 +33,7 @@ public class Account {
         this._open = new Date();
         this._balance = 0;
         this._customer = _customer;
+        this.Payments = new Vector<Payment>();
     }
 
     public void AddOrder (Order order){
@@ -42,7 +54,10 @@ public class Account {
         }
         return OrderDict.get(number);
     }
-
+    public void AddPayment(Payment p)
+    {
+        this.Payments.add(p);
+    }
     public void set_customer(Customer _customer) {
         this._customer = _customer;
     }

@@ -1,0 +1,40 @@
+Index: src/Product.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import javax.sound.sampled.Line;\r\nimport java.util.Dictionary;\r\nimport java.util.Vector;\r\n\r\npublic class Product {\r\n    private String _id;\r\n    private static int Curr_id=0;\r\n    private String _name;\r\n    private Vector<LineItem> lineItemsVec;\r\n    private Supplier _supplier;\r\n\r\n\r\n    public Product( String _name, Supplier _supplier) {\r\n\r\n\r\n        this._id=String.valueOf(Curr_id);\r\n        Curr_id++;\r\n        this._name = _name;\r\n        this._supplier = _supplier;\r\n        this.lineItemsVec = new Vector<LineItem>();\r\n    }\r\n\r\n\r\n    public void set_id(String _id) {\r\n        this._id = _id;\r\n    }\r\n\r\n    public void set_name(String _name) {\r\n        this._name = _name;\r\n    }\r\n\r\n    public String get_id() {\r\n        return _id;\r\n    }\r\n\r\n    public String get_name() {\r\n        return _name;\r\n    }\r\n\r\n    public void Add_Line_Item (LineItem lineitem)\r\n    {\r\n        this.lineItemsVec.add(lineitem);\r\n    }\r\n\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Product.java b/src/Product.java
+--- a/src/Product.java	(revision 45456815db991d54021c85a8f45f89556e52d8d7)
++++ b/src/Product.java	(date 1668441142439)
+@@ -29,6 +29,10 @@
+         this._name = _name;
+     }
+ 
++    public Vector<LineItem> getLineItemsVec() {
++        return lineItemsVec;
++    }
++
+     public String get_id() {
+         return _id;
+     }
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_X\" default=\"true\" project-jdk-name=\"corretto-18\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 45456815db991d54021c85a8f45f89556e52d8d7)
++++ b/.idea/misc.xml	(date 1668441142447)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="corretto-18" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_18" default="true" project-jdk-name="corretto-18" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file

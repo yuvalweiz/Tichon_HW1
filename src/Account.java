@@ -1,6 +1,4 @@
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Vector;
+import java.util.*;
 
 public class Account {
     private static int Curr_Id=0;
@@ -10,6 +8,7 @@ public class Account {
     private Date _open;
     private Date _closed;
     private int _balance;
+    private List<String> myOrders;
 
 
     public HashMap<String, Order> getOrderDict() {
@@ -34,10 +33,16 @@ public class Account {
         this._balance = 0;
         this._customer = _customer;
         this.Payments = new Vector<Payment>();
+        this.myOrders = new ArrayList<String>();
+    }
+
+    public List<String> getMyOrders() {
+        return myOrders;
     }
 
     public void AddOrder (Order order){
         this.OrderDict.put(order.get_number(),order);
+        this.myOrders.add(order.get_number());
     }
 
     public void set_lastOrder(String _lastOrder) {

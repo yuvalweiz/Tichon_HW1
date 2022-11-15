@@ -44,6 +44,12 @@ public class SystemC {
         if(_connectedUser!=null && _connectedUser.get_login_id().equals(Login_id)){
             logoutUser(_connectedUser.get_login_id());
         }
+        Account account = User.UserDict.get(Login_id).get_customer().get_account();
+        for(int i=0;i<account.getMyOrders().size();i++){
+            Account.OrderDict.remove(account.getMyOrders().get(i));
+        }
+
+
         User.UserDict.remove(Login_id);
         return true;
     }
@@ -284,7 +290,7 @@ public class SystemC {
     }
     public boolean ShowObjectID(String ID) throws Erorr { //T-Payment|P-Product|A-Account|C-Customer|O-Order|S-Supllier
         Erorr error;
-        Character firstChar = ID.charAt(0);
+        String firstChar = String.valueOf(ID.charAt(0));
         if(firstChar.equals("T")){
             for(var entry : User.UserDict.entrySet()){
                 Vector<Payment> payments =entry.getValue().get_customer().get_account().getPayments();
@@ -327,17 +333,26 @@ public class SystemC {
             error = new id_is_wrong_EX();
             throw error;
         }
+       // if(firstChar.equals("O")){
+         //   for(var entry : User.UserDict.entrySet()){
+              //  for(var entry2 : entry.getValue().get_customer().get_account().getOrderDict().entrySet()){
+               //     if(entry2.getValue().get_number().equals(ID)){
+                //        System.out.println(entry2.getValue());
+                //        return true;
+               //     }
+            //    }
+          //  }
+           // error = new order_is_not_exist();
+          //  throw error;
+
+        //}
         if(firstChar.equals("O")){
-            for(var entry : User.UserDict.entrySet()){
-                for(var entry2 : entry.getValue().get_customer().get_account().getOrderDict().entrySet()){
-                    if(entry2.getValue().get_number().equals(ID)){
-                        System.out.println(entry2.getValue());
-                        return true;
-                    }
-                }
+            if(!Account.OrderDict.containsKey(ID)){
+                error = new id_is_wrong_EX();
+                throw error;
             }
-            error = new order_is_not_exist();
-            throw error;
+            System.out.println(Account.OrderDict.get(ID));
+            return true;
 
         }
         if(firstChar.equals("S")){

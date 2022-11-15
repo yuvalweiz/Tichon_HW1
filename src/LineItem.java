@@ -2,7 +2,6 @@ public class LineItem {
     private int _quantity;
     private int _price;
     private ShoppingCart shcart;
-    private LineItem _lineItem;
     private Product _product;
 
     public void setQuantity(int quantity) {
@@ -23,8 +22,7 @@ public class LineItem {
                 "Quantity = " + _quantity +
                 ", Price = " + _price +
                 ", Shopping Cart = " + shcart +
-                ", LineItem = " + _lineItem +
-                ", Product = " + _product +
+                ", Product = " + _product.get_id() +
                 '}';
     }
 

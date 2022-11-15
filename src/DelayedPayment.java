@@ -23,10 +23,4 @@ public class DelayedPayment extends Payment{
         this.paymentDate = paymentDate;
     }
 
-    @Override
-    public String toString() {
-        return "DelayedPayment" +
-                "paymentDate=" + paymentDate +
-                '}';
-    }
 }

@@ -11,7 +11,7 @@ public class Order {
     private OrderStatus _status;
     private float _total;
     private Account _account;
-    private Vector<LineItem> LineItemsVec;
+    private Vector<LineItem> LineItemsVec = new Vector<LineItem>();
     private Vector<Payment> Payments;
 
     public Order(Date _ordered, Address _ship_to, Account _account) {
@@ -95,7 +95,7 @@ public class Order {
                 ", Ship To = " + _ship_to +
                 ", Status = " + _status +
                 ", Total = " + _total +
-                ", Account = " + _account +
+                ", Account = " + _account.get_id() +
                 ", LineItems = " + LineItemsVec +
                 '}';
     }

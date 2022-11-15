@@ -7,6 +7,7 @@ public class PremiumAccount extends Account {
     public PremiumAccount(String _id, Customer _customer) {
         super( _customer);
         Products = new Vector<Product>();
+
     }
 
     @Override

@@ -12,6 +12,7 @@ public class Order {
     private float _total;
     private Account _account;
     private Vector<LineItem> LineItemsVec;
+    private Vector<Payment> Payments;
 
     public Order(Date _ordered, Address _ship_to, Account _account) {
         this._number = "O-" + String.valueOf(Curr_Id) ;
@@ -21,6 +22,7 @@ public class Order {
         this._status = OrderStatus.New;
         this._total = 0;
         this._account = _account;
+        this.Payments = new Vector<Payment>();
     }
 
     public Vector<LineItem> getLineItemsVec() {
@@ -36,7 +38,14 @@ public class Order {
         return null;
     }
 
+    public Vector<Payment> getPayments() {
+        return Payments;
+    }
 
+    public void Add_Payment(Payment p)
+    {
+        this.Payments.add(p);
+    }
     public void AddProductQuantity(Product product){
         for(int i=0;i<LineItemsVec.size();i++){
             if(LineItemsVec.get(i).get_product().get_name().equals(product.get_name())){

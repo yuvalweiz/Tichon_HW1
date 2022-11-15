@@ -3,7 +3,7 @@ import java.util.Date;
 public class ImmediatePayment extends Payment {
     private Boolean phoneConfirmation;
 
-    public ImmediatePayment(String ID, Date PAID, Float TOTAL, String DETAILS, Boolean PHONECONFIRMATION) {
+    public ImmediatePayment( Date PAID, Float TOTAL, String DETAILS, Boolean PHONECONFIRMATION) {
         super( PAID, TOTAL, DETAILS);
         this.phoneConfirmation = PHONECONFIRMATION;
     }

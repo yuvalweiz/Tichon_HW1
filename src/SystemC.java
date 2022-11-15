@@ -215,18 +215,29 @@ public class SystemC {
 
     public void ShowAllObjects()
     {
-        Vector<LineItem> lineitemss;
+        Vector<LineItem> lineitemss = new Vector<LineItem>();
         Account account;
+        User user;
         Order order;
+        ShoppingCart shoppingCart;
+        Payment payment;
        for(var entry : User.UserDict.entrySet())
        {
-           System.out.println(entry.getValue().toString());
-           System.out.println(entry.getValue().get_customer().toString());
+           user = entry.getValue();
+           if (user!=null)
+           {
+               System.out.println(user.toString());
+               System.out.println(user.toString());
+           }
+
            account = entry.getValue().get_customer().get_account();
            System.out.println( account.toString());
            if (account.getPayments().size()!=0) {
-               for (int i = 0; i < account.getPayments().size(); i++) {
-                   System.out.println(account.getPayments().get(i).toString());
+
+               for (int i = 0; i < account.getPayments().size(); i++)
+               {
+
+                   System.out.println(account.getPayments().get(i));
                }
            }
 
@@ -235,7 +246,8 @@ public class SystemC {
                System.out.println(orderentry.getValue().toString());
                if(orderentry.getValue().getPayments().size()!=0) {
                    for (int j = 0; j < orderentry.getValue().getPayments().size(); j++) {
-                       System.out.println(orderentry.getValue().getPayments().toString());
+                       payment = orderentry.getValue().getPayments().get(j);
+                       System.out.println(payment.toString());
                    }
                }
 
@@ -244,8 +256,12 @@ public class SystemC {
    // public void ShowObjectID(String ID){
 
  //  }
+            shoppingCart = entry.getValue().get_shcart();
+           if (shoppingCart!=null)
+           {
+               System.out.println(shoppingCart.toString());
+           }
 
-           System.out.println(entry.getValue().get_shcart().toString());
 
 
 

@@ -2,6 +2,8 @@ import Error.*;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Vector;
 
 public class SystemC {
     private User _connectedUser;
@@ -198,32 +200,70 @@ public class SystemC {
         Supplier supnik = new Supplier(supllierName);
         Product prod = new Product(name,supnik);
         supnik.Add_Product(prod);
-        PrductDict.put(prod.get_id(),prod);
+        PrductDict.put(prod.get_name(),prod);
     }
 
-    public void ShowObjectID(String ID){ //T- payment|P- product|S-Supplier|O-order|C-Customer|A-Account
-        Character firstChar = ID.charAt(0);
-        if(firstChar.equals("T")){
-
+    public void Delete_Product (String Product_name) throws Erorr {
+        Erorr e;
+        if(PrductDict.containsKey(Product_name)==false)
+        {
+            e=new product_is_not_exist();
+            throw e;
         }
-        if(firstChar.equals("P")){
-
-        }
-        if(firstChar.equals("S")){
-
-        }
-        if(firstChar.equals("O")){
-
-        }
-        if(firstChar.equals("C")){
-
-        }
-        if(firstChar.equals("A")){
-
-        }
-
-
+        PrductDict.remove(Product_name);
     }
 
+    public void ShowAllObjects()
+    {
+        Vector<LineItem> lineitemss;
+        Account account;
+        Order order;
+       for(var entry : User.UserDict.entrySet())
+       {
+           System.out.println(entry.getValue().toString());
+           System.out.println(entry.getValue().get_customer().toString());
+           account = entry.getValue().get_customer().get_account();
+           System.out.println( account.toString());
+           if (account.getPayments().size()!=0) {
+               for (int i = 0; i < account.getPayments().size(); i++) {
+                   System.out.println(account.getPayments().get(i).toString());
+               }
+           }
 
+           HashMap<String,Order> Orders=entry.getValue().get_customer().get_account().getOrderDict();
+           for(var orderentry : Orders.entrySet()) {
+               System.out.println(orderentry.getValue().toString());
+               if(orderentry.getValue().getPayments().size()!=0) {
+                   for (int j = 0; j < orderentry.getValue().getPayments().size(); j++) {
+                       System.out.println(orderentry.getValue().getPayments().toString());
+                   }
+               }
+
+           }
+
+   // public void ShowObjectID(String ID){
+
+ //  }
+
+           System.out.println(entry.getValue().get_shcart().toString());
+
+
+
+
+       }
+        for(var entry : Supplier.SupllierDict.entrySet())
+        {
+            System.out.println(entry.getValue().toString());
+        }
+        for(var entry : PrductDict.entrySet())
+        {
+            System.out.println(entry.getValue().toString());
+             lineitemss= entry.getValue().getLineItemsVec();
+            for (int i=0;i<lineitemss.size();i++)
+            {
+                System.out.println(lineitemss.get(i).toString());
+            }
+
+        }
+    }
 }

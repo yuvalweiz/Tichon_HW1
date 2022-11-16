@@ -227,6 +227,16 @@ public class SystemC {
                     }
                 }
             }
+            Product p = SystemC.PrductDict.get(Product_name);
+            Supplier s = p.get_supplier();
+            for (int i =0;i<s.productsVec.size();i++)
+            {
+                if (s.productsVec.get(i).get_name().equals(Product_name))
+                {
+                    s.productsVec.remove(i);
+                }
+            }
+
 
 
         }

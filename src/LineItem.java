@@ -18,12 +18,20 @@ public class LineItem {
 
     @Override
     public String toString() {
+       if(_product!=null) {
+           return "LineItem-" +
+                   "Quantity = " + _quantity + "\n" +
+                   "Price = " + _price + "\n" +
+                   "Shopping Cart = " + shcart + "\n" +
+                   "Product's ID = " + _product.get_id() + "\n"
+
+                   ;
+       }
         return "LineItem-" +
-                "Quantity = " + _quantity + "\n"+
-                "Price = " + _price + "\n"+
-                "Shopping Cart = " + shcart +"\n"+
-                "Product's ID = " + _product.get_id() + "\n"
-                ;
+                "Quantity = " + _quantity + "\n" +
+                "Price = " + _price + "\n" +
+                "Shopping Cart = " + shcart + "\n" +
+                  "\n";
     }
 
     public LineItem(int quantity, int price) {

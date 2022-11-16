@@ -8,6 +8,10 @@ public class Product {
     private String _name;
     private Vector<LineItem> lineItemsVec;
 
+    public Supplier get_supplier() {
+        return _supplier;
+    }
+
     @Override
     public String toString() {
         return

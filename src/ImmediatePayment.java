@@ -18,7 +18,7 @@ public class ImmediatePayment extends Payment {
             yesorno = "No";
         }
         return "ImmediatePayment: " +
-                "phoneConfirmation=" + yesorno
+                "phoneConfirmation = " + yesorno
                 ;
     }
 

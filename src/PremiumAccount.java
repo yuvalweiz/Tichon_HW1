@@ -20,9 +20,16 @@ public class PremiumAccount extends Account {
 
     @Override
     public String toString() {
-        return "PremiumAccount{" +
-                "Products = " + Products +
-                '}';
+
+        return "This Account is a Premium account" + "\n"+
+                "Account's ID = " + this.get_id()+"\n"+
+                "Account's open date = " + this.get_open()+"\n"+
+                "Account's balance = " + this.get_balance()+"\n"+
+                "Account's customer ID = " + this.get_customer()+"\n"+
+                "Orders = " + this.getMyOrders()+"\n"+
+                "Payments = " + this.getPayments()+"\n"+
+                "Account's Products = " + Products+"\n"
+                ;
     }
 
     public Product GetProduct(String Productname)

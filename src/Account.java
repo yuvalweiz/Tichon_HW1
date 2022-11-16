@@ -36,6 +36,10 @@ public class Account {
         this.myOrders = new ArrayList<String>();
     }
 
+    public Customer get_customer() {
+        return _customer;
+    }
+
     public List<String> getMyOrders() {
         return myOrders;
     }
@@ -100,17 +104,17 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" +
-                "ID = '" + _id + '\'' +
-                ", Billing Address = '" + _billing_address + '\'' +
-                ", Is Closed=" + _is_closed +
-                ", Open = " + _open +
-                ", Closed = " + _closed +
-                ", Balance = " + _balance +
-                ", Last Order = '" + _lastOrder + '\'' +
-                ", Orders = " + OrderDict +
-                ", Customer = " + _customer.get_id() +
-                '}';
+        return "Account" +
+                "ID = '" + _id + "\n"+
+                "Billing Address = '" + _billing_address + "\n"+
+                "Is Closed=" + _is_closed +  "\n"+
+                "Open = " + _open + "\n"+
+                "Closed = " + _closed + "\n"+
+                "Balance = " + _balance + "\n"+
+                "Last Order = '" + _lastOrder + "\n"+
+                "Orders = " + OrderDict + "\n"+
+                "Customer's ID = " + _customer.get_id() + "\n"
+                ;
     }
 
     public Date get_closed() {

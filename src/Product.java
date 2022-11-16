@@ -10,12 +10,12 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "ID = '" + _id + '\'' +
-                ", Name = '" + _name + '\'' +
-                ", LineItems = " + lineItemsVec +
-                ", Supplier = " + _supplier._id +
-                '}';
+        return
+                "Product's ID = '" + _id + "\n" +
+                "Product's Name = '" + _name + "\n" +
+                "LineItems = " + lineItemsVec +"\n"+
+                "Product's Supplier ID = " + _supplier._id + "\n"
+                ;
     }
 
     private Supplier _supplier;

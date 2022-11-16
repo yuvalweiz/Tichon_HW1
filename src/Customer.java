@@ -24,14 +24,14 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" +
-                "ID = '" + _id + '\'' +
-                ", Address = " + _address +
-                ", Phone = '" + _phone + '\'' +
-                ", Email = '" + _email + '\'' +
-                ", User = " + _user +
-                ", Account = " + _account.get_id() +
-                '}';
+        return
+                "Costumer's ID = " + _id + "\n"+
+                "Costumer's Address = " + _address + "\n"+
+                "Costumer's Phone = " + _phone + "\n"+
+                "Email = '" + _email + "\n"+
+                "Costumer's User ID = " + _user.get_login_id() + "\n"+
+                "Costumer's Account ID = " + _account.get_id() + "\n"
+                ;
     }
 
     public Customer(Address _address, String _phone, String _email) {

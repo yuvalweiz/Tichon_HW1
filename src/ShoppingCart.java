@@ -37,8 +37,8 @@ public class ShoppingCart
         return "ShoppingCart{" +
                 "Created = " + _created +
                 ", User = " + _user +
-                ", lineItems = " + lineItemsVector +
-                '}';
+                ", lineItems = " + lineItemsVector +"\n"
+                ;
     }
 
     public Date getCreated() {

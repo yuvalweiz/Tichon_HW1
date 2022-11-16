@@ -49,9 +49,9 @@ public class Address {
     public String toString() {
         return "Address:" +
                 "Country = '" + _country + '\'' +
-                ",City = '" + _city + '\'' +
-                ",Street = '" + _street + '\'' +
-                ",Number = " + _number
+                ", City = '" + _city + '\'' +
+                ", Street = '" + _street + '\'' +
+                ", Number=" + _number
                 ;
     }
 }

@@ -88,16 +88,16 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" +
-                "Number = '" + _number + '\'' +
-                ", Ordered = " + _ordered +
-                ", Shipped = " + _shipped +
-                ", Ship To = " + _ship_to +
-                ", Status = " + _status +
-                ", Total = " + _total +
-                ", Account = " + _account.get_id() +
-                ", LineItems = " + LineItemsVec +
-                '}';
+        return
+                "Order Number - '" + _number + "\n" +
+                "Ordered at = " + _ordered +"\n"+
+                "Shipped at = " + _shipped +"\n"+
+                "Ship To = " + _ship_to +"\n"+
+                "Order Status = " + _status +"\n"+
+                "Order Total = " + _total +"\n"+
+                "Order's Account = " + _account.get_id() +"\n"+
+                "LineItems = " + LineItemsVec+ "\n"
+                ;
     }
 
     public void set_number(String _number) {

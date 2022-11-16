@@ -12,12 +12,12 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "Login ID= " + _login_id + '\'' +
-                ", State = " + _state +
-                ", ShoppingCart = " + _shcart +
-                ", Customer = " + _customer.get_id() +
-                '}';
+        return
+                "User's Login ID = " + _login_id + "\n"+
+                "User's State = " + _state + "\n"+
+                "User's ShoppingCart = " + _shcart + "\n"+
+                "User's Customer ID = " + _customer.get_id() + "\n"
+                ;
     }
 
     private Customer _customer;

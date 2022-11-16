@@ -11,11 +11,11 @@ public class Supplier
 
     @Override
     public String toString() {
-        return "Supplier{" +
-                "ID = '" + _id + '\'' +
-                ", Name = '" + _name + '\'' +
-                ", Products = " + productsVec +
-                '}';
+        return
+                "Supplier's ID = '" + _id + "\n"+
+                "Supplier's Name = '" + _name + "\n"+
+                "Supplier's Products = " + productsVec + "\n"
+                ;
     }
 
     public Supplier(String _name) {

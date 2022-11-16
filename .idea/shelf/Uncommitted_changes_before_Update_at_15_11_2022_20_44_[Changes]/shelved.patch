@@ -1,0 +1,642 @@
+Index: src/SystemC.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import Error.*;\r\n\r\nimport java.util.Date;\r\nimport java.util.HashMap;\r\nimport java.util.Iterator;\r\nimport java.util.Vector;\r\n\r\npublic class SystemC {\r\n    private User _connectedUser;\r\n    private HashMap<String, Product> PrductDict = new HashMap<String, Product>();\r\n\r\n    public SystemC(){\r\n        this._connectedUser = null;\r\n    } //defult constructor\r\n    public boolean AddUser(String _login_id,String _password,int premium,Address address,String phone, String email){\r\n        if(User.UserDict.containsKey(_login_id)){\r\n            return false;\r\n        }\r\n        User newUser= new User(_login_id,_password);\r\n        Customer newCustomer = new Customer(address,phone,email);\r\n        Account newAccount;\r\n        if(premium == 1){\r\n            newAccount = new PremiumAccount(_login_id,newCustomer);\r\n            newCustomer.set_account(newAccount);\r\n            newAccount.set_customer(newCustomer);\r\n        }\r\n        if (premium == 0){\r\n            newAccount = new Account(newCustomer);\r\n            newCustomer.set_account(newAccount);\r\n            newAccount.set_customer(newCustomer);\r\n        }\r\n        newCustomer.set_user(newUser);\r\n        newUser.set_customer(newCustomer);\r\n        Date date = new Date();\r\n        ShoppingCart cart = new ShoppingCart(date);\r\n        return true;\r\n\r\n    }\r\n    public boolean RemoveUser(String Login_id) throws Erorr {\r\n        if (User.UserDict.containsKey(Login_id)!= true)\r\n        {\r\n            return false;\r\n        }\r\n        if(_connectedUser!=null && _connectedUser.get_login_id().equals(Login_id)){\r\n            logoutUser(_connectedUser.get_login_id());\r\n        }\r\n        User.UserDict.remove(Login_id);\r\n        return true;\r\n    }\r\n\r\n    public boolean loginUser(String _loginid, String password) throws Erorr {\r\n        Erorr error;\r\n        if(this._connectedUser != null){\r\n            error = new there_is_user_connected_EX();\r\n            throw error;\r\n        }\r\n\r\n        if(!User.UserDict.containsKey(_loginid)){\r\n            error = new id_is_wrong_EX();\r\n            throw error;\r\n\r\n        }\r\n        if(!User.UserDict.get(_loginid).get_password().equals(password)){\r\n            error = new pass_is_wrong_EX();\r\n            throw error;\r\n        }\r\n        this._connectedUser = User.UserDict.get(_loginid);\r\n        return true;\r\n    }\r\n    public boolean logoutUser(String _loginid) throws Erorr {\r\n        Erorr error;\r\n        if(this._connectedUser == null){\r\n            error = new there_is_no_user_connected_EX();\r\n            throw error;\r\n        }\r\n        this._connectedUser = null;\r\n        return true;\r\n    }\r\n\r\n    public void Create_new_order(Address address) throws Erorr {\r\n\r\n        if(_connectedUser==null)\r\n        {\r\n            Erorr error = new there_is_no_user_connected_EX();\r\n            throw error;\r\n        }\r\n        Date currDate = new Date();\r\n        Order order = new Order(currDate,address,_connectedUser.get_customer().get_account());\r\n        _connectedUser.get_customer().get_account().AddOrder(order);\r\n        _connectedUser.get_customer().get_account().set_lastOrder(order.get_number());\r\n        System.out.println(\"Your Order number is: \" + order.get_number());\r\n\r\n    }\r\n\r\n    public void Add_product_to_order(String Order_ID,String Login_ID,String Product_Name) throws Erorr {\r\n        Erorr error ;\r\n\r\n        if (_connectedUser == null)\r\n        {\r\n            error = new there_is_no_user_connected_EX();\r\n            throw error;\r\n        }\r\n        User sellerUser = User.UserDict.get(Login_ID);\r\n        if (sellerUser == null)\r\n        {\r\n\r\n            error=new id_is_wrong_EX();\r\n            throw error;\r\n        }\r\n        Account Seller_account = sellerUser.get_customer().get_account();\r\n        if(!(Seller_account instanceof PremiumAccount))\r\n        {\r\n            error = new not_premium_user();\r\n            throw error;\r\n        }\r\n\r\n        Order Buyerorder = _connectedUser.get_customer().get_account().getOrder(Order_ID);\r\n        if (Buyerorder == null)\r\n        {\r\n            error = new order_is_not_exist();\r\n            throw error;\r\n        }\r\n        Product SellerProduct = ((PremiumAccount) Seller_account).GetProduct(Product_Name);\r\n        if (SellerProduct==null)\r\n        {\r\n            error = new product_is_not_exist();\r\n            throw error;\r\n        }\r\n        for (int i=0;i<SellerProduct.getLineItemsVec().size();i++) // I dont think we need this\r\n        {\r\n            if (SellerProduct.getLineItemsVec().get(i).getQuantity()==0)\r\n            {\r\n                SellerProduct.getLineItemsVec().remove(i);\r\n            }\r\n\r\n        }\r\n        SellerProduct.getLineItemsVec().get(0).setQuantity(SellerProduct.getLineItemsVec().get(0).getQuantity()-1);//\r\n        int price=SellerProduct.getLineItemsVec().get(0).getPrice();\r\n        Buyerorder.AddProduct(SellerProduct,price);\r\n\r\n\r\n\r\n    }\r\n    public void DisplayOrder() throws Erorr {\r\n        Erorr erorr;\r\n        if(_connectedUser == null){\r\n            erorr = new there_is_no_user_connected_EX();\r\n            throw erorr;\r\n        }\r\n        Order myOrder = _connectedUser.get_customer().get_account().getOrder(_connectedUser.get_customer().get_account().get_lastOrder());\r\n        if(myOrder == null){\r\n            erorr = new order_is_not_exist();\r\n            throw erorr;\r\n        }\r\n        int price;\r\n        int quan;\r\n        float sum = 0;\r\n        if(myOrder.getLineItemsVec() != null){\r\n        for(int i=0;i<myOrder.getLineItemsVec().size();i++){\r\n            quan = myOrder.getLineItemsVec().get(i).getQuantity();\r\n            price = myOrder.getLineItemsVec().get(i).getPrice();\r\n            sum = sum + (quan * price);\r\n        }}\r\n        myOrder.set_total(sum);\r\n\r\n        System.out.println(\"Order Number: \" + myOrder.get_number());\r\n        System.out.println(\"Order Date: \" + myOrder.get_ordered());\r\n        System.out.println(\"Shipment Date: \" + myOrder.get_shipped());\r\n        System.out.println(\"Shipment Address: \" + myOrder.get_ship_to());\r\n        System.out.println(\"Order status: \" + myOrder.get_status());\r\n        System.out.println(\"Total payment: \" + myOrder.get_total());\r\n\r\n    }\r\n\r\n    public void LinkProduct (String name,int price,int Quan) throws Erorr {\r\n        Erorr error;\r\n        if (_connectedUser == null)\r\n        {\r\n            error = new there_is_no_user_connected_EX();\r\n            throw error;\r\n        }\r\n        Account account = _connectedUser.get_customer().get_account();\r\n        if(!(account instanceof PremiumAccount))\r\n        {\r\n            error = new not_premium_user();\r\n            throw error;\r\n        }\r\n        Product product = PrductDict.get(name);\r\n        if(product == null){\r\n            error = new product_is_not_exist();\r\n        }\r\n        LineItem lineItem = new LineItem(Quan,price);\r\n        product.getLineItemsVec().add(lineItem);\r\n        ((PremiumAccount) account).AddProduct(product);\r\n\r\n    }\r\n\r\n\r\n    public void AddProduct(String name,String supllierName){\r\n        Supplier supnik = new Supplier(supllierName);\r\n        Product prod = new Product(name,supnik);\r\n        supnik.Add_Product(prod);\r\n        PrductDict.put(prod.get_name(),prod);\r\n    }\r\n\r\n    public void Delete_Product (String Product_name) throws Erorr {\r\n        Erorr e;\r\n        if(PrductDict.containsKey(Product_name)==false)\r\n        {\r\n            e=new product_is_not_exist();\r\n            throw e;\r\n        }\r\n        PrductDict.remove(Product_name);\r\n    }\r\n\r\n    public void ShowAllObjects()\r\n    {\r\n        Vector<LineItem> lineitemss = new Vector<LineItem>();\r\n        Account account;\r\n        User user;\r\n        Order order;\r\n        ShoppingCart shoppingCart;\r\n        Payment payment;\r\n       for(var entry : User.UserDict.entrySet())\r\n       {\r\n           user = entry.getValue();\r\n           if (user!=null)\r\n           {\r\n               System.out.println(user.toString());\r\n               System.out.println(user.toString());\r\n           }\r\n\r\n           account = entry.getValue().get_customer().get_account();\r\n           System.out.println( account.toString());\r\n           if (account.getPayments().size()!=0) {\r\n\r\n               for (int i = 0; i < account.getPayments().size(); i++)\r\n               {\r\n\r\n                   System.out.println(account.getPayments().get(i));\r\n               }\r\n           }\r\n\r\n           HashMap<String,Order> Orders=entry.getValue().get_customer().get_account().getOrderDict();\r\n           for(var orderentry : Orders.entrySet()) {\r\n               System.out.println(orderentry.getValue().toString());\r\n               if(orderentry.getValue().getPayments().size()!=0) {\r\n                   for (int j = 0; j < orderentry.getValue().getPayments().size(); j++) {\r\n                       payment = orderentry.getValue().getPayments().get(j);\r\n                       System.out.println(payment.toString());\r\n                   }\r\n               }\r\n\r\n           }\r\n\r\n   // public void ShowObjectID(String ID){\r\n\r\n //  }\r\n            shoppingCart = entry.getValue().get_shcart();\r\n           if (shoppingCart!=null)\r\n           {\r\n               System.out.println(shoppingCart.toString());\r\n           }\r\n\r\n\r\n\r\n       }\r\n        for(var entry : Supplier.SupllierDict.entrySet())\r\n        {\r\n            System.out.println(entry.getValue().toString());\r\n        }\r\n        for(var entry : PrductDict.entrySet())\r\n        {\r\n            System.out.println(entry.getValue().toString());\r\n             lineitemss= entry.getValue().getLineItemsVec();\r\n            for (int i=0;i<lineitemss.size();i++)\r\n            {\r\n                System.out.println(lineitemss.get(i).toString());\r\n            }\r\n\r\n        }\r\n    }\r\n    public boolean ShowObjectID(String ID) throws Erorr { //T-Payment|P-Product|A-Account|C-Customer|O-Order|S-Supllier\r\n        Erorr error;\r\n        Character firstChar = ID.charAt(0);\r\n        if(firstChar.equals(\"T\")){\r\n            for(var entry : User.UserDict.entrySet()){\r\n                Vector<Payment> payments =entry.getValue().get_customer().get_account().getPayments();\r\n                for(int i =0;i<payments.size();i++){\r\n                    if(payments.get(i).getId().equals(ID)){\r\n                        System.out.println(payments.get(i).toString());\r\n                        return true;\r\n                    }\r\n                }\r\n            }\r\n            error = new id_is_wrong_EX();\r\n            throw error;\r\n\r\n        }\r\n        if(firstChar.equals(\"P\")){\r\n            if(!PrductDict.containsKey(ID)){\r\n                error = new product_is_not_exist();\r\n                throw error;\r\n            }\r\n            System.out.println(PrductDict.get(ID));\r\n            return true;\r\n        }\r\n        if(firstChar.equals(\"A\")){\r\n            for(var entry : User.UserDict.entrySet()){\r\n                if(entry.getValue().get_customer().get_account().get_id().equals(ID)){\r\n                    System.out.println(entry.getValue().get_customer().get_account());\r\n                    return true;\r\n                }\r\n            }\r\n            error = new id_is_wrong_EX();\r\n            throw error;\r\n        }\r\n        if(firstChar.equals(\"C\")){\r\n            for(var entry : User.UserDict.entrySet()){\r\n                if(entry.getValue().get_customer().get_id().equals(ID)){\r\n                    System.out.println(entry.getValue().get_customer());\r\n                    return true;\r\n                }\r\n            }\r\n            error = new id_is_wrong_EX();\r\n            throw error;\r\n        }\r\n        if(firstChar.equals(\"O\")){\r\n            for(var entry : User.UserDict.entrySet()){\r\n                for(var entry2 : entry.getValue().get_customer().get_account().getOrderDict().entrySet()){\r\n                    if(entry2.getValue().get_number().equals(ID)){\r\n                        System.out.println(entry2.getValue());\r\n                        return true;\r\n                    }\r\n                }\r\n            }\r\n            error = new order_is_not_exist();\r\n            throw error;\r\n\r\n        }\r\n        if(firstChar.equals(\"S\")){\r\n            if(!Supplier.SupllierDict.containsKey(ID)){\r\n                error = new id_is_wrong_EX();\r\n                throw error;\r\n            }\r\n            System.out.println(Supplier.SupllierDict.get(ID));\r\n            return true;\r\n\r\n        }\r\n        error = new id_is_wrong_EX();\r\n        throw error;\r\n\r\n    }\r\n\r\n    public boolean ShowObjectUSER (String ID) throws Erorr {\r\n        Erorr error;\r\n        if(!User.UserDict.containsKey(ID)){\r\n            error = new id_is_wrong_EX();\r\n            throw error;\r\n        }\r\n        System.out.println(User.UserDict.get(ID));\r\n        return true;\r\n    }\r\n    public ImmediatePayment AddImmediatePayment(String orderid,String details,Boolean Phoneconfirmation) throws Erorr {\r\n        float sum =0;\r\n        Erorr e;\r\n        Order order = Account.OrderDict.get(orderid);\r\n        if(order==null)\r\n        {\r\n            e= new order_is_not_exist();\r\n            throw e;\r\n        }\r\n        if (order.getLineItemsVec().size()==0)\r\n        {\r\n            sum =0;\r\n        }\r\n        else\r\n        {\r\n            for (int i=0;i<order.getLineItemsVec().size();i++)\r\n            {\r\n                sum +=order.getLineItemsVec().get(i).getQuantity()*order.getLineItemsVec().get(i).getPrice();\r\n            }\r\n        }\r\n\r\n        Date date = new Date();\r\n\r\n        return new ImmediatePayment(date,sum,details,Phoneconfirmation);\r\n    }\r\n\r\n    public DelayedPayment AddDelayedPayment(String orderid,String details,Date PaymentDate) throws Erorr {\r\n        float sum =0;\r\n        Erorr e;\r\n        Order order = Account.OrderDict.get(orderid);\r\n        if(order==null)\r\n        {\r\n            e= new order_is_not_exist();\r\n            throw e;\r\n        }\r\n        if (order.getLineItemsVec().size()==0)\r\n        {\r\n            sum =0;\r\n        }\r\n        else\r\n        {\r\n            for (int i=0;i<order.getLineItemsVec().size();i++)\r\n            {\r\n                sum +=order.getLineItemsVec().get(i).getQuantity()*order.getLineItemsVec().get(i).getPrice();\r\n            }\r\n        }\r\n        Date date = new Date();\r\n        return new DelayedPayment(date,sum,details,PaymentDate);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/SystemC.java b/src/SystemC.java
+--- a/src/SystemC.java	(revision 037b4548da3e736f269a32c6a68b7e35cf7ce4fd)
++++ b/src/SystemC.java	(date 1668537684958)
+@@ -361,53 +361,393 @@
+         System.out.println(User.UserDict.get(ID));
+         return true;
+     }
+-    public ImmediatePayment AddImmediatePayment(String orderid,String details,Boolean Phoneconfirmation) throws Erorr {
+-        float sum =0;
+-        Erorr e;
+-        Order order = Account.OrderDict.get(orderid);
+-        if(order==null)
+-        {
+-            e= new order_is_not_exist();
+-            throw e;
+-        }
+-        if (order.getLineItemsVec().size()==0)
+-        {
+-            sum =0;
+-        }
+-        else
+-        {
+-            for (int i=0;i<order.getLineItemsVec().size();i++)
+-            {
+-                sum +=order.getLineItemsVec().get(i).getQuantity()*order.getLineItemsVec().get(i).getPrice();
++    import Error.*;
++
++        import java.util.Date;
++        import java.util.HashMap;
++        import java.util.Iterator;
++        import java.util.Vector;
++
++    public class SystemC {
++        private User _connectedUser;
++        private HashMap<String, Product> PrductDict = new HashMap<String, Product>();
++
++        public SystemC(){
++            this._connectedUser = null;
++        } //defult constructor
++        public boolean AddUser(String _login_id,String _password,int premium,Address address,String phone, String email){
++            if(User.UserDict.containsKey(_login_id)){
++                return false;
++            }
++            User newUser= new User(_login_id,_password);
++            Customer newCustomer = new Customer(address,phone,email);
++            Account newAccount;
++            if(premium == 1){
++                newAccount = new PremiumAccount(_login_id,newCustomer);
++                newCustomer.set_account(newAccount);
++                newAccount.set_customer(newCustomer);
++            }
++            if (premium == 0){
++                newAccount = new Account(newCustomer);
++                newCustomer.set_account(newAccount);
++                newAccount.set_customer(newCustomer);
+             }
+-        }
+-
+-        Date date = new Date();
++            newCustomer.set_user(newUser);
++            newUser.set_customer(newCustomer);
++            Date date = new Date();
++            ShoppingCart cart = new ShoppingCart(date);
++            return true;
++
++        }
++        public boolean RemoveUser(String Login_id) throws Erorr {
++            if (User.UserDict.containsKey(Login_id)!= true)
++            {
++                return false;
++            }
++            if(_connectedUser!=null && _connectedUser.get_login_id().equals(Login_id)){
++                logoutUser(_connectedUser.get_login_id());
++            }
++            User.UserDict.remove(Login_id);
++            return true;
++        }
++
++        public boolean loginUser(String _loginid, String password) throws Erorr {
++            Erorr error;
++            if(this._connectedUser != null){
++                error = new there_is_user_connected_EX();
++                throw error;
++            }
++
++            if(!User.UserDict.containsKey(_loginid)){
++                error = new id_is_wrong_EX();
++                throw error;
++
++            }
++            if(!User.UserDict.get(_loginid).get_password().equals(password)){
++                error = new pass_is_wrong_EX();
++                throw error;
++            }
++            this._connectedUser = User.UserDict.get(_loginid);
++            return true;
++        }
++        public boolean logoutUser(String _loginid) throws Erorr {
++            Erorr error;
++            if(this._connectedUser == null){
++                error = new there_is_no_user_connected_EX();
++                throw error;
++            }
++            this._connectedUser = null;
++            return true;
++        }
++
++        public void Create_new_order(Address address) throws Erorr {
++
++            if(_connectedUser==null)
++            {
++                Erorr error = new there_is_no_user_connected_EX();
++                throw error;
++            }
++            Date currDate = new Date();
++            Order order = new Order(currDate,address,_connectedUser.get_customer().get_account());
++            _connectedUser.get_customer().get_account().AddOrder(order);
++            _connectedUser.get_customer().get_account().set_lastOrder(order.get_number());
++            System.out.println("Your Order number is: " + order.get_number());
+ 
+-        return new ImmediatePayment(date,sum,details,Phoneconfirmation);
+-    }
++        }
+ 
+-    public DelayedPayment AddDelayedPayment(String orderid,String details,Date PaymentDate) throws Erorr {
+-        float sum =0;
+-        Erorr e;
+-        Order order = Account.OrderDict.get(orderid);
+-        if(order==null)
+-        {
+-            e= new order_is_not_exist();
+-            throw e;
++        public void Add_product_to_order(String Order_ID,String Login_ID,String Product_Name) throws Erorr {
++            Erorr error ;
++
++            if (_connectedUser == null)
++            {
++                error = new there_is_no_user_connected_EX();
++                throw error;
++            }
++            User sellerUser = User.UserDict.get(Login_ID);
++            if (sellerUser == null)
++            {
++
++                error=new id_is_wrong_EX();
++                throw error;
++            }
++            Account Seller_account = sellerUser.get_customer().get_account();
++            if(!(Seller_account instanceof PremiumAccount))
++            {
++                error = new not_premium_user();
++                throw error;
++            }
++
++            Order Buyerorder = _connectedUser.get_customer().get_account().getOrder(Order_ID);
++            if (Buyerorder == null)
++            {
++                error = new order_is_not_exist();
++                throw error;
++            }
++            Product SellerProduct = ((PremiumAccount) Seller_account).GetProduct(Product_Name);
++            if (SellerProduct==null)
++            {
++                error = new product_is_not_exist();
++                throw error;
++            }
++            for (int i=0;i<SellerProduct.getLineItemsVec().size();i++) // I dont think we need this
++            {
++                if (SellerProduct.getLineItemsVec().get(i).getQuantity()==0)
++                {
++                    SellerProduct.getLineItemsVec().remove(i);
++                }
++
++            }
++            SellerProduct.getLineItemsVec().get(0).setQuantity(SellerProduct.getLineItemsVec().get(0).getQuantity()-1);//
++            int price=SellerProduct.getLineItemsVec().get(0).getPrice();
++            Buyerorder.AddProduct(SellerProduct,price);
++
++
++
++        }
++        public void DisplayOrder() throws Erorr {
++            Erorr erorr;
++            if(_connectedUser == null){
++                erorr = new there_is_no_user_connected_EX();
++                throw erorr;
++            }
++            Order myOrder = _connectedUser.get_customer().get_account().getOrder(_connectedUser.get_customer().get_account().get_lastOrder());
++            if(myOrder == null){
++                erorr = new order_is_not_exist();
++                throw erorr;
++            }
++            int price;
++            int quan;
++            float sum = 0;
++            if(myOrder.getLineItemsVec() != null){
++                for(int i=0;i<myOrder.getLineItemsVec().size();i++){
++                    quan = myOrder.getLineItemsVec().get(i).getQuantity();
++                    price = myOrder.getLineItemsVec().get(i).getPrice();
++                    sum = sum + (quan * price);
++                }}
++            myOrder.set_total(sum);
++
++            System.out.println("Order Number: " + myOrder.get_number());
++            System.out.println("Order Date: " + myOrder.get_ordered());
++            System.out.println("Shipment Date: " + myOrder.get_shipped());
++            System.out.println("Shipment Address: " + myOrder.get_ship_to());
++            System.out.println("Order status: " + myOrder.get_status());
++            System.out.println("Total payment: " + myOrder.get_total());
++
++        }
++
++        public void LinkProduct (String name,int price,int Quan) throws Erorr {
++            Erorr error;
++            if (_connectedUser == null)
++            {
++                error = new there_is_no_user_connected_EX();
++                throw error;
++            }
++            Account account = _connectedUser.get_customer().get_account();
++            if(!(account instanceof PremiumAccount))
++            {
++                error = new not_premium_user();
++                throw error;
++            }
++            Product product = PrductDict.get(name);
++            if(product == null){
++                error = new product_is_not_exist();
++            }
++            LineItem lineItem = new LineItem(Quan,price);
++            product.getLineItemsVec().add(lineItem);
++            ((PremiumAccount) account).AddProduct(product);
++
++        }
++
++
++        public void AddProduct(String name,String supllierName){
++            Supplier supnik = new Supplier(supllierName);
++            Product prod = new Product(name,supnik);
++            supnik.Add_Product(prod);
++            PrductDict.put(prod.get_name(),prod);
++        }
++
++        public void Delete_Product (String Product_name) throws Erorr {
++            Erorr e;
++            if(PrductDict.containsKey(Product_name)==false)
++            {
++                e=new product_is_not_exist();
++                throw e;
++            }
++            PrductDict.remove(Product_name);
+         }
+-        if (order.getLineItemsVec().size()==0)
+-        {
+-            sum =0;
+-        }
+-        else
+-        {
+-            for (int i=0;i<order.getLineItemsVec().size();i++)
++
++        public void ShowAllObjects()
++        {
++            Vector<LineItem> lineitemss = new Vector<LineItem>();
++            Account account;
++            User user;
++            Order order;
++            ShoppingCart shoppingCart;
++            Payment payment;
++            for(var entry : User.UserDict.entrySet())
++            {
++                user = entry.getValue();
++                if (user!=null)
++                {
++                    System.out.println(user.toString());
++                    System.out.println(user.toString());
++                }
++
++                account = entry.getValue().get_customer().get_account();
++                System.out.println( account.toString());
++                if (account.getPayments().size()!=0) {
++
++                    for (int i = 0; i < account.getPayments().size(); i++)
++                    {
++
++                        System.out.println(account.getPayments().get(i));
++                    }
++                }
++
++                HashMap<String,Order> Orders=entry.getValue().get_customer().get_account().getOrderDict();
++                for(var orderentry : Orders.entrySet()) {
++                    System.out.println(orderentry.getValue().toString());
++                    if(orderentry.getValue().getPayments().size()!=0) {
++                        for (int j = 0; j < orderentry.getValue().getPayments().size(); j++) {
++                            payment = orderentry.getValue().getPayments().get(j);
++                            System.out.println(payment.toString());
++                        }
++                    }
++
++                }
++
++                // public void ShowObjectID(String ID){
++
++                //  }
++                shoppingCart = entry.getValue().get_shcart();
++                if (shoppingCart!=null)
++                {
++                    System.out.println(shoppingCart.toString());
++                }
++
++
++
++            }
++            for(var entry : Supplier.SupllierDict.entrySet())
++            {
++                System.out.println(entry.getValue().toString());
++            }
++            for(var entry : PrductDict.entrySet())
+             {
+-                sum +=order.getLineItemsVec().get(i).getQuantity()*order.getLineItemsVec().get(i).getPrice();
+-            }
+-        }
+-        Date date = new Date();
+-        return new DelayedPayment(date,sum,details,PaymentDate);
++                System.out.println(entry.getValue().toString());
++                lineitemss= entry.getValue().getLineItemsVec();
++                for (int i=0;i<lineitemss.size();i++)
++                {
++                    System.out.println(lineitemss.get(i).toString());
++                }
++
++            }
++        }
++        public boolean ShowObjectID(String ID) throws Erorr { //T-Payment|P-Product|A-Account|C-Customer|O-Order|S-Supllier
++            Erorr error;
++            Character firstChar = ID.charAt(0);
++            if(firstChar.equals("T")){
++                for(var entry : User.UserDict.entrySet()){
++                    Vector<Payment> payments =entry.getValue().get_customer().get_account().getPayments();
++                    for(int i =0;i<payments.size();i++){
++                        if(payments.get(i).getId().equals(ID)){
++                            System.out.println(payments.get(i).toString());
++                            return true;
++                        }
++                    }
++                }
++                error = new id_is_wrong_EX();
++                throw error;
++
++            }
++        /* if(firstChar.equals("P")){
++            if(!PrductDict.containsKey(ID)){
++                error = new product_is_not_exist();
++                throw error;
++            }
++            System.out.println(PrductDict.get(ID));
++            return true;
++        }*/
++
++
++            if(firstChar.equals("A")){
++                for(var entry : User.UserDict.entrySet()){
++                    if(entry.getValue().get_customer().get_account().get_id().equals(ID)){
++                        System.out.println(entry.getValue().get_customer().get_account());
++                        return true;
++                    }
++                }
++                error = new id_is_wrong_EX();
++                throw error;
++            }
++            if(firstChar.equals("C")){
++                for(var entry : User.UserDict.entrySet()){
++                    if(entry.getValue().get_customer().get_id().equals(ID)){
++                        System.out.println(entry.getValue().get_customer());
++                        return true;
++                    }
++                }
++                error = new id_is_wrong_EX();
++                throw error;
++            }
++            if(firstChar.equals("O")){
++                for(var entry : User.UserDict.entrySet()){
++                    for(var entry2 : entry.getValue().get_customer().get_account().getOrderDict().entrySet()){
++                        if(entry2.getValue().get_number().equals(ID)){
++                            System.out.println(entry2.getValue());
++                            return true;
++                        }
++                    }
++                }
++                error = new order_is_not_exist();
++                throw error;
++
++            }
++        /*
++        if(firstChar.equals("S")){
++            if(!Supplier.SupllierDict.containsKey(ID)){
++                error = new id_is_wrong_EX();
++                throw error;
++            }
++            System.out.println(Supplier.SupllierDict.get(ID));
++            return true;
++
++        }
++
++*/
++            error = new id_is_wrong_EX();
++            throw error;
++        }
++
++
++        public boolean ShowObjectUSER (String ID) throws Erorr {
++            Erorr error;
++            if(!User.UserDict.containsKey(ID)){
++                error = new id_is_wrong_EX();
++                throw error;
++            }
++            System.out.println(User.UserDict.get(ID));
++            return true;
++        }
++
++        public boolean ShowObjectSupplier(String ID) throws Erorr {
++            Erorr error;
++            if(!Supplier.SupllierDict.containsKey(ID)){
++                error = new id_is_wrong_EX();
++                throw error;
++            }
++            System.out.println(Supplier.SupllierDict.get(ID));
++            return true;
++        }
++
++        public boolean ShowObjectProduct(String ID) throws Erorr {
++            Erorr error;
++            if(!PrductDict.containsKey(ID)){
++                error = new product_is_not_exist();
++                throw error;
++            }
++            System.out.println(PrductDict.get(ID));
++            return true;
++        }
+     }
+ }
+Index: src/ImmediatePayment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.Date;\r\n\r\npublic class ImmediatePayment extends Payment {\r\n    private Boolean phoneConfirmation;\r\n\r\n    public ImmediatePayment( Date PAID, Float TOTAL, String DETAILS, Boolean PHONECONFIRMATION) {\r\n        super( PAID, TOTAL, DETAILS);\r\n        this.phoneConfirmation = PHONECONFIRMATION;\r\n    }\r\n\r\n    public Boolean getPhoneConfirmation() {\r\n        return phoneConfirmation;\r\n    }\r\n\r\n    public void setPhoneConfirmation(Boolean phoneConfirmation) {\r\n        this.phoneConfirmation = phoneConfirmation;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/ImmediatePayment.java b/src/ImmediatePayment.java
+--- a/src/ImmediatePayment.java	(revision 037b4548da3e736f269a32c6a68b7e35cf7ce4fd)
++++ b/src/ImmediatePayment.java	(date 1668537520379)
+@@ -8,6 +8,20 @@
+         this.phoneConfirmation = PHONECONFIRMATION;
+     }
+ 
++    @Override
++    public String toString() {
++        String yesorno = null;
++        if (phoneConfirmation == true){
++            yesorno = "Yes";
++        }
++        if(phoneConfirmation == false){
++            yesorno = "No";
++        }
++        return "ImmediatePayment: " +
++                "phoneConfirmation=" + yesorno
++                ;
++    }
++
+     public Boolean getPhoneConfirmation() {
+         return phoneConfirmation;
+     }
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\nimport java.util.Scanner;\r\n\r\n\r\npublic class Main {\r\n    public static void main(String[] args)\r\n    {\r\n        /* System initialization  */\r\n        SystemC system = new SystemC();\r\n        Supplier osem = new Supplier(\"Osem\");\r\n        Supplier EastWest = new Supplier(\"EastWest\");\r\n        Product bamba = new Product(\"Bamba\",osem);\r\n        Product ramen = new Product(\"Ramen\",EastWest);\r\n        system.AddUser(\"Dani\",\"Dani123\",0,null,null,null);\r\n        system.AddUser(\"Dana\",\"Dana123\",1,null,null,null);\r\n        PremiumAccount danaIsPremium = (PremiumAccount) User.UserDict.get(\"Dana\").get_customer().get_account();\r\n        danaIsPremium.AddProduct(bamba);\r\n\r\n\r\n        Scanner scanner = new Scanner(System.in);\r\n        int choice;\r\n        while(true) {\r\n\r\n            System.out.println(\"Press 1 for Add user\");\r\n            System.out.println(\"Press 2 for Remove user\");\r\n            System.out.println(\"Press 3 for Login user \");\r\n            System.out.println(\"Press 4 for Logout user \");\r\n            System.out.println(\"Press 5 for Create new order\");\r\n            System.out.println(\"Press 6 for Add product to order\");\r\n            System.out.println(\"Press 7 for Display order\");\r\n            System.out.println(\"Press 8 for Link Product \");\r\n            System.out.println(\"Press 9 for Add Product \");\r\n            System.out.println(\"Press 10 for Delete Product \");\r\n            System.out.println(\"Press 11 for ShowAllObjects \");\r\n            System.out.println(\"Press 12 for ShowObjectId \");\r\n            System.out.println(\"Press 13 to Quit\\n \\n \");\r\n\r\n            choice = scanner.nextInt();\r\n\r\n            switch (choice) {\r\n\r\n                //First case for finding the addition\r\n                case 1:\r\n                    System.out.println(\"Enter login_id: \");\r\n                    String login_id = scanner.next();\r\n                    System.out.println(\"Enter password:\");\r\n                    String pass = scanner.next();\r\n                    System.out.println(\"Premium account: - Yes enter 1/Not enter 0\");\r\n                    int p_account = scanner.nextInt();\r\n                    System.out.println(\"Enter customer country: \");\r\n                    String customer_country = scanner.next();\r\n                    System.out.println(\"Enter customer city: \");\r\n                    String customer_city = scanner.next();\r\n                    System.out.println(\"Enter customer street: \");\r\n                    String customer_street = scanner.next();\r\n                    System.out.println(\"Enter customer number: \");\r\n                    int customer_addres_num = scanner.nextInt();\r\n                    Address address = new Address(customer_country, customer_city, customer_street, customer_addres_num);\r\n                    System.out.println(\"Enter customer phone: \");\r\n                    String customer_phone = scanner.next();\r\n                    System.out.println(\"Enter customer email: \");\r\n                    String customer_email = scanner.next();\r\n                    if(!system.AddUser(login_id, pass, p_account, address, customer_phone, customer_email))\r\n                    {\r\n                        System.out.println(\"User is not valid\");\r\n\r\n                    }\r\n                    break;\r\n\r\n                case 2:\r\n                    try\r\n                    {\r\n                        System.out.println(\"Enter login_id: \");\r\n                        login_id = scanner.next();\r\n                        if(!system.RemoveUser(login_id))\r\n                        {\r\n                            System.out.println(\"User does not exist\");\r\n                        }\r\n                        break;\r\n                    }\r\n                    catch(Exception Error)\r\n                    {\r\n                        System.out.println(Error.getMessage());\r\n                    }\r\n\r\n\r\n                case 3:\r\n                    try\r\n                    {\r\n                        System.out.println(\"Enter login_id: \");\r\n                        login_id = scanner.next();\r\n                        System.out.println(\"Enter password: \");\r\n                        pass = scanner.next();\r\n                        if(!system.loginUser(login_id,pass))\r\n                        {\r\n                            System.out.println(\"Login problem\");\r\n                        }\r\n                    }\r\n                    catch(Exception Error) {\r\n                        System.out.println(Error.getMessage());\r\n                    }\r\n                    break;\r\n                case 4:\r\n                    try\r\n                    {\r\n                        System.out.println(\"Enter login_id: \");\r\n                        login_id = scanner.next();\r\n                        if(!system.logoutUser(login_id))\r\n                        {\r\n                            System.out.println(\"logout problem\");\r\n                        }\r\n                    }\r\n                    catch(Exception Error) {\r\n                        System.out.println(Error.getMessage());\r\n                    }\r\n                    break;\r\n                case 5:\r\n                    try\r\n                    {\r\n                        System.out.println(\"Enter login_id: \");\r\n                        login_id = scanner.next();\r\n                        System.out.println(\"Enter customer country: \");\r\n                        customer_country = scanner.next();\r\n                        System.out.println(\"Enter customer city: \");\r\n                        customer_city = scanner.next();\r\n                        System.out.println(\"Enter customer street: \");\r\n                        customer_street = scanner.next();\r\n                        System.out.println(\"Enter customer number: \");\r\n                        customer_addres_num = scanner.nextInt();\r\n                        address = new Address(customer_country, customer_city, customer_street, customer_addres_num);\r\n                        system.Create_new_order(address);\r\n                    }\r\n                    catch(Exception Error) {\r\n                        System.out.println(Error.getMessage());\r\n                    }\r\n                    break;\r\n                case 6:\r\n                    try\r\n                    {\r\n                        System.out.println(\"Enter Order_id: \");\r\n                        String order_id = scanner.next();\r\n                        System.out.println(\"Enter Login_id: \");\r\n                        login_id = scanner.next();\r\n                        System.out.println(\"Enter Product_name: \");\r\n                        String product_name = scanner.next();\r\n                        system.Add_product_to_order(order_id,login_id,product_name);\r\n                    }\r\n                    catch(Exception Error)\r\n                    {\r\n\r\n                        System.out.println(Error.getMessage());\r\n                    }\r\n                    break;\r\n                case 7:\r\n                    try\r\n                    {\r\n                        system.DisplayOrder();\r\n                    }\r\n                    catch(Exception Error)\r\n                    {\r\n\r\n                        System.out.println(Error.getMessage());\r\n                    }\r\n                    break;\r\n                case 8:\r\n                    try\r\n                    {\r\n                        System.out.println(\"Enter name: \");\r\n                        String name = scanner.next();\r\n                        System.out.println(\"Enter price: \");\r\n                        int price = scanner.nextInt();\r\n                        System.out.println(\"Enter Product_name: \");\r\n                        int Quan = scanner.nextInt();\r\n                        system.LinkProduct(name,price,Quan);\r\n                    }\r\n                    catch(Exception Error)\r\n                    {\r\n\r\n                        System.out.println(Error.getMessage());\r\n                    }\r\n                    break;\r\n                case 9:\r\n                    System.out.println(\"Enter name: \");\r\n                    String name = scanner.next();\r\n                    System.out.println(\"Enter price: \");\r\n                    String supllierName = scanner.next();\r\n                    system.AddProduct(name,supllierName);\r\n                    break;\r\n\r\n                //default case to display the message invalid choice made by the user\r\n                default:\r\n                    System.out.println(\"Invalid choice!!! Please make a valid choice. \\\\n\\\\n\");\r\n\r\n            }\r\n        }\r\n\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Main.java b/src/Main.java
+--- a/src/Main.java	(revision 037b4548da3e736f269a32c6a68b7e35cf7ce4fd)
++++ b/src/Main.java	(date 1668537520384)
+@@ -15,6 +15,8 @@
+         system.AddUser("Dana","Dana123",1,null,null,null);
+         PremiumAccount danaIsPremium = (PremiumAccount) User.UserDict.get("Dana").get_customer().get_account();
+         danaIsPremium.AddProduct(bamba);
++        /* End of System initialization  */
++
+ 
+ 
+         Scanner scanner = new Scanner(System.in);
+Index: src/DelayedPayment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.Date;\r\n\r\npublic class DelayedPayment extends Payment{\r\n    private Date paymentDate;\r\n\r\n    public DelayedPayment( Date PAID, Float TOTAL, String DETAILS, Date PAYMENTDATE) {\r\n        super( PAID, TOTAL, DETAILS);\r\n        this.paymentDate = PAYMENTDATE;\r\n    }\r\n\r\n    public Date getPaymentDate() {\r\n        return paymentDate;\r\n    }\r\n\r\n    public void setPaymentDate(Date paymentDate) {\r\n        this.paymentDate = paymentDate;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/DelayedPayment.java b/src/DelayedPayment.java
+--- a/src/DelayedPayment.java	(revision 037b4548da3e736f269a32c6a68b7e35cf7ce4fd)
++++ b/src/DelayedPayment.java	(date 1668537684972)
+@@ -3,7 +3,14 @@
+ public class DelayedPayment extends Payment{
+     private Date paymentDate;
+ 
+-    public DelayedPayment( Date PAID, Float TOTAL, String DETAILS, Date PAYMENTDATE) {
++    @Override
++    public String toString() {
++        return "DelayedPayment: " +
++                "paymentDate=" + paymentDate
++                ;
++    }
++
++    public DelayedPayment(Date PAID, Float TOTAL, String DETAILS, Date PAYMENTDATE) {
+         super( PAID, TOTAL, DETAILS);
+         this.paymentDate = PAYMENTDATE;
+     }
+Index: src/UserState.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public enum UserState {\r\n\r\n    New, Active, Blocked, Banned\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/UserState.java b/src/UserState.java
+--- a/src/UserState.java	(revision 037b4548da3e736f269a32c6a68b7e35cf7ce4fd)
++++ b/src/UserState.java	(date 1668537684966)
+@@ -1,5 +1,12 @@
++import java.util.Date;
++import java.util.HashMap;
++import java.util.Vector;
++
+ public enum UserState {
+ 
+     New, Active, Blocked, Banned
+ }
+ 
++
++
++
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"9262f2f0-af8d-43a7-b255-09edff5c737d\" name=\"Changes\" comment=\"hi\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Order.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Order.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/SystemC.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/SystemC.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2HGzfH0UCszOQZeFNGHalD4475Y\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"Test.test\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Tichon_HW1\" />\r\n      <option name=\"PACKAGE_NAME\" value=\"\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Test\" />\r\n      <option name=\"METHOD_NAME\" value=\"test\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"JUnit.Test.test\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"5198120f-0955-4c57-bec4-bc285fab6ab4\" name=\"Changes\" comment=\"\" />\r\n      <created>1667926313386</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1667926313386</updated>\r\n      <workItem from=\"1668324775726\" duration=\"2848000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"test1\">\r\n      <created>1667926772421</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1667926772421</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Add User func\">\r\n      <created>1668366678281</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668366678281</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Add User func\">\r\n      <created>1668366709485</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668366709485</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"user func update&#10;customer id and account id update\">\r\n      <created>1668425961720</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668425961720</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"user func update&#10;customer id and account id update\">\r\n      <created>1668426006216</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668426006216</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"SystemC class, login method.\">\r\n      <created>1668427248803</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668427248803</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"error class created\">\r\n      <created>1668427786309</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668427786309</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"exceptions\">\r\n      <created>1668430381827</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668430381827</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"blabla\">\r\n      <created>1668433819230</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668433819230</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"blabla\">\r\n      <created>1668433837748</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668433837748</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"hara ba leben\">\r\n      <created>1668447329261</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668447329261</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"hara ba leben\">\r\n      <created>1668448548558</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668448548558</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E00013\" summary=\"update 2\">\r\n      <created>1668520421015</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E00013\" />\r\n      <updated>1668520421015</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E00014\" summary=\"update 2\">\r\n      <created>1668520528643</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E00014\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E00014\" />\r\n      <updated>1668520528643</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E00015\" summary=\"update 2\">\r\n      <created>1668520548704</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E00015\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E00015\" />\r\n      <updated>1668520548704</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"16\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"test1\" />\r\n    <MESSAGE value=\"Add User func\" />\r\n    <MESSAGE value=\"user func update&#10;customer id and account id update\" />\r\n    <MESSAGE value=\"SystemC class, login method.\" />\r\n    <MESSAGE value=\"error class created\" />\r\n    <MESSAGE value=\"exceptions\" />\r\n    <MESSAGE value=\"blabla\" />\r\n    <MESSAGE value=\"hara ba leben\" />\r\n    <MESSAGE value=\"update 2\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"update 2\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/src/SystemC.java</url>\r\n          <line>225</line>\r\n          <option name=\"timeStamp\" value=\"21\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 037b4548da3e736f269a32c6a68b7e35cf7ce4fd)
++++ b/.idea/workspace.xml	(date 1668537572285)
+@@ -1,9 +1,11 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="9262f2f0-af8d-43a7-b255-09edff5c737d" name="Changes" comment="hi">
++    <list default="true" id="5198120f-0955-4c57-bec4-bc285fab6ab4" name="Changes" comment="hara ba leben">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Order.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/DelayedPayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DelayedPayment.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/ImmediatePayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ImmediatePayment.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/SystemC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SystemC.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -147,17 +149,19 @@
+       <option name="presentableId" value="LOCAL‎00013" />
+       <updated>1668520421015</updated>
+     </task>
+-    <task id="LOCAL‎00014" summary="update 2">
+-      <created>1668520528643</created>
+-      <option name="number" value="LOCAL‎00014" />
+-      <option name="presentableId" value="LOCAL‎00014" />
+-      <updated>1668520528643</updated>
++    <task id="LOCAL-00014" summary="hara ba leben">
++      <created>1668522944004</created>
++      <option name="number" value="00014" />
++      <option name="presentableId" value="LOCAL-00014" />
++      <option name="project" value="LOCAL" />
++      <updated>1668522944004</updated>
+     </task>
+-    <task id="LOCAL‎00015" summary="update 2">
+-      <created>1668520548704</created>
+-      <option name="number" value="LOCAL‎00015" />
+-      <option name="presentableId" value="LOCAL‎00015" />
+-      <updated>1668520548704</updated>
++    <task id="LOCAL-00015" summary="hara ba leben">
++      <created>1668532433693</created>
++      <option name="number" value="00015" />
++      <option name="presentableId" value="LOCAL-00015" />
++      <option name="project" value="LOCAL" />
++      <updated>1668532433693</updated>
+     </task>
+     <option name="localTasksCounter" value="16" />
+     <servers />
+@@ -184,19 +188,8 @@
+     <MESSAGE value="error class created" />
+     <MESSAGE value="exceptions" />
+     <MESSAGE value="blabla" />
++    <MESSAGE value="update 2" />
+     <MESSAGE value="hara ba leben" />
+-    <MESSAGE value="update 2" />
+-    <option name="LAST_COMMIT_MESSAGE" value="update 2" />
+-  </component>
+-  <component name="XDebuggerManager">
+-    <breakpoint-manager>
+-      <breakpoints>
+-        <line-breakpoint enabled="true" type="java-line">
+-          <url>file://$PROJECT_DIR$/src/SystemC.java</url>
+-          <line>225</line>
+-          <option name="timeStamp" value="21" />
+-        </line-breakpoint>
+-      </breakpoints>
+-    </breakpoint-manager>
++    <option name="LAST_COMMIT_MESSAGE" value="hara ba leben" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_18\" default=\"true\" project-jdk-name=\"corretto-18\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 037b4548da3e736f269a32c6a68b7e35cf7ce4fd)
++++ b/.idea/misc.xml	(date 1668537572296)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_18" default="true" project-jdk-name="corretto-18" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="corretto-18" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file

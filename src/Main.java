@@ -71,6 +71,10 @@ public class Main
                         pass = reader.readLine();
                         System.out.println("Premium account: - Yes enter 1/No enter 0");
                          p_account = scanner.nextInt();
+                         if(p_account != 0 || p_account != 1){
+                             System.out.println("Please enter '1' or '0' only! ");
+                             break;
+                         }
                         System.out.println("Enter customer country: ");
                         customer_country = reader.readLine();
                         System.out.println("Enter customer city: ");

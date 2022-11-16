@@ -405,7 +405,8 @@ public class Main
                                 break;
 
                             case 5:
-                                break;
+                                String[] a = new String[0];
+                                main(a);
 
                             default:
                                 System.out.println("Invalid choice!Please make a valid choice. \\n\\n");

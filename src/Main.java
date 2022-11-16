@@ -69,9 +69,9 @@ public class Main
                         login_id = reader.readLine();
                         System.out.println("Enter password: ");
                         pass = reader.readLine();
-                        System.out.println("Premium account: - Yes enter 1/No enter 0");
+                        System.out.println("Premium account: Press 1 for YES||Press 2 for NO");
                          p_account = scanner.nextInt();
-                         if(p_account != 0 || p_account != 1){
+                         if(p_account != 0 && p_account != 1){
                              System.out.println("Please enter '1' or '0' only! ");
                              break;
                          }
@@ -94,7 +94,7 @@ public class Main
 
                         }
                     }
-                    catch (Exception InputMismatchException ) {
+                    catch (InputMismatchException e ) {
                         System.out.println("Your input invalid, please try agian!");
                         scanner.nextLine();
                         break;
@@ -163,22 +163,28 @@ public class Main
                     {
                         System.out.println("Enter login id: ");
                         login_id = reader.readLine();
-                        System.out.println("Enter customer country: ");
+                        System.out.println("Enter customer's country: ");
                         customer_country = reader.readLine();
-                        System.out.println("Enter customer city: ");
+                        System.out.println("Enter customer's city: ");
                         customer_city = reader.readLine();
-                        System.out.println("Enter customer street: ");
+                        System.out.println("Enter customer's street: ");
                         customer_street = reader.readLine();
-                        System.out.println("Enter customer number: ");
+                        System.out.println("Enter customer's street number: ");
                         customer_addres_num = scanner.nextInt();
                         address = new Address(customer_country, customer_city, customer_street, customer_addres_num);
                         system.Create_new_order(address);
+                    }
+                    catch (InputMismatchException e){
+                        System.out.println("Street number have to be a number! please try agian.");
+                        scanner.nextLine();
+                        break;
                     }
                     catch (Exception Error)
                     {
                         System.out.println(Error.getMessage());
                         break;
                     }
+
                     System.out.println("A new order has been successfully created");
                     break;
                 case 6:
@@ -190,17 +196,7 @@ public class Main
                         login_id = reader.readLine();
                         System.out.println("Enter product name: ");
                         String product_name = reader.readLine();
-                        try
-                        {
                             system.Add_product_to_order(order_id, login_id, product_name);
-
-                        }
-                        catch (Exception Error)
-                        {
-                            System.out.println(Error.getMessage());
-                            break;
-
-                        }
                         System.out.println("Do you want to add payment method? Yes enter 1/Not enter 0");
                         int want_payment = scanner.nextInt();
                         if (want_payment == 0)
@@ -229,7 +225,7 @@ public class Main
                             {
                                 System.out.println("Enter details");
                                 String details = reader.readLine();
-                                System.out.println("Payment with phoneconfirmation? Yes enter 1/Not enter 0");
+                                System.out.println("Payment with phone confirmation? Yes enter 1/Not enter 0");
                                 int pc = scanner.nextInt();
                                 if (pc == 0)
                                 {
@@ -248,12 +244,19 @@ public class Main
                         }
 
                     }
+                    catch (InputMismatchException e){
+                        System.out.println("Please enter a correct input, only digits allowed here!");
+                        scanner.nextLine();
+                        break;
+                    }
                     catch (Exception Error)
                     {
 
                         System.out.println(Error.getMessage());
                         break;
                     }
+
+
                     System.out.println("Adding a product to the order was done successfully");
                     break;
                 case 7:
@@ -278,6 +281,11 @@ public class Main
                         System.out.println("Enter product quantity: ");
                         int Quan = scanner.nextInt();
                         system.LinkProduct(name, price, Quan);
+                    }
+                    catch (InputMismatchException e){
+                        System.out.println("Product quantity and price are a numbers, please try agian!");
+                        scanner.nextLine();
+                        break;
                     }
                     catch (Exception Error)
                     {
@@ -325,8 +333,14 @@ public class Main
                         System.out.println("Press 3 for supplier ");
                         System.out.println("Press 4 for other object");
                         System.out.println("Press 5 to return \n \n ");
-
-                        choose = scanner.nextInt();
+                        try {
+                            choose = scanner.nextInt();
+                        }
+                        catch (InputMismatchException e){
+                            System.out.println("You have to choose a number!");
+                            scanner.nextLine();
+                            continue;
+                        }
                         switch (choose)
                         {
                             case 1:

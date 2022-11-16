@@ -251,7 +251,6 @@ public class SystemC {
             if (user!=null)
             {
                 System.out.println(user.toString());
-                System.out.println(user.toString());
             }
 
             account = entry.getValue().get_customer().get_account();

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -28,6 +29,16 @@ public class Main
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Scanner scanner = new Scanner(System.in);
         int choice;
+        String login_id;
+        int p_account;
+        String pass;
+        String customer_country;
+        String customer_city;
+        String customer_street;
+        Address address;
+        String customer_phone;
+        String customer_email;
+        int customer_addres_num;
         while(true)
         {
 
@@ -47,34 +58,42 @@ public class Main
 
             choice = scanner.nextInt();
 
+
+
             switch (choice) {
 
                 //First case for finding the addition
                 case 1:
-                    System.out.println("Enter login id: ");
-                    String login_id = reader.readLine();
-                    System.out.println("Enter password: ");
-                    String pass = reader.readLine();
-                    System.out.println("Premium account: - Yes enter 1/Not enter 0");
-                    int p_account = scanner.nextInt();
-                    System.out.println("Enter customer country: ");
-                    String customer_country = reader.readLine();
-                    System.out.println("Enter customer city: ");
-                    String customer_city = reader.readLine();
-                    System.out.println("Enter customer street: ");
-                    String customer_street = reader.readLine();
-                    System.out.println("Enter customer number: ");
-                    int customer_addres_num = scanner.nextInt();
-                    Address address = new Address(customer_country, customer_city, customer_street, customer_addres_num);
-                    System.out.println("Enter customer phone: ");
-                    String customer_phone = reader.readLine();
-                    System.out.println("Enter customer email: ");
-                    String customer_email = reader.readLine();
-                    if (!system.AddUser(login_id, pass, p_account, address, customer_phone, customer_email))
-                    {
-                        System.out.println("User is not valid");
-                        break;
+                    try {
+                        System.out.println("Enter login id: ");
+                        login_id = reader.readLine();
+                        System.out.println("Enter password: ");
+                        pass = reader.readLine();
+                        System.out.println("Premium account: - Yes enter 1/No enter 0");
+                         p_account = scanner.nextInt();
+                        System.out.println("Enter customer country: ");
+                        customer_country = reader.readLine();
+                        System.out.println("Enter customer city: ");
+                        customer_city = reader.readLine();
+                        System.out.println("Enter customer street: ");
+                        customer_street = reader.readLine();
+                        System.out.println("Enter customer number: ");
+                        customer_addres_num = scanner.nextInt();
+                        address = new Address(customer_country, customer_city, customer_street, customer_addres_num);
+                        System.out.println("Enter customer phone: ");
+                        customer_phone = reader.readLine();
+                        System.out.println("Enter customer email: ");
+                        customer_email = reader.readLine();
+                        if (!system.AddUser(login_id, pass, p_account, address, customer_phone, customer_email)) {
+                            System.out.println("User is not valid");
+                            break;
 
+                        }
+                    }
+                    catch (Exception InputMismatchException ) {
+                        System.out.println("Your input invalid, please try agian!");
+                        scanner.nextLine();
+                        break;
                     }
                     System.out.println("The user was successfully added");
                     break;
